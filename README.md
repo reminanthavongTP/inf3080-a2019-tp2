@@ -1,8 +1,8 @@
-   # Travail pratique 1
+   # Travail pratique 2
 
    ## Description
 
-   Modélisation d'un schéma afin de créer une base de données pour une compagnie de transport avec plusieurs camions.
+   Utilisation et développement de programmes dans un SGBDR pour une compagnie de transport avec plusieurs camions.
 
    INF3080 A2019 UQAM
 
@@ -46,23 +46,22 @@
 
    ## Contenu du projet
 
-   00_modele.pdf : un modèle entité-association et un modèle entité-association relationnel normalisé.
-   
-   01_schema.sql : Un script qui crée la BD.
-   
-   02_charger.sql : Un script qui remplie la BD.
-   
-   03_tester.sql : Des requêtes qui test la qualité BD.
-   
-   04a_query.sql : Une requête qui retourne les soumissions générées par le client #4 du 2019-09-30.
-   
-   04b_query.sql : Une requête qui liste les camions qui sont présentement en voyage.
-   
-   04c_query.sql : Une requête qui retourne le nom des tables en minuscule du schéma en ordre décroissant
-   
-   04d_query.sql : Une requête qui retourne les attributs des entités E = { Tracteur, Camion, Equipement }
-   
-   05_algebre-tp1.pdf : L'algèbre relationnelle des requetes 04a et 04b
+   01_schema.sql
+   02_sequence.sql
+   03_gachette.sql
+   04_procedure.sql
+   05a_route.txt
+   05a_route.ctl
+   05a_route.log
+   05a_route.sh
+   05b_charger.sql
+   06_tester.sql
+   07a_query.sql
+   07b_query.sql
+   07c_query.sql
+   07d_query.md
+   07e_query.sql
+   08_algebre-tp1.pdf
 
    ## Références
 
