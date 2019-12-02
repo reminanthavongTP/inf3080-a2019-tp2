@@ -112,10 +112,18 @@ CREATE TABLE tp1Tracteur
 /
 CREATE TABLE tp1Carburant
 (pCarburant INTEGER NOT NULL,
- cCarburantt VARCHAR(30) NOT NULL,
+ cCarburant VARCHAR(30) NOT NULL,
  nCout INTEGER NOT NULL,
  PRIMARY KEY    (pCarburant)
 )
 /
+CREATE TABLE tp1Position
+(pPosition INTEGER NOT NULL,
+ cPosition VARCHAR(30) NOT NULL,
+ nLat INTEGER NOT NULL,
+ nLong INTEGER NOT NULL,
+ bDisponible INTEGER NOT NULL,
+ PRIMARY KEY    (pPosition)
+)
 COMMIT
 /
