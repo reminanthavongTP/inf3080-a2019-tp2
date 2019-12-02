@@ -90,4 +90,6 @@
    
    ## Auto-évaluation de votre travail
    
-   J'évalue mon livrable à 10 points / 15
+   J'évalue mon livrable à x points / 25
+   
+   ## Difficultés rencontrées
