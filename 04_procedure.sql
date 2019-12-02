@@ -1,7 +1,7 @@
 SET ECHO ON
 -- Script Oracle SQL*plus de procedure. pour le travail pratique 2 - Modélisation et Conception d'une BD
 -- Version sans accents
--- INSERTION dans les tables
+-- p_demande() p_soumission() p_commande() f_prix()
 SET ECHO ON
 CREATE SEQUENCE tp2Client
 (start with 10
