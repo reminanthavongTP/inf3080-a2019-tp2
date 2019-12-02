@@ -3,100 +3,100 @@ SET ECHO ON
 -- Version sans accents
 -- INSERTION dans les tables
 SET ECHO ON
-CREATE SEQUENCE tp2Client
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 100
- cycle
+create trigger tp2GachetteClients 
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2DemandeSoumission
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 100
- cycle
+create trigger tp2GachetteDemandeSoumission
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2SoumissionE
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 100
- cycle
+create trigger tp2GachetteSoumissionE
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Chargement
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 200
- cycle
+create trigger tp2GachetteChargement
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Route
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 20
- cycle
+create trigger tp2GachetteRoute
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Carburant
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 12
- cycle
+create trigger tp2GachetteCarburant
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Compagnie
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 20
- cycle
+create trigger tp2GachetteCompagnie
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Camion
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 40
- cycle
+create trigger tp2GachetteCamion
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2TypeEquipement
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 40
- cycle
+create trigger tp2GachetteTypeEquipement
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Equipement
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 40
- cycle
+create trigger tp2GachetteEquipement
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Position
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 40
- cycle
+create trigger tp2GachettePosition
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
-CREATE SEQUENCE tp2Tracteur
-(start with 10
- increment by 2
- minvalue 10
- maxvalue 40
- cycle
+create trigger tp2GachetteTracteur
+( before INSERT 
+  on 
+  Student 
+  for each row 
+  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 COMMIT
