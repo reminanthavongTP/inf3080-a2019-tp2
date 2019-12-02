@@ -43,7 +43,7 @@ CREATE TABLE tp1DemandeSoumission
 )
 /
 CREATE TABLE tp1Route
-(pRoute 		VARCHAR(30) 	NOT NULL,
+(pRoute 		INTEGER 	NOT NULL,
  cRoute 		VARCHAR(30) 	NOT NULL,
  nLatOri 	FLOAT(8) 	NOT NULL,
  nLongOri 	FLOAT(8) 	NOT NULL,
@@ -125,5 +125,23 @@ CREATE TABLE tp1Position
  bDisponible INTEGER NOT NULL,
  PRIMARY KEY    (pPosition)
 )
+/
+CREATE TABLE tp1Chargement
+(pChargement 		INTEGER 	NOT NULL,
+ cChargement 		VARCHAR(30) 	NOT NULL,
+ nLatOri 	FLOAT(8) 	NOT NULL,
+ nLongOri 	FLOAT(8) 	NOT NULL,
+ nLatDes 		FLOAT(8) 		NOT NULL,
+ nLongDes 		FLOAT(8) 		NOT NULL,
+ nLongueur 		FLOAT(8) 		NOT NULL,
+ nLargeur 		FLOAT(8) 		NOT NULL,
+ nHauteur		FLOAT(8) 		NOT NULL,
+ nPoids 		FLOAT(8) 		NOT NULL,
+ pClient 		INTEGER 		NOT NULL,
+ CHECK (nDistance>0),
+ PRIMARY KEY 	(pChargement),
+ FOREIGN KEY 	(pClient) REFERENCES tp1Client
+)
+/
 COMMIT
 /
