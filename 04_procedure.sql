@@ -16,15 +16,19 @@ CREATE OR REPLACE PROCEDURE p_demande(pClient, nLatOri, nLongOri, nLatDes, nLong
 CREATE OR REPLACE PROCEDURE p_soumission(pChargement)
 (IS
  BEGIN
- dbms_output.put_line (‘Welcome '|| p_name);
+ 
  END
 )
 /
 CREATE OR REPLACE PROCEDURE p_commande(pSoumissionD)
-(IS
+(@nPrix 		NUMBER 		= f_prix(pSoumissionD),
+ @pCamion 		INTEGER = 
+ AS
  BEGIN
- dbms_output.put_line (‘Welcome '|| p_name);
+    INSERT INTO tp1DemandeSoumission (pSoumission,nPrix,pCamion) 
+    values (pSoumission,@nPrix,@pCamion)
  END
+)
 )
 /
 CREATE OR REPLACE FUNCTION f_prix(pSoumissionD) RETURN NUMBER
