@@ -8,7 +8,7 @@ create trigger tp2GachetteClients
   on 
   tp1Client  
   for each row 
-  set tp1Client.pClient = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Client.pClient = tp2Client.nextval
 )
 /
 create trigger tp2GachetteDemandeSoumission
@@ -16,7 +16,7 @@ create trigger tp2GachetteDemandeSoumission
   on 
   tp1DemandeSoumission  
   for each row 
-  set tp1DemandeSoumission.pSoumission = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1DemandeSoumission.pSoumission = tp2DemandeSoumission.nextval
 )
 /
 create trigger tp2GachetteSoumissionE
@@ -24,7 +24,7 @@ create trigger tp2GachetteSoumissionE
   on 
   tp1SoumissionE  
   for each row 
-  set tp1SoumissionE.pSoumissionE = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1SoumissionE.pSoumissionE = tp2SoumissionE.nextval
 )
 /
 create trigger tp2GachetteChargement
@@ -32,7 +32,7 @@ create trigger tp2GachetteChargement
   on 
   tp1Chargement  
   for each row 
-  set tp1Chargement.pChargement = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Chargement.pChargement = tp2Chargement.nextval
 )
 /
 create trigger tp2GachetteRoute
@@ -40,7 +40,7 @@ create trigger tp2GachetteRoute
   on 
   tp1Route  
   for each row 
-  set tp1Route.pRoute = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Route.pRoute = tp2Route.nextval
 )
 /
 create trigger tp2GachetteCarburant
@@ -48,7 +48,7 @@ create trigger tp2GachetteCarburant
   on 
   tp1Carburant  
   for each row 
-  set tp1Carburant.pCarburant = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Carburant.pCarburant = tp2Carburant.nextval
 )
 /
 create trigger tp2GachetteCompagnie
@@ -56,7 +56,7 @@ create trigger tp2GachetteCompagnie
   on 
   tp1Compagnie 
   for each row 
-  set tp1Compagnie.pCompagnie = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Compagnie.pCompagnie = tp2Compagnie.nextval
 )
 /
 create trigger tp2GachetteCamion
@@ -64,7 +64,7 @@ create trigger tp2GachetteCamion
   on 
   tp1Camion  
   for each row 
-  set tp1Camion.pCamion = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Camion.pCamion = tp2Camion.nextval
 )
 /
 create trigger tp2GachetteTypeEquipement
@@ -72,7 +72,7 @@ create trigger tp2GachetteTypeEquipement
   on 
   tp1TypeEquipement  
   for each row 
-  set tp1TypeEquipement.pTypeEquipement = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1TypeEquipement.pTypeEquipement = tp2TypeEquipement.nextval
 )
 /
 create trigger tp2GachetteEquipement
@@ -80,7 +80,7 @@ create trigger tp2GachetteEquipement
   on 
   tp1Equipement  
   for each row 
-  set tp1Equipement.pEquipement  = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Equipement.pEquipement  = tp2Equipement.nextval
 )
 /
 create trigger tp2GachettePosition
@@ -88,7 +88,7 @@ create trigger tp2GachettePosition
   on 
   tp1Position  
   for each row 
-  set tp1Position.pPosition  = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Position.pPosition  = tp2Position.nextval
 )
 /
 create trigger tp2GachetteTracteur
@@ -96,7 +96,7 @@ create trigger tp2GachetteTracteur
   on 
   tp1Tracteur  
   for each row 
-  set tp1Tracteur.pTracteur  = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Tracteur.pTracteur  = tp2Tracteur.nextval
 )
 /
 COMMIT
