@@ -5,7 +5,7 @@ SET ECHO ON
 
 CREATE OR REPLACE VIEW v_tables AS
   SELECT
-   LOWER(table_name), owner
+   COUNT (table_name) "NbLignes", owner
   FROM
    all_tables
   WHERE
