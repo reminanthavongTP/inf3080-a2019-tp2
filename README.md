@@ -47,20 +47,35 @@
    ## Contenu du projet
 
    01_schema.sql
+   
    02_sequence.sql
+   
    03_gachette.sql
+   
    04_procedure.sql
+   
    05a_route.txt
+   
    05a_route.ctl
+   
    05a_route.log
+   
    05a_route.sh
+   
    05b_charger.sql
+   
    06_tester.sql
+   
    07a_query.sql
+   
    07b_query.sql
+   
    07c_query.sql
+   
    07d_query.md
+   
    07e_query.sql
+   
    08_algebre-tp1.pdf
 
    ## Références
