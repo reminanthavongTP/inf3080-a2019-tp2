@@ -1,5 +1,6 @@
 SET ECHO ON
--- Écrire une requête qui liste les camions qui sont présentement en voyage
+-- Écrire le code nécessaire pour réinitialiser toutes les séquences qui existent dans la base de données
+-- La séquence offrira comme première valeur 1 et augmentera de 1.
 SET ECHO ON
 SELECT tp1Compagnie.nomcompagnie, tp1camion.pcamion, tp1position.cposition, tp1position.ndisponible 
 FROM ((tp1Compagnie
