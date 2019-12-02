@@ -6,97 +6,97 @@ SET ECHO ON
 create trigger tp2GachetteClients 
 ( before INSERT 
   on 
-  Student 
+  tp1Client  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Client.pClient = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteDemandeSoumission
 ( before INSERT 
   on 
-  Student 
+  tp1DemandeSoumission  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1DemandeSoumission.pSoumission = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteSoumissionE
 ( before INSERT 
   on 
-  Student 
+  tp1SoumissionE  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1SoumissionE.pSoumissionE = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteChargement
 ( before INSERT 
   on 
-  Student 
+  tp1Chargement  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Chargement.pChargement = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteRoute
 ( before INSERT 
   on 
-  Student 
+  tp1Route  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Route.pRoute = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteCarburant
 ( before INSERT 
   on 
-  Student 
+  tp1Carburant  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Carburant.pCarburant = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteCompagnie
 ( before INSERT 
   on 
-  Student 
+  tp1Compagnie 
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Compagnie.pCompagnie = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteCamion
 ( before INSERT 
   on 
-  Student 
+  tp1Camion  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Camion.pCamion = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteTypeEquipement
 ( before INSERT 
   on 
-  Student 
+  tp1TypeEquipement  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1TypeEquipement.pTypeEquipement = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteEquipement
 ( before INSERT 
   on 
-  Student 
+  tp1Equipement  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Equipement.pEquipement  = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachettePosition
 ( before INSERT 
   on 
-  Student 
+  tp1Position  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Position.pPosition  = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 create trigger tp2GachetteTracteur
 ( before INSERT 
   on 
-  Student 
+  tp1Tracteur  
   for each row 
-  set Student.total = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
+  set tp1Tracteur.pTracteur  = Student.subj1 + Student.subj2 + Student.subj3, Student.per = Student.total * 60 / 100
 )
 /
 COMMIT
