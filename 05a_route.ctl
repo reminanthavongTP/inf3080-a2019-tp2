@@ -1,0 +1,14 @@
+LOAD DATA
+APPEND
+INTO TABLE tp1Route
+FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"'
+TRAILING NULLCOLS
+(
+pRoute,
+cRoute,
+nLatOri,
+nLongOri,
+nLatDes,
+nLongDes,
+nDistance
+)
