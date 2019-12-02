@@ -3,7 +3,7 @@ SET ECHO ON
 -- Version sans accents
 -- INSERTION dans les tables
 SET ECHO ON
-create trigger tp2GachetteClients 
+create OR REPLACE trigger tp2GachetteClients 
 ( before INSERT 
   on 
   tp1Client  
@@ -11,7 +11,7 @@ create trigger tp2GachetteClients
   set tp1Client.pClient = tp2Client.nextval
 )
 /
-create trigger tp2GachetteDemandeSoumission
+create OR REPLACE trigger tp2GachetteDemandeSoumission
 ( before INSERT 
   on 
   tp1DemandeSoumission  
@@ -19,7 +19,7 @@ create trigger tp2GachetteDemandeSoumission
   set tp1DemandeSoumission.pSoumission = tp2DemandeSoumission.nextval
 )
 /
-create trigger tp2GachetteSoumissionE
+create OR REPLACE trigger tp2GachetteSoumissionE
 ( before INSERT 
   on 
   tp1SoumissionE  
@@ -27,7 +27,7 @@ create trigger tp2GachetteSoumissionE
   set tp1SoumissionE.pSoumissionE = tp2SoumissionE.nextval
 )
 /
-create trigger tp2GachetteChargement
+create OR REPLACE trigger tp2GachetteChargement
 ( before INSERT 
   on 
   tp1Chargement  
@@ -35,7 +35,7 @@ create trigger tp2GachetteChargement
   set tp1Chargement.pChargement = tp2Chargement.nextval
 )
 /
-create trigger tp2GachetteRoute
+create OR REPLACE trigger tp2GachetteRoute
 ( before INSERT 
   on 
   tp1Route  
@@ -43,7 +43,7 @@ create trigger tp2GachetteRoute
   set tp1Route.pRoute = tp2Route.nextval
 )
 /
-create trigger tp2GachetteCarburant
+create OR REPLACE trigger tp2GachetteCarburant
 ( before INSERT 
   on 
   tp1Carburant  
@@ -51,7 +51,7 @@ create trigger tp2GachetteCarburant
   set tp1Carburant.pCarburant = tp2Carburant.nextval
 )
 /
-create trigger tp2GachetteCompagnie
+create OR REPLACE trigger tp2GachetteCompagnie
 ( before INSERT 
   on 
   tp1Compagnie 
@@ -59,7 +59,7 @@ create trigger tp2GachetteCompagnie
   set tp1Compagnie.pCompagnie = tp2Compagnie.nextval
 )
 /
-create trigger tp2GachetteCamion
+create OR REPLACE trigger tp2GachetteCamion
 ( before INSERT 
   on 
   tp1Camion  
@@ -67,7 +67,7 @@ create trigger tp2GachetteCamion
   set tp1Camion.pCamion = tp2Camion.nextval
 )
 /
-create trigger tp2GachetteTypeEquipement
+create OR REPLACE trigger tp2GachetteTypeEquipement
 ( before INSERT 
   on 
   tp1TypeEquipement  
@@ -75,7 +75,7 @@ create trigger tp2GachetteTypeEquipement
   set tp1TypeEquipement.pTypeEquipement = tp2TypeEquipement.nextval
 )
 /
-create trigger tp2GachetteEquipement
+create OR REPLACE trigger tp2GachetteEquipement
 ( before INSERT 
   on 
   tp1Equipement  
@@ -83,7 +83,7 @@ create trigger tp2GachetteEquipement
   set tp1Equipement.pEquipement  = tp2Equipement.nextval
 )
 /
-create trigger tp2GachettePosition
+create OR REPLACE trigger tp2GachettePosition
 ( before INSERT 
   on 
   tp1Position  
@@ -91,7 +91,7 @@ create trigger tp2GachettePosition
   set tp1Position.pPosition  = tp2Position.nextval
 )
 /
-create trigger tp2GachetteTracteur
+create OR REPLACE trigger tp2GachetteTracteur
 ( before INSERT 
   on 
   tp1Tracteur  
