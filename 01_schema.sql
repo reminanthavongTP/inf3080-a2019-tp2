@@ -31,7 +31,7 @@ DROP TABLE tp1Tracteur CASCADE CONSTRAINTS
 CREATE TABLE tp1Client
 (pClient 		INTEGER 		NOT NULL,
  cClient 		VARCHAR(20) 	NOT NULL,
- CHECK     (cClient = 'VISA' OR 'Master Card' OR 'American Express'),
+ CHECK     (cClient IN ('VISA','Master Card','American Express')),
  PRIMARY KEY 	(pClient)
 )
 /
@@ -77,7 +77,7 @@ CREATE TABLE tp1TypeEquipement
 (pTypeEquipement INTEGER NOT NULL,
  cTypeEquipement VARCHAR(30) NOT NULL,
  nCout NUMBER(8,5) NOT NULL,
- CHECK           (cTypeEquipement = 'Drybox' OR 'Flatbed')
+ CHECK           (cTypeEquipement IN ( 'Drybox','Flatbed'))
  PRIMARY KEY    (pTypeEquipement)
 )
 /
