@@ -111,7 +111,6 @@ CREATE TABLE tp1Route
  nLongDes 		NUMBER(8,5) 		NOT NULL,
  nDistance 		NUMBER(8,5) 		NOT NULL
  pSoumission 		INTEGER 		NOT NULL,
- CHECK (nDistance>0),
  FOREIGN KEY 	(pSoumission) REFERENCES tp1DemandeSoumission,
  PRIMARY KEY 	(pRoute)
 )
