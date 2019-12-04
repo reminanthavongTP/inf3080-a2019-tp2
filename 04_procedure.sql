@@ -60,5 +60,19 @@ RAISE_APPLICATION_ERROR(-20001,'erreur interne');
 END afficherLivraisons
 )
 /
+CREATE OR REPLACE FUNCTION CoutTotalDuTrajet
+(uneSoumission tp1DemandeSoumission.pSoumission%TYPE,
+sourceOri tp1Route.nLatOri%TYPE,
+sourceDest tp1Route.nLatDes%TYPE) RETURN NUMBER	
+(IS	
+ prix INTEGER;	
+ BEGIN	
+ prix = tp1Tracteur.nConsommation * tp1Chargement.nDistance * tp1Chargement.nCout; 	
+ prix = prix + (tp1TypeEquipement.nCount * tp1Chargement.nDistance); 	
+ prix = prix * tp1Compagnie.nProfit;	
+ RETURN prix;	
+ END	
+)
+/
 COMMIT
 /
