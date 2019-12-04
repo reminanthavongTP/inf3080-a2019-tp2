@@ -40,6 +40,7 @@ CREATE TABLE tp1Compagnie
  cCompagnie 		VARCHAR(20) 	NOT NULL,
  nCamion      	INTEGER 		NOT NULL,
  nProfit      NUMBER      NOT NULL,
+ CHECK (nbCamion>=1),
  PRIMARY KEY 	(pCompagnie)
 )
 /
@@ -96,6 +97,7 @@ CREATE TABLE tp1DemandeSoumission
 (pSoumission 		INTEGER 		NOT NULL,
  nPrix 		NUMBER 		NOT NULL,
  pCamion 		INTEGER 		NOT NULL,
+ dateSoumission 	DATE 	NOT NULL,
  PRIMARY KEY 	(pSoumission),
  FOREIGN KEY 	(pCamion) REFERENCES tp1Camion
 )
@@ -107,22 +109,28 @@ CREATE TABLE tp1Route
  nLongOri 	NUMBER(8,5) 	NOT NULL,
  nLatDes 		NUMBER(8,5) 		NOT NULL,
  nLongDes 		NUMBER(8,5) 		NOT NULL,
- nDistance 		NUMBER(8,5) 		NOT NULL,
+ nDistance 		NUMBER(8,5) 		NOT NULL
+ pSoumission 		INTEGER 		NOT NULL,
+ CHECK (nDistance>0),
+ FOREIGN KEY 	(pSoumission) REFERENCES tp1DemandeSoumission,
  PRIMARY KEY 	(pRoute)
 )
 /
 CREATE TABLE tp1Chargement
 (pChargement 		INTEGER 	NOT NULL,
  cChargement 		VARCHAR(30) 	NOT NULL,
- nLatOri 	NUMBER(8,5) 	NOT NULL,
- nLongOri 	NUMBER(8,5) 	NOT NULL,
- nLatDes 		NUMBER(8,5) 		NOT NULL,
- nLongDes 		NUMBER(8,5) 		NOT NULL,
  nLongueur 		NUMBER 		NOT NULL,
  nLargeur 		NUMBER 		NOT NULL,
  nHauteur		NUMBER 		NOT NULL,
  nPoids 		NUMBER 		NOT NULL,
- pClient 		INTEGER 		NOT NULL,
+ refrigerated 		INTEGER	NOT NULL,
+ dock 		INTEGER 	NOT NULL,
+ hazardous 	INTEGER 	NOT NULL,
+ rush 		INTEGER 		NOT NULL,
+ quantity 	INTEGER  	NOT NULL,
+ hours 	FLOAT  	NOT NULL,
+ valeur 	INTEGER  	NOT NULL,
+ pSoumission 		INTEGER 		NOT NULL,
  PRIMARY KEY 	(pChargement),
  FOREIGN KEY 	(pClient) REFERENCES tp1Client
 )
@@ -141,7 +149,9 @@ CREATE TABLE tp1Position
  nLat NUMBER(8,5) NOT NULL,
  nLong NUMBER(8,5) NOT NULL,
  bDisponible INTEGER NOT NULL,
- PRIMARY KEY    (pPosition)
+ pCamion 		INTEGER 		NOT NULL,
+ PRIMARY KEY    (pPosition),
+ FOREIGN KEY 	(pCamion) REFERENCES tp1Camion
 )
 /
 COMMIT
