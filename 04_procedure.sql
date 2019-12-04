@@ -76,5 +76,17 @@ sourceDestLong tp1Route.nLongDes%TYPE) RETURN NUMBER
  END	
 )
 /
+CREATE OR REPLACE FUNCTION TotalFacture
+(uneFacture tp1SoumissionE.pSoumissionE%TYPE)
+RETURN tp1DemandeSoumission.nPrix%TYPE IS
+unPrix tp1DemandeSoumission.nPrix%TYPE;
+BEGIN
+SELECT quantitéEnStock
+INTO unPrix
+FROM Article
+WHERE noArticle = unNoArticle;
+RETURN unPrix;
+END TotalFacture;
+/
 COMMIT
 /
