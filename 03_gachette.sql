@@ -106,5 +106,28 @@ create OR REPLACE trigger tp2ReduireCamion
   set tp1Camion.nCamion = tp1Camion - 1
 )
 /
+create OR REPLACE trigger tp2BloquerCamion
+( after INSERT on SoumissionD  
+  for each row 
+  on tp1Camion
+  set tp1Camion.nCamion = tp1Camion - 1
+)
+/
+CREATE OR REPLACE TRIGGER ON SoumissionE
+(AFTER INSERT
+AS
+IF EXISTS (SELECT *
+           FROM tp1Chargement p 
+           JOIN inserted AS i 
+           ON p.pChargement = i.pChargement 
+           WHERE v.CreditRating = 5
+          )
+BEGIN
+RAISERROR ('This vendor''s credit rating is too low to accept new purchase orders.', 16, 1);
+ROLLBACK TRANSACTION;
+RETURN 
+END
+ )
+/
 COMMIT
 /
