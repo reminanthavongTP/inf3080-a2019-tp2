@@ -1,45 +1,34 @@
 SET ECHO ON
 -- Script Oracle SQL*plus de procedure. pour le travail pratique 2 - Modélisation et Conception d'une BD
 -- Version sans accents
--- p_demande() p_soumission() p_commande() f_prix()
 SET ECHO ON
-CREATE OR REPLACE PROCEDURE p_demande(pClient, nLatOri, nLongOri, nLatDes, nLongDes, nPoids, nLargeur, nLongueur, nHauteur)
-(@pChargement 		INTEGER 	= '0',
- @cChargement 		VARCHAR(30) 	= pClient + pChargement
- AS
- BEGIN
-    INSERT INTO tp1Chargement (pChargement,cChargement,nLatOri,nLongOri,nLatDes,nLongDes,nLongueur,nLargeur,nHauteur,nPoids,pClient) 
-    values (@pChargement,@cChargement,nLatOri,nLongOri,nLatDes,nLongDes,nLongueur,nLargeur,nHauteur,nPoids,pClient)
- END
-)
-/
-CREATE OR REPLACE PROCEDURE p_soumission(pChargement)
-(IS
- BEGIN
- 
- END
-)
-/
-CREATE OR REPLACE PROCEDURE p_commande(pSoumissionD)
-(@nPrix 		NUMBER 		= f_prix(pSoumissionD),
- @pCamion 		INTEGER = 
- AS
- BEGIN
-    INSERT INTO tp1DemandeSoumission (pSoumission,nPrix,pCamion) 
-    values (pSoumission,@nPrix,@pCamion)
- END
-)
-)
-/
-CREATE OR REPLACE FUNCTION f_prix(pSoumissionD) RETURN NUMBER
-(IS
- prix INTEGER;
- BEGIN
- prix = tp1Tracteur.nConsommation * tp1Chargement.nDistance * tp1Chargement.nCout; 
- prix = prix + (tp1TypeEquipement.nCount * tp1Chargement.nDistance); 
- prix = prix * tp1Compagnie.nProfit;
- RETURN prix;
- END
+CREATE OR REPLACE PROCEDURE ConsulterSoumissions
+(
+(Soumission tp1DemandeSoumission.pSoumission%TYPE) 
+IS
+laSoumission tp1DemandeSoumission.pSoumission%TYPE;
+-- Déclaration d'un curseur (CURSOR) PL/SQL pour itérer sur les lignes
+CURSOR lignesDetail
+(unSoumission tp1DemandeSoumission.pSoumission%TYPE)
+IS
+SELECT pSoumission, pCamion, dateSoumission
+FROM tp1DemandeSoumission
+WHERE Soumission = unSoumission;
+BEGIN
+DBMS_OUTPUT.PUT('noSoumission #:');
+DBMS_OUTPUT.PUT_LINE(Soumission);
+OPEN lignesDetail(Soumission);
+LOOP
+FETCH lignesDetail INTO laSoumission;
+EXIT WHEN lignesDetail%NOTFOUND;
+DBMS_OUTPUT.PUT('noSoumission #:');
+DBMS_OUTPUT.PUT(laSoumission);
+END LOOP;
+CLOSE lignesDetail ;
+EXCEPTION
+WHEN OTHERS THEN
+RAISE_APPLICATION_ERROR(-20001,'erreur interne');
+END afficherLivraisons
 )
 /
 COMMIT
