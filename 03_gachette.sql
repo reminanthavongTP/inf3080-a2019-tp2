@@ -99,5 +99,12 @@ create OR REPLACE trigger tp2GachetteTracteur
   set tp1Tracteur.pTracteur  = tp2Tracteur.nextval
 )
 /
+create OR REPLACE trigger tp2ReduireCamion
+( after INSERT on SoumissionD  
+  for each row 
+  on tp1Camion
+  set tp1Camion.nCamion = tp1Camion - 1
+)
+/
 COMMIT
 /
