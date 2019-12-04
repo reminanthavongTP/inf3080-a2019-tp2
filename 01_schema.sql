@@ -38,6 +38,7 @@ CREATE TABLE tp1Client
 CREATE TABLE tp1Compagnie
 (pCompagnie 		INTEGER 		NOT NULL,
  cCompagnie 		VARCHAR(20) 	NOT NULL,
+ nCamion      	INTEGER 		NOT NULL,
  nProfit      NUMBER      NOT NULL,
  PRIMARY KEY 	(pCompagnie)
 )
