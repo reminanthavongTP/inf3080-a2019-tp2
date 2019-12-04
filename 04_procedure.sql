@@ -62,8 +62,10 @@ END afficherLivraisons
 /
 CREATE OR REPLACE FUNCTION CoutTotalDuTrajet
 (uneSoumission tp1DemandeSoumission.pSoumission%TYPE,
-sourceOri tp1Route.nLatOri%TYPE,
-sourceDest tp1Route.nLatDes%TYPE) RETURN NUMBER	
+sourceOriLat tp1Route.nLatOri%TYPE,
+sourceOriLong tp1Route.nLongOri%TYPE,
+sourceDestLat tp1Route.nLatDes%TYPE,
+sourceDestLong tp1Route.nLongDes%TYPE) RETURN NUMBER	
 (IS	
  prix INTEGER;	
  BEGIN	
