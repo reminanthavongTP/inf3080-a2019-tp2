@@ -100,7 +100,7 @@ create OR REPLACE trigger tp2GachetteTracteur
 )
 /
 create OR REPLACE trigger tp2ReduireCamion
-( after INSERT on SoumissionD  
+( after INSERT on tp1DemandeSoumission  
   for each row 
   on tp1Camion
   set tp1Camion.nCamion = tp1Camion - 1
@@ -122,5 +122,42 @@ RETURN
 END
  )
 /
+CREATE OR REPLACE TRIGGER ON tp1DemandeSoumission
+(AFTER INSERT
+AS
+IF EXISTS (SELECT *
+           FROM tp1Route p 
+           JOIN inserted AS i 
+           ON p.pSoumission = i.pSoumission 
+           WHERE p.nDistance = 0
+          )
+BEGIN
+RAISERROR ('Bloquer la soumission si le trajet n’a pas été bien identifié');
+ROLLBACK TRANSACTION;
+RETURN 
+END
+ )
+ /
+ CREATE OR REPLACE TRIGGER ON tp1DemandeSoumission
+(AFTER INSERT
+AS
+IF EXISTS (SELECT *
+           FROM tp1Camion p 
+           JOIN inserted AS i 
+           ON p.pCamion = i.pCamion 
+           JOIN tp1Equipement AS v 
+           ON v.pTypeEquipement = p.pTypeEquipement
+           JOIN tp1TypeEquipement AS y
+           ON y.pTypeEquipement = v.pTypeEquipement
+           WHERE y.nCout > 0
+          )
+BEGIN
+RAISERROR ('Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas
+différents');
+ROLLBACK TRANSACTION;
+RETURN 
+END
+ )
+ /
 COMMIT
 /
