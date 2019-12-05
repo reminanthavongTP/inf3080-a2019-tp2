@@ -68,6 +68,15 @@ BEGIN
   :new.pCamion := tp2Camion.nextval;
 END;
 /
+create OR REPLACE trigger tp2GachetteCamion2
+BEFORE INSERT ON tp1Camion
+FOR EACH ROW
+  WHEN (new.pEquipement = 0 and new.pTracteur = 0)
+BEGIN
+  :new.pEquipement := tp2Equipement.currval;
+  :new.pTracteur := tp2Tracteur.currval;
+END;
+/
 create OR REPLACE trigger tp2GachetteTypeEquipement
 BEFORE INSERT ON tp1TypeEquipement
 FOR EACH ROW
