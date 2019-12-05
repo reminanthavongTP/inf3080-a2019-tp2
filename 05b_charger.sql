@@ -49,37 +49,37 @@ INSERT INTO tp1TypeEquipement
  	VALUES(0,'Flatbed',0.02)
 /
 INSERT INTO tp1Equipement
- 	VALUES(0,'EarenamFlatbed',8.0,4.8,5.4,208.0,10)
+ 	VALUES(0,'EarenamFlatbed',8.0,4.8,5.4,208.0,0)
 /	
 INSERT INTO tp1TypeEquipement
  	VALUES(0,'DryBox',0.05)
 /
 INSERT INTO tp1Equipement
- 	VALUES(0,'EarenamDryBox',11.7,6.0,5.5,396.0,12)
+ 	VALUES(0,'EarenamDryBox',11.7,6.0,5.5,396.0,0)
 /
 INSERT INTO tp1TypeEquipement
  	VALUES(0,'Flatbed',0.02)
 /
 INSERT INTO tp1Equipement
- 	VALUES(0,'ArearnFlatbed',8.0,4.8,5.4,208.0,14)
+ 	VALUES(0,'ArearnFlatbed',8.0,4.8,5.4,208.0,0)
 /
 INSERT INTO tp1TypeEquipement
  	VALUES(0,'DryBox',0.05)
 /
 INSERT INTO tp1Equipement
- 	VALUES(0,'ArearnDryBox',11.7,6.0,5.5,396.0,16)
+ 	VALUES(0,'ArearnDryBox',11.7,6.0,5.5,396.0,0)
 /
 INSERT INTO tp1TypeEquipement
  	VALUES(0,'Flatbed',0.02)
 /
 INSERT INTO tp1Equipement
- 	VALUES(0,'SenoineFlatbed',8.0,4.8,5.4,208.0,18)
+ 	VALUES(0,'SenoineFlatbed',8.0,4.8,5.4,208.0,0)
 /
 INSERT INTO tp1TypeEquipement
  	VALUES(0,'DryBox',0.05)
 /
 INSERT INTO tp1Equipement
- 	VALUES(0,'SenoineDryBox',11.7,6.0,5.5,396.0,20)
+ 	VALUES(0,'SenoineDryBox',11.7,6.0,5.5,396.0,0)
 /
 INSERT INTO tp1Carburant
  	VALUES(0,'Regulier',1.10)
