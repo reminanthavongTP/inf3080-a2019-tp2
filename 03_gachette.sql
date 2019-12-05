@@ -108,6 +108,14 @@ BEGIN
   :new.pTracteur := tp2Tracteur.nextval;
 END;
 /
+create OR REPLACE trigger tp2GachetteTracteur2
+BEFORE INSERT ON tp1Tracteur
+FOR EACH ROW
+  WHEN (new.pCarburant = 0)
+BEGIN
+  :new.pCarburant := tp2Carburant.currval;
+END;
+/
 create OR REPLACE trigger tp2ReduireCamion
 AFTER INSERT ON tp1SoumissionE
 FOR EACH ROW
