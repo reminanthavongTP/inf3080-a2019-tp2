@@ -9,7 +9,7 @@ create OR REPLACE trigger tp2GachetteClients
   tp1Client  
   for each row
   BEGIN
-  set tp1Client.pClient := tp2Client.nextval
+  set :new.pClient := tp2Client.nextval
 
 /
 create OR REPLACE trigger tp2GachetteDemandeSoumission
