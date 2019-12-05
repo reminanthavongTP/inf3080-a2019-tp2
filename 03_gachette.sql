@@ -14,16 +14,16 @@ END;
 create OR REPLACE trigger tp2GachetteDemandeSoumission
 BEFORE INSERT ON tp1DemandeSoumission
 FOR EACH ROW
-  WHEN (new.pDemandeSoumission = 0)
+  WHEN (new.pSoumission = 0)
 BEGIN
-  :new.pDemandeSoumission := tp2DemandeSoumission.nextval;
+  :new.pSoumission := tp2DemandeSoumission.nextval;
 END;
 
 /
 create OR REPLACE trigger tp2GachetteSoumissionE
 BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
-  WHEN (new.pSoumissionEt = 0)
+  WHEN (new.pSoumissionE = 0)
 BEGIN
   :new.pSoumissionE := tp2SoumissionE.nextval;
 END;
@@ -31,7 +31,7 @@ END;
 create OR REPLACE trigger tp2GachetteChargement
 BEFORE INSERT ON tp1Chargement
 FOR EACH ROW
-  WHEN (new.pChargementt = 0)
+  WHEN (new.pChargement = 0)
 BEGIN
   :new.pChargement := tp2Chargement.nextval;
 END;
@@ -39,7 +39,7 @@ END;
 create OR REPLACE trigger tp2GachetteRoute
 BEFORE INSERT ON tp1Route
 FOR EACH ROW
-  WHEN (new.pRoutet = 0)
+  WHEN (new.pRoute = 0)
 BEGIN
   :new.pRoute := tp2Route.nextval;
 END;
@@ -47,7 +47,7 @@ END;
 create OR REPLACE trigger tp2GachetteCarburant
 BEFORE INSERT ON tp1Carburant
 FOR EACH ROW
-  WHEN (new.pCarburantt = 0)
+  WHEN (new.pCarburant = 0)
 BEGIN
   :new.pCarburant := tp2Carburant.nextval;
 END;
