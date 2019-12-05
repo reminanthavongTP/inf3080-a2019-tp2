@@ -85,61 +85,61 @@ INSERT INTO tp1Carburant
  	VALUES(0,'Regulier',1.10)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'EarenamTracteurReg',20,1,tp2Carburant.currval())
+ 	VALUES(0,'EarenamTracteurReg',20,1,10)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,tp2Camion.currval(),tp2Camion.currval(),tp2Camion.currval(),tp2Tracteur.currval(),'EarenamCamion')
+ 	VALUES(0,10,10,10,'EarenamCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Montreal',43.6532,79.3832,1,)
+ 	VALUES(0,'Montreal',43.6532,79.3832,1,10)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'ArearnTracteurReg',20,1,tp2Carburant.currval())
+ 	VALUES(0,'ArearnTracteurReg',20,1,10)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,tp2Camion.currval(),tp2Camion.currval(),tp2Camion.currval(),tp2Tracteur.currval(),'ArearnCamion')
+ 	VALUES(0,12,12,12,'ArearnCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Toronto',45.5017,73.5673,1)
+ 	VALUES(0,'Toronto',45.5017,73.5673,1,12)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'SenoineTracteurReg',20,1,tp2Carburant.currval())
+ 	VALUES(0,'SenoineTracteurReg',20,1,10)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,tp2Camion.currval(),tp2Camion.currval(),tp2Camion.currval(),tp2Tracteur.currval(),'SenoineCamion')
+ 	VALUES(0,14,14,14,'SenoineCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Calgary',51.0447,114.0719,1)
+ 	VALUES(0,'Calgary',51.0447,114.0719,1,14)
 /
 INSERT INTO tp1Carburant
  	VALUES(0,'Diesel',1.50)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'EarenamTracteurDies',20,1,tp2Carburant.currval())
+ 	VALUES(0,'EarenamTracteurDies',20,1,12)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,tp2Camion.currval(),tp2Camion.currval(),tp2Camion.currval(),tp2Tracteur.currval(),'EarenamCamion')
+ 	VALUES(0,16,16,16,'EarenamCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Montreal',43.6532,79.3832,1)
+ 	VALUES(0,'Montreal',43.6532,79.3832,1,16)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'ArearnTracteurDies,20,1,tp2Carburant.currval())
+ 	VALUES(0,'ArearnTracteurDies',20,1,12)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,tp2Camion.currval(),tp2Camion.currval(),tp2Camion.currval(),tp2Tracteur.currval(),'ArearnCamion')
+ 	VALUES(0,18,18,18,'ArearnCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Toronto',45.5017,73.5673,1)
+ 	VALUES(0,'Toronto',45.5017,73.5673,1,18)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'SenoineTracteurDies',20,1,tp2Carburant.currval())
+ 	VALUES(0,'SenoineTracteurDies',20,1,12)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,tp2Camion.currval(),tp2Camion.currval(),tp2Camion.currval(),tp2Tracteur.currval(),'SenoineCamion')
+ 	VALUES(0,20,20,20,'SenoineCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Calgary',51.0447,114.0719,1)
+ 	VALUES(0,'Calgary',51.0447,114.0719,1,20)
 /
 INSERT INTO tp1DemandeSoumission
  	VALUES(0,15.00,18,'2019/10/18')
