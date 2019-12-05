@@ -32,7 +32,7 @@ CREATE SEQUENCE tp2Client
  increment by 2
  minvalue 10
  maxvalue 100
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2DemandeSoumission
@@ -40,7 +40,7 @@ CREATE SEQUENCE tp2DemandeSoumission
  increment by 2
  minvalue 10
  maxvalue 100
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2SoumissionE
@@ -48,7 +48,7 @@ CREATE SEQUENCE tp2SoumissionE
  increment by 2
  minvalue 10
  maxvalue 100
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Chargement
@@ -56,7 +56,7 @@ CREATE SEQUENCE tp2Chargement
  increment by 2
  minvalue 10
  maxvalue 200
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Route
@@ -64,7 +64,7 @@ CREATE SEQUENCE tp2Route
  increment by 2
  minvalue 10
  maxvalue 20
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Carburant
@@ -72,7 +72,7 @@ CREATE SEQUENCE tp2Carburant
  increment by 2
  minvalue 10
  maxvalue 12
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Compagnie
@@ -80,7 +80,7 @@ CREATE SEQUENCE tp2Compagnie
  increment by 2
  minvalue 10
  maxvalue 20
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Camion
@@ -88,7 +88,7 @@ CREATE SEQUENCE tp2Camion
  increment by 2
  minvalue 10
  maxvalue 40
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2TypeEquipement
@@ -96,7 +96,7 @@ CREATE SEQUENCE tp2TypeEquipement
  increment by 2
  minvalue 10
  maxvalue 40
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Equipement
@@ -104,7 +104,7 @@ CREATE SEQUENCE tp2Equipement
  increment by 2
  minvalue 10
  maxvalue 40
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Position
@@ -112,7 +112,7 @@ CREATE SEQUENCE tp2Position
  increment by 2
  minvalue 10
  maxvalue 40
- cycle
+ 
 
 /
 CREATE SEQUENCE tp2Tracteur
@@ -120,7 +120,7 @@ CREATE SEQUENCE tp2Tracteur
  increment by 2
  minvalue 10
  maxvalue 40
- cycle
+ 
 
 /
 COMMIT
