@@ -60,6 +60,14 @@ BEGIN
   :new.pRoute := tp2Route.nextval;
 END;
 /
+create OR REPLACE trigger tp2GachetteRoute2
+BEFORE INSERT ON tp1Route
+FOR EACH ROW
+  WHEN (new.pSoumission = 0)
+BEGIN
+  :new.pSoumission := tp2Soumission.currval;
+END;
+/
 create OR REPLACE trigger tp2GachetteCarburant
 BEFORE INSERT ON tp1Carburant
 FOR EACH ROW
