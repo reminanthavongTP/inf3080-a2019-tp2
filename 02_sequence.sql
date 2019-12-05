@@ -3,6 +3,30 @@ SET ECHO ON
 -- Version sans accents
 -- INSERTION dans les tables
 SET ECHO ON
+DROP SEQUENCE tp2Client
+/
+DROP SEQUENCE tp2DemandeSoumission
+/
+DROP SEQUENCE tp2SoumissionE
+/
+DROP SEQUENCE tp2Chargement
+/
+DROP SEQUENCE tp2Route
+/
+DROP SEQUENCE tp2Carburant
+/
+DROP SEQUENCE tp2Compagnie
+/
+DROP SEQUENCE tp2Camion
+/
+DROP SEQUENCE tp2TypeEquipement
+/
+DROP SEQUENCE tp2Equipement
+/
+DROP SEQUENCE tp2Position
+/
+DROP SEQUENCE tp2Tracteur
+/
 CREATE SEQUENCE tp2Client
 (start with 10
  increment by 2
