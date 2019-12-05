@@ -90,7 +90,7 @@ FOR EACH ROW
   WHEN (new.TypeEquipement = 0)
 BEGIN
   UPDATE tp1Equipement
-  SET TypeEquipement := tp2TypeEquipement.currval;
+  SET pTypeEquipement := tp2TypeEquipement.currval;
   WHERE pEquipement = tp2Equipement.currval;
 END;
 /
