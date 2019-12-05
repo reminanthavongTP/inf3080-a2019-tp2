@@ -12,92 +12,92 @@ BEGIN
 END;
 /
 create OR REPLACE trigger tp2GachetteDemandeSoumission
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1DemandeSoumission
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pDemandeSoumission IS NULL)
 BEGIN
-  :new.pClient := tp2DemandeSoumission.nextval;
+  :new.pDemandeSoumission := tp2DemandeSoumission.nextval;
 END;
 
 /
 create OR REPLACE trigger tp2GachetteSoumissionE
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pSoumissionEt IS NULL)
 BEGIN
-  :new.pClient := tp2SoumissionE.nextval;
+  :new.pSoumissionE := tp2SoumissionE.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteChargement
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Chargement
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pChargementt IS NULL)
 BEGIN
-  :new.pClient := tp2Chargement.nextval;
+  :new.pChargement := tp2Chargement.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteRoute
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Route
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pRoutet IS NULL)
 BEGIN
-  :new.pClient := tp2Route.nextval;
+  :new.pRoute := tp2Route.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteCarburant
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Carburant
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pCarburantt IS NULL)
 BEGIN
-  :new.pClient := tp2Carburant.nextval;
+  :new.pCarburant := tp2Carburant.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteCompagnie
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Compagnie
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pCompagnie IS NULL)
 BEGIN
-  :new.pClient := tp2Compagnie.nextval;
+  :new.pCompagnie := tp2Compagnie.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteCamion
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Camion
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pCamion IS NULL)
 BEGIN
-  :new.pClient := tp2Camion.nextval;
+  :new.pCamion := tp2Camion.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteTypeEquipement
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1TypeEquipement
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pTypeEquipement IS NULL)
 BEGIN
-  :new.pClient := tp2TypeEquipement.nextval;
+  :new.pTypeEquipement := tp2TypeEquipement.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteEquipement
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Equipement
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pEquipement IS NULL)
 BEGIN
-  :new.pClient := tp2Equipement.nextval;
+  :new.pEquipement := tp2Equipement.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachettePosition
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Position
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pPosition IS NULL)
 BEGIN
-  :new.pClient := tp2Position.nextval;
+  :new.pPosition := tp2Position.nextval;
 END;
 /
 create OR REPLACE trigger tp2GachetteTracteur
-BEFORE INSERT ON tp1Client
+BEFORE INSERT ON tp1Tracteur
 FOR EACH ROW
-  WHEN (new.pClient IS NULL)
+  WHEN (new.pTracteur IS NULL)
 BEGIN
-  :new.pClient := tp2Tracteur.nextval;
+  :new.pTracteur := tp2Tracteur.nextval;
 END;
 /
 create OR REPLACE trigger tp2ReduireCamion
