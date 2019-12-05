@@ -3,7 +3,7 @@ SET ECHO ON
 -- Version sans accents
 -- INSERTION dans les tables
 SET ECHO ON
-CREATE OR REPLACE SEQUENCE tp2Client
+CREATE SEQUENCE tp2Client
 (start with 10
  increment by 2
  minvalue 10
@@ -11,7 +11,7 @@ CREATE OR REPLACE SEQUENCE tp2Client
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2DemandeSoumission
+CREATE SEQUENCE tp2DemandeSoumission
 (start with 10
  increment by 2
  minvalue 10
@@ -19,7 +19,7 @@ CREATE OR REPLACE SEQUENCE tp2DemandeSoumission
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2SoumissionE
+CREATE SEQUENCE tp2SoumissionE
 (start with 10
  increment by 2
  minvalue 10
@@ -27,7 +27,7 @@ CREATE OR REPLACE SEQUENCE tp2SoumissionE
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Chargement
+CREATE SEQUENCE tp2Chargement
 (start with 10
  increment by 2
  minvalue 10
@@ -35,7 +35,7 @@ CREATE OR REPLACE SEQUENCE tp2Chargement
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Route
+CREATE SEQUENCE tp2Route
 (start with 10
  increment by 2
  minvalue 10
@@ -43,7 +43,7 @@ CREATE OR REPLACE SEQUENCE tp2Route
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Carburant
+CREATE SEQUENCE tp2Carburant
 (start with 10
  increment by 2
  minvalue 10
@@ -51,7 +51,7 @@ CREATE OR REPLACE SEQUENCE tp2Carburant
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Compagnie
+CREATE SEQUENCE tp2Compagnie
 (start with 10
  increment by 2
  minvalue 10
@@ -59,7 +59,7 @@ CREATE OR REPLACE SEQUENCE tp2Compagnie
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Camion
+CREATE SEQUENCE tp2Camion
 (start with 10
  increment by 2
  minvalue 10
@@ -67,7 +67,7 @@ CREATE OR REPLACE SEQUENCE tp2Camion
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2TypeEquipement
+CREATE SEQUENCE tp2TypeEquipement
 (start with 10
  increment by 2
  minvalue 10
@@ -75,7 +75,7 @@ CREATE OR REPLACE SEQUENCE tp2TypeEquipement
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Equipement
+CREATE SEQUENCE tp2Equipement
 (start with 10
  increment by 2
  minvalue 10
@@ -83,7 +83,7 @@ CREATE OR REPLACE SEQUENCE tp2Equipement
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Position
+CREATE SEQUENCE tp2Position
 (start with 10
  increment by 2
  minvalue 10
@@ -91,7 +91,7 @@ CREATE OR REPLACE SEQUENCE tp2Position
  cycle
 )
 /
-CREATE OR REPLACE SEQUENCE tp2Tracteur
+CREATE SEQUENCE tp2Tracteur
 (start with 10
  increment by 2
  minvalue 10
