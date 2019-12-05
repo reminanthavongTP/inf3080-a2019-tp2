@@ -85,13 +85,11 @@ BEGIN
 END;
 /
 create OR REPLACE trigger tp2GachetteEquipement2
-AFTER INSERT ON tp1Equipement
+BEFORE INSERT ON tp1Equipement
 FOR EACH ROW
-  WHEN (new.TypeEquipement = 0)
+  WHEN (new.pTypeEquipement = 0)
 BEGIN
-  UPDATE tp1Equipement
-  SET pTypeEquipement := tp2TypeEquipement.currval;
-  WHERE pEquipement = tp2Equipement.currval;
+  :new.pTypeEquipement := tp2TypeEquipement.currval;
 END;
 /
 create OR REPLACE trigger tp2GachettePosition
