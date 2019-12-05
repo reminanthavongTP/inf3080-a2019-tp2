@@ -48,7 +48,7 @@ CREATE TABLE tp1TypeEquipement
 (pTypeEquipement INTEGER NOT NULL,
  cTypeEquipement VARCHAR(30) NOT NULL,
  nCout NUMBER(8,5) NOT NULL,
- CHECK           (cTypeEquipement IN ( 'Drybox','Flatbed')),
+ CHECK           (cTypeEquipement IN ( 'DryBox','Flatbed')),
  PRIMARY KEY    (pTypeEquipement)
 )
 /
