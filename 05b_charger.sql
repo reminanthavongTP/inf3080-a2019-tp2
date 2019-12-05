@@ -175,7 +175,7 @@ INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Route
- 	VALUES(0,to_date('Vancouver-Ottawa',45.638728,-122.661486,45.4215,75.6972,3539.0,14)
+ 	VALUES(0,'Vancouver-Ottawa',45.638728,-122.661486,45.4215,75.6972,3539.0,14)
 /
 INSERT INTO tp1DemandeSoumission
  	VALUES(0,20.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
@@ -196,7 +196,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Montreal-Toronto',0,0,1,0,6.0,3.0,7.0,20.0,1,1.0,1000.00,0,0)
 /
 INSERT INTO tp1SoumissionE
- 	VALUES(0,0,'2019/09/30')
+ 	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Route
  	VALUES(0,'Montreal-Toronto',45.5017,73.5673,43.6532,79.3832,504.3,18)
@@ -220,7 +220,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Edmonton-Ottawa',1,1,1,1,3.0,7.0,6.0,50.0,1,1.0,100.00,0,0)
 /
 INSERT INTO tp1SoumissionE
- 	VALUES(0,0,'2019/09/30', 'yyyy/mm/dd'))
+ 	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Route
  	VALUES(0,'Edmonton-Ottawa',53.546,113.493,45.421,75.697,2837.0,22)
