@@ -104,7 +104,7 @@ CREATE TABLE tp1DemandeSoumission
 /
 CREATE TABLE tp1Route
 (pRoute 		INTEGER 	NOT NULL,
- cRoute 		VARCHAR(30) 	NOT NULL,
+ cRoute 		VARCHAR(40) 	NOT NULL,
  nLatOri 	NUMBER(8,5) 	NOT NULL,
  nLongOri 	NUMBER(8,5) 	NOT NULL,
  nLatDes 		NUMBER(8,5) 		NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE tp1Route
 /
 CREATE TABLE tp1Chargement
 (pChargement 		INTEGER 	NOT NULL,
- cChargement 		VARCHAR(30) 	NOT NULL,
+ cChargement 		VARCHAR(40) 	NOT NULL,
  refrigerated 		INTEGER	NOT NULL,
  dock 		INTEGER 	NOT NULL,
  hazardous 	INTEGER 	NOT NULL,
