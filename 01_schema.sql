@@ -95,7 +95,7 @@ CREATE TABLE tp1Camion
 /
 CREATE TABLE tp1DemandeSoumission
 (pSoumission 		INTEGER 		NOT NULL,
- nPrix 		NUMBER 		NOT NULL,
+ nPrix 		NUMBER(8,5) 		NOT NULL,
  pCamion 		INTEGER 		NOT NULL,
  dateSoumission 	DATE 	NOT NULL,
  PRIMARY KEY 	(pSoumission),
