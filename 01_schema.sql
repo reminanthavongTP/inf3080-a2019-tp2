@@ -133,7 +133,7 @@ CREATE TABLE tp1Chargement
  pClient       INTEGER 		NOT NULL,
  PRIMARY KEY 	(pChargement),
  FOREIGN KEY 	(pClient) REFERENCES tp1Client,
- FOREIGN KEY 	(pSoumission) REFERENCES DemandeSoumission
+ FOREIGN KEY 	(pSoumission) REFERENCES tp1DemandeSoumission
 )
 /                  
 CREATE TABLE tp1SoumissionE
