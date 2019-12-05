@@ -18,7 +18,23 @@ FOR EACH ROW
 BEGIN
   :new.pSoumission := tp2DemandeSoumission.nextval;
 END;
-
+/
+create OR REPLACE trigger tp2GachetteDemandeSoumission2
+BEFORE INSERT ON tp1DemandeSoumission
+FOR EACH ROW
+  WHEN (new.pCamion = 0)
+DECLARE
+  rpCamion  tp1DemandeSoumission.pCamion%TYPE;
+BEGIN
+SELECT * INTO rpCamion FROM   
+(
+SELECT pCamion FROM tp1Camion  
+ORDER BY dbms_random.value
+)  
+WHERE rownum = 1;
+ 
+  :new.pCamion := rpCamion;
+END;
 /
 create OR REPLACE trigger tp2GachetteSoumissionE
 BEFORE INSERT ON tp1SoumissionE
