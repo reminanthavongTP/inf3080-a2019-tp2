@@ -40,7 +40,7 @@ CREATE TABLE tp1Compagnie
  cCompagnie 		VARCHAR(20) 	NOT NULL,
  nCamion      	INTEGER 		NOT NULL,
  nProfit      NUMBER      NOT NULL,
- CHECK (nbCamion>=1),
+ CHECK (nCamion>=1),
  PRIMARY KEY 	(pCompagnie)
 )
 /
