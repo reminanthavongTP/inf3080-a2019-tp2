@@ -13,7 +13,7 @@ create OR REPLACE trigger tp2GachetteClients
   THEN
   set :new.pClient := tp2Client.nextval
   END IF;
-  END
+  END;
 
 /
 create OR REPLACE trigger tp2GachetteDemandeSoumission
