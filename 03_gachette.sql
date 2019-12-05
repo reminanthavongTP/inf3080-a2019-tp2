@@ -65,7 +65,7 @@ BEFORE INSERT ON tp1Route
 FOR EACH ROW
   WHEN (new.pSoumission = 0)
 BEGIN
-  :new.pSoumission := tp2Soumission.currval;
+  :new.pSoumission := tp2DemandeSoumission.currval;
 END;
 /
 create OR REPLACE trigger tp2GachetteCarburant
