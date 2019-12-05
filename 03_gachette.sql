@@ -109,6 +109,14 @@ BEGIN
   :new.pPosition := tp2Position.nextval;
 END;
 /
+create OR REPLACE trigger tp2GachettePosition2
+BEFORE INSERT ON tp1Position
+FOR EACH ROW
+  WHEN (new.pCamion = 0)
+BEGIN
+  :new.pCamion := tp2Camion.currval;
+END;
+/
 create OR REPLACE trigger tp2GachetteTracteur
 BEFORE INSERT ON tp1Tracteur
 FOR EACH ROW
