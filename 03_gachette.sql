@@ -44,6 +44,14 @@ BEGIN
   :new.pSoumissionE := tp2SoumissionE.nextval;
 END;
 /
+create OR REPLACE trigger tp2GachetteSoumissionE2
+BEFORE INSERT ON tp1SoumissionE
+FOR EACH ROW
+  WHEN (new.pChargement = 0)
+BEGIN
+  :new.pChargement := tp2Chargement.currval;
+END;
+/
 create OR REPLACE trigger tp2GachetteChargement
 BEFORE INSERT ON tp1Chargement
 FOR EACH ROW
