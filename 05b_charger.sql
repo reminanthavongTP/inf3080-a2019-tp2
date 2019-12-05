@@ -85,61 +85,61 @@ INSERT INTO tp1Carburant
  	VALUES(0,'Regulier',1.10)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'EarenamTracteurReg',20,1,10)
+ 	VALUES(0,'EarenamTracteurReg',20,1,0)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,10,10,10,'EarenamCamion')
+ 	VALUES(0,10,0,0,'EarenamCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Montreal',43.6532,79.3832,1,10)
+ 	VALUES(0,'Montreal',43.6532,79.3832,1,0)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'ArearnTracteurReg',20,1,10)
+ 	VALUES(0,'ArearnTracteurReg',20,1,0)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,12,12,12,'ArearnCamion')
+ 	VALUES(0,12,0,0,'ArearnCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Toronto',45.5017,73.5673,1,12)
+ 	VALUES(0,'Toronto',45.5017,73.5673,1,0)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'SenoineTracteurReg',20,1,10)
+ 	VALUES(0,'SenoineTracteurReg',20,1,0)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,14,14,14,'SenoineCamion')
+ 	VALUES(0,14,0,0,'SenoineCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Calgary',51.0447,114.0719,1,14)
+ 	VALUES(0,'Calgary',51.0447,114.0719,1,0)
 /
 INSERT INTO tp1Carburant
  	VALUES(0,'Diesel',1.50)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'EarenamTracteurDies',20,1,12)
+ 	VALUES(0,'EarenamTracteurDies',20,1,0)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,10,16,16,'EarenamCamion')
+ 	VALUES(0,10,0,0,'EarenamCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Montreal',43.6532,79.3832,1,16)
+ 	VALUES(0,'Montreal',43.6532,79.3832,1,0)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'ArearnTracteurDies',20,1,12)
+ 	VALUES(0,'ArearnTracteurDies',20,1,0)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,12,18,18,'ArearnCamion')
+ 	VALUES(0,12,0,0,'ArearnCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Toronto',45.5017,73.5673,1,18)
+ 	VALUES(0,'Toronto',45.5017,73.5673,1,0)
 /
 INSERT INTO tp1Tracteur
- 	VALUES(0,'SenoineTracteurDies',20,1,12)
+ 	VALUES(0,'SenoineTracteurDies',20,1,0)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,14,20,20,'SenoineCamion')
+ 	VALUES(0,14,0,0,'SenoineCamion')
 /
 INSERT INTO tp1Position
- 	VALUES(0,'Calgary',51.0447,114.0719,1,20)
+ 	VALUES(0,'Calgary',51.0447,114.0719,1,0)
 /
 INSERT INTO tp1DemandeSoumission
  	VALUES(0,15.00,22,'2019/10/18')
