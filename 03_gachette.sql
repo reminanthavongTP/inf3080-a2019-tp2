@@ -11,7 +11,7 @@ create OR REPLACE trigger tp2GachetteClients
   BEGIN
   IF :new.pClient = 0
   THEN
-  set :new.pClient := tp2Client.nextval
+  set :new.pClient := tp2Client.nextval;
   END IF;
   END;
 
