@@ -18,17 +18,17 @@ ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
 WHERE noSoumissionE = unnoSoumissionE AND 
 noDate = unnoDate; 
 BEGIN 
-DBMS_OUTPUT.PUT('noSoumissionE #:'); 
+DBMS_OUTPUT.PUT('Votre Soumission #:'); 
 DBMS_OUTPUT.PUT_LINE(noSoumissionE); 
-DBMS_OUTPUT.PUT('noDate #:'); 
+DBMS_OUTPUT.PUT('Date:'); 
 DBMS_OUTPUT.PUT_LINE(noDate); 
 OPEN lignesDétail(noSoumissionE, noDate); 
 LOOP 
 FETCH lignesDétail INTO leCamion, lePrix; 
 EXIT WHEN lignesDétail%NOTFOUND; 
-DBMS_OUTPUT.PUT('Camion :'); 
+DBMS_OUTPUT.PUT('Le Camion assigné :'); 
 DBMS_OUTPUT.PUT(leCamion); 
-DBMS_OUTPUT.PUT(' Prix :'); 
+DBMS_OUTPUT.PUT('Votre Cout :'); 
 DBMS_OUTPUT.PUT_LINE(lePrix); 
 END LOOP; 
 CLOSE lignesDétail ; 
