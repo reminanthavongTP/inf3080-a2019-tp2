@@ -9,7 +9,11 @@ create OR REPLACE trigger tp2GachetteClients
   tp1Client  
   for each row
   BEGIN
+  IF :new.pClient = 0
+  THEN
   set :new.pClient := tp2Client.nextval
+  END IF;
+  END
 
 /
 create OR REPLACE trigger tp2GachetteDemandeSoumission
