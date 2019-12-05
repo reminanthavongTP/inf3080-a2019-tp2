@@ -210,58 +210,72 @@ SELECT tp1Camion.pCompagnie INTO rpCompagnie
      WHERE pCompagnie = rpCompagnie;
 END;     
 /
-CREATE OR REPLACE TRIGGER ON tp1DemandeSoumission
-AFTER INSERT
-AS
-IF EXISTS (SELECT *
-           FROM tp1Route p 
-           JOIN inserted AS i 
-           ON p.pSoumission = i.pSoumission 
-           WHERE p.nDistance > 50
-          )
+CREATE OR REPLACE TRIGGER tp2BlocReservation
+AFTER INSERT ON tp1SoumissionE
+FOR EACH ROW
+DECLARE
+  rnDistance  tp1Route.nDistance %TYPE;
 BEGIN
-RAISERROR ('Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km');
-ROLLBACK TRANSACTION;
-RETURN 
-END
- 
+
+SELECT tp1route.ndistance INTO rnDistance
+    FROM tp1SoumissionE JOIN tp1Chargement
+    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
+    JOIN tp1DemandeSoumission
+    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+    JOIN tp1Route
+    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
+    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
+IF  (rnDistance > 50)
+THEN
+raise_application_error
+(-20000, 'Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km');
+END IF;
+END;
 /
-CREATE OR REPLACE TRIGGER ON tp1DemandeSoumission
-AFTER INSERT
-AS
-IF EXISTS (SELECT *
-           FROM tp1Route p 
-           JOIN inserted AS i 
-           ON p.pSoumission = i.pSoumission 
-           WHERE p.nDistance = 0
-          )
+CREATE OR REPLACE TRIGGER tp2TrajetInvalid
+AFTER INSERT ON tp1SoumissionE
+FOR EACH ROW
+DECLARE
+  rnDistance  tp1Route.nDistance %TYPE;
 BEGIN
-RAISERROR ('Bloquer la soumission si le trajet n’a pas été bien identifié');
-ROLLBACK TRANSACTION;
-RETURN 
-END
- 
+
+SELECT tp1route.ndistance INTO rnDistance
+    FROM tp1SoumissionE JOIN tp1Chargement
+    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
+    JOIN tp1DemandeSoumission
+    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+    JOIN tp1Route
+    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
+    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
+IF  (rnDistance <= 0)
+THEN
+raise_application_error
+(-20000, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
+END IF;
+END;
  /
- CREATE OR REPLACE TRIGGER ON tp1DemandeSoumission
-AFTER INSERT
-AS
-IF EXISTS (SELECT *
-           FROM tp1Camion p 
-           JOIN inserted AS i 
-           ON p.pCamion = i.pCamion 
-           JOIN tp1Equipement AS v 
-           ON v.pTypeEquipement = p.pTypeEquipement
-           JOIN tp1TypeEquipement AS y
-           ON y.pTypeEquipement = v.pTypeEquipement
-           WHERE y.nCout > 0
-          )
+CREATE OR REPLACE TRIGGER tp2CoutErreur
+AFTER INSERT ON tp1SoumissionE
+FOR EACH ROW
+DECLARE
+  rnDistance  tp1Route.nDistance %TYPE;
 BEGIN
-RAISERROR ('Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas
-différents');
-ROLLBACK TRANSACTION;
-RETURN 
-END
- 
+
+SELECT tp1route.ndistance INTO rnDistance
+    FROM tp1SoumissionE JOIN tp1Chargement
+    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
+    JOIN tp1DemandeSoumission
+    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+    JOIN tp1Route
+    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
+    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
+IF  (rnDistance <= 0)
+THEN
+raise_application_error
+(-20000, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas
+différents.');
+END IF;
+END;
  /
 COMMIT
 /
