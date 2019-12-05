@@ -103,10 +103,8 @@ END;
 create OR REPLACE trigger tp2ReduireCamion
 AFTER INSERT ON tp1SoumissionE
 FOR EACH ROW
-BEGIN
-  :tp1Compagnie.nCamion := tp1Compagnie.nCamion - 1;
-END;
-
+  UPDATE tp1Compagnie
+     SET nCamion = nCamion - 1;
 /
 CREATE OR REPLACE TRIGGER ON tp1DemandeSoumission
 AFTER INSERT
