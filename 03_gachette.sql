@@ -52,6 +52,30 @@ BEGIN
   :new.pChargement := tp2Chargement.nextval;
 END;
 /
+create OR REPLACE trigger tp2GachetteChargement2
+BEFORE INSERT ON tp1Chargement
+FOR EACH ROW
+  WHEN (new.pSoumission = 0)
+BEGIN
+  :new.pSoumission := tp2DemandeSoumission.currval;
+END;
+/
+create OR REPLACE trigger tp2GachetteChargement3
+BEFORE INSERT ON tp1Chargement
+FOR EACH ROW
+  WHEN (new.pClient = 0)
+DECLARE
+  rpClient  tp1Chargement.pClient%TYPE;
+BEGIN
+SELECT * INTO rpClient FROM   
+(
+SELECT pClient FROM tp1Client  
+ORDER BY dbms_random.value
+)  
+WHERE rownum = 1;
+  :new.pClient := rpClient;
+END;
+/
 create OR REPLACE trigger tp2GachetteRoute
 BEFORE INSERT ON tp1Route
 FOR EACH ROW
