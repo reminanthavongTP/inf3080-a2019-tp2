@@ -145,7 +145,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,15.00,0,'2019/10/18')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Toronto-Ottawa','2019/10/18',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+ 	VALUES(0,'Toronto-Ottawa',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/10/18')
@@ -157,7 +157,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,170.00,0,'2019/10/17')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Calgary-Montreal','2019/10/17',0,1,0,0,7.0,6.0,3.0,30.0,1,1.0,300.00,0,0)
+ 	VALUES(0,'Calgary-Montreal',0,1,0,0,7.0,6.0,3.0,30.0,1,1.0,300.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/10/17')
@@ -169,7 +169,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,190.00,0,'2019/09/30')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Vancouver-Ottawa','2019/09/30',0,1,0,1,7.0,3.0,6.0,40.0,1,1.0,20.00,0,0)
+ 	VALUES(0,'Vancouver-Ottawa',0,1,0,1,7.0,3.0,6.0,40.0,1,1.0,20.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/09/30')
@@ -181,7 +181,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,20.00,0,'2019/09/30')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Quebec-Toronto','2019/09/30',0,0,1,1,7.0,6.0,3.0,50.0,1,1.0,500.00,0,0)
+ 	VALUES(0,'Quebec-Toronto',0,0,1,1,7.0,6.0,3.0,50.0,1,1.0,500.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/09/30')
@@ -193,7 +193,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,15.00,0,'2019/09/30')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Montreal-Toronto','2019/09/30',0,0,1,0,6.0,3.0,7.0,20.0,1,1.0,1000.00,0,0)
+ 	VALUES(0,'Montreal-Toronto',0,0,1,0,6.0,3.0,7.0,20.0,1,1.0,1000.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/09/30')
@@ -205,7 +205,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,125.00,0,'2019/09/30')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Montreal-Regina','2019/09/30',1,1,1,0,7.0,6.0,3.0,40.0,1,1.0,5000.00,0,0)
+ 	VALUES(0,'Montreal-Regina',1,1,1,0,7.0,6.0,3.0,40.0,1,1.0,5000.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/09/30')
@@ -217,7 +217,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,160.00,0,'2019/09/30')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Edmonton-Ottawa','2019/09/30',1,1,1,1,3.0,7.0,6.0,50.0,1,1.0,100.00,0,0)
+ 	VALUES(0,'Edmonton-Ottawa',1,1,1,1,3.0,7.0,6.0,50.0,1,1.0,100.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/09/30')
@@ -229,7 +229,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,12.00,0,'2019/10/18')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Mississauga-Ottawa','2019/10/18',0,1,0,1,3.0,6.0,7.0,20.0,1,1.0,400.00,0,0)
+ 	VALUES(0,'Mississauga-Ottawa',0,1,0,1,3.0,6.0,7.0,20.0,1,1.0,400.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/10/18')
@@ -241,7 +241,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,30.00,0,'2019/10/15')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Winnipeg-Edmonton','2019/10/15',0,1,1,0,6.0,3.0,7.0,200.0,1,1.0,500.00,0,0)
+ 	VALUES(0,'Winnipeg-Edmonton',0,1,1,0,6.0,3.0,7.0,200.0,1,1.0,500.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/10/15')
@@ -253,7 +253,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,5.00,0,'2019/10/12')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Toronto-Mississauga','2019/10/12',1,0,1,0,7.0,6.0,3.0,250.0,1,1.0,600.00,0,0)
+ 	VALUES(0,'Toronto-Mississauga',1,0,1,0,7.0,6.0,3.0,250.0,1,1.0,600.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/10/12')
@@ -265,7 +265,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,80.00,0,'2019/10/13')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Winnipeg-Brampton','2019/10/13',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
+ 	VALUES(0,'Winnipeg-Brampton',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/10/13')
@@ -277,7 +277,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,145.00,0,'2019/10/10')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Edmonton-Hamilton','2019/10/10',0,0,0,1,7.0,6.0,3.0,80.0,1,1.0,700.00,0,0)
+ 	VALUES(0,'Edmonton-Hamilton',0,0,0,1,7.0,6.0,3.0,80.0,1,1.0,700.00,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,'2019/10/10')
@@ -289,7 +289,7 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,5.00,0,'2019/10/17')
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Hamilton-Mississauga','2019/10/17',0,0,0,1,6.0,3.0,7.0,90.0,1,1.0,40.00,0,0)
+ 	VALUES(0,'Hamilton-Mississauga',0,0,0,1,6.0,3.0,7.0,90.0,1,1.0,40.00,0,0)
 /
 INSERT INTO tp1Route
  	VALUES(0,'Hamilton-Mississauga',43.2557,79.8711,43.5890,79.6441,41.35,34)
