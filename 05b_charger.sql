@@ -118,7 +118,7 @@ INSERT INTO tp1Tracteur
  	VALUES(0,'EarenamTracteurDies',20,1,12)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,16,16,16,'EarenamCamion')
+ 	VALUES(0,10,16,16,'EarenamCamion')
 /
 INSERT INTO tp1Position
  	VALUES(0,'Montreal',43.6532,79.3832,1,16)
@@ -127,7 +127,7 @@ INSERT INTO tp1Tracteur
  	VALUES(0,'ArearnTracteurDies',20,1,12)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,18,18,18,'ArearnCamion')
+ 	VALUES(0,12,18,18,'ArearnCamion')
 /
 INSERT INTO tp1Position
  	VALUES(0,'Toronto',45.5017,73.5673,1,18)
@@ -136,7 +136,7 @@ INSERT INTO tp1Tracteur
  	VALUES(0,'SenoineTracteurDies',20,1,12)
 /
 INSERT INTO tp1Camion
- 	VALUES(0,20,20,20,'SenoineCamion')
+ 	VALUES(0,14,20,20,'SenoineCamion')
 /
 INSERT INTO tp1Position
  	VALUES(0,'Calgary',51.0447,114.0719,1,20)
