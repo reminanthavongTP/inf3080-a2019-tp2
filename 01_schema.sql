@@ -109,7 +109,7 @@ CREATE TABLE tp1Route
  nLongOri 	NUMBER(8,5) 	NOT NULL,
  nLatDes 		NUMBER(8,5) 		NOT NULL,
  nLongDes 		NUMBER(8,5) 		NOT NULL,
- nDistance 		NUMBER(8,5) 		NOT NULL
+ nDistance 		NUMBER(8,5) 		NOT NULL,
  pSoumission 		INTEGER 		NOT NULL,
  FOREIGN KEY 	(pSoumission) REFERENCES tp1DemandeSoumission,
  PRIMARY KEY 	(pRoute)
@@ -130,6 +130,7 @@ CREATE TABLE tp1Chargement
  hours 	FLOAT  	NOT NULL,
  valeur 	INTEGER  	NOT NULL,
  pSoumission 		INTEGER 		NOT NULL,
+ pClient       INTEGER 		NOT NULL,
  PRIMARY KEY 	(pChargement),
  FOREIGN KEY 	(pClient) REFERENCES tp1Client
 )
