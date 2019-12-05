@@ -163,7 +163,7 @@ INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Calgary-Montreal',51.048615,-114.070846,45.501,73.567,3020.0,12)
+ 	VALUES(0,'Calgary-Montreal',51.0486,-114.0708,45.501,73.567,3020.0,12)
 /
 INSERT INTO tp1DemandeSoumission
  	VALUES(0,190.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
@@ -211,7 +211,7 @@ INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Montreal-Regina',45.501,73.567,50.454722,-104.606667,2357.0,20)
+ 	VALUES(0,'Montreal-Regina',45.501,73.567,50.4547,-104.6066,2357.0,20)
 /
 INSERT INTO tp1DemandeSoumission
  	VALUES(0,160.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
