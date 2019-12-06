@@ -413,77 +413,25 @@ BEGIN
 END;
 /
 create OR REPLACE trigger tp2ReduireCamion
-AFTER INSERT ON tp1SoumissionE
+BEFORE INSERT ON tp1Route
 FOR EACH ROW
 DECLARE
-  rpCompagnie  tp1Camion.pCompagnie %TYPE; 
-  laSoumissionE   tp1SoumissionE.pSoumissionE %TYPE;
+rpCompagnie tp1Camion.pCompagnie%TYPE;  
+rpSoumission tp1DemandeSoumission.pSoumission%TYPE;  
 BEGIN
+rpSoumission := tp2DemandeSoumission.currval;
+SELECT tp1Camion.pCompagnie INTO rpCompagnie
+FROM tp1DemandeSoumission JOIN tp1Camion
+ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
+WHERE tp1DemandeSoumission.pSoumission = rpSoumission;
 
-  laSoumissionE := tp2SoumissionE.currval;
-  LOCK TABLE tp1SoumissionE IN ROW SHARE MODE;
-  SELECT tp1Camion.pCompagnie INTO rpCompagnie
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    JOIN tp1Camion
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-    WHERE tp1SoumissionE.pSoumissionE = laSoumissionE;
-	
-     UPDATE tp1Compagnie
+
+UPDATE tp1Compagnie
      SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
-     WHERE tp1Compagnie.pCompagnie = rpCompagnie; 
-
+     WHERE tp1Compagnie.pCompagnie = rpCompagnie;
+	 
+	 
 END;
-/
-CREATE OR REPLACE TRIGGER tp2GachetteSoumissionE
-FOR INSERT ON tp1SoumissionE
-COMPOUND TRIGGER
-   -- Declarative Section (optional)
-   rpCompagnie  tp1Camion.pCompagnie %TYPE; 
-   laSoumissionE   tp1SoumissionE.pSoumissionE %TYPE;
-   -- Variables declared here have firing-statement duration.
-     
-     --Executed before DML statement
-     BEFORE STATEMENT IS
-     BEGIN
-       NULL;
-     END BEFORE STATEMENT;
-   
-     --Executed before each row change- :NEW, :OLD are available
-     BEFORE EACH ROW IS
-     BEGIN
-       :new.pSoumissionE := tp2SoumissionE.nextval;
-       :new.pChargement := tp2Chargement.currval;
-     END BEFORE EACH ROW;
-   
-     --Executed aftereach row change- :NEW, :OLD are available
-     AFTER EACH ROW IS
-     BEGIN
-        laSoumissionE := tp2SoumissionE.currval;
-    LOCK TABLE tp1SoumissionE IN ROW SHARE MODE;
-    SELECT tp1Camion.pCompagnie INTO rpCompagnie
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    JOIN tp1Camion
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-    WHERE tp1SoumissionE.pSoumissionE = laSoumissionE;
-	
-     UPDATE tp1Compagnie
-     SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
-     WHERE tp1Compagnie.pCompagnie = rpCompagnie; 
-     END AFTER EACH ROW;
-   
-     --Executed after DML statement
-     AFTER STATEMENT IS
-     BEGIN
-       NULL;
-     END AFTER STATEMENT;
-
-END tp2GachetteSoumissionE;
 /
 INSERT INTO tp1Client
  	VALUES(0,'VISA')
