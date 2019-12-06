@@ -806,13 +806,11 @@ END ConsulterSoumissions;
 /
 CREATE OR REPLACE PROCEDURE afficherLivraisons
 (noCommande tp1SoumissionE.pSoumissionE%TYPE) IS
-leNoLivraison tp1SoumissionE.pChargement%TYPE;
 laQuantitéLivrée tp1SoumissionE.dSoumission%TYPE;
 -- Déclaration d'un curseur (CURSOR) PL/SQL pour itérer sur les lignes
 CURSOR lignesDétail
-(unNoCommande tp1SoumissionE.pChargement%TYPE,
-unNoArticle tp1SoumissionE.dSoumission%TYPE)IS
-SELECT pChargement, dSoumission
+(unNoArticle tp1SoumissionE.dSoumission%TYPE)IS
+SELECT dSoumission
 FROM tp1SoumissionE
 WHERE noCommande = unNoCommande;
 BEGIN
@@ -820,10 +818,8 @@ DBMS_OUTPUT.PUT('noCommande #:');
 DBMS_OUTPUT.PUT_LINE(noCommande);
 OPEN lignesDétail(noCommande);
 LOOP
-FETCH lignesDétail INTO leNoLivraison, laQuantitéLivrée;
+FETCH lignesDétail INTO laQuantitéLivrée;
 EXIT WHEN lignesDétail%NOTFOUND;
-DBMS_OUTPUT.PUT('noLivraison :');
-DBMS_OUTPUT.PUT(leNoLivraison);
 DBMS_OUTPUT.PUT(' quantitéLivrée :');
 DBMS_OUTPUT.PUT_LINE(laQuantitéLivrée);
 END LOOP;
