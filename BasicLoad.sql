@@ -787,7 +787,7 @@ CURSOR lignesDétail
 SELECT tp1DemandeSoumission.pCamion, tp1DemandeSoumission.nPrix, tp1DemandeSoumission.dateSoumission  
 FROM tp1Chargement JOIN tp1DemandeSoumission 
 ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission 
-WHERE noClient = unClient; 
+WHERE tp1Chargement.noClient = tp1Chargement.unClient; 
 BEGIN 
 DBMS_OUTPUT.PUT('Votre Client #:'); 
 DBMS_OUTPUT.PUT_LINE(noClient);  
