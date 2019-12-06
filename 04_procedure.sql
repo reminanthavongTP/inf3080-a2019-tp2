@@ -94,5 +94,19 @@ WHERE noArticle = unNoArticle;
 RETURN unPrix;
 END TotalFacture;
 /
+CREATE OR REPLACE FUNCTION calculDistance (LatOri IN NUMBER,
+                                     LonOri IN NUMBER,
+                                     LatDest IN NUMBER,
+                                     LonDest IN NUMBER,
+                                     Radius IN NUMBER DEFAULT 3963) RETURN NUMBER IS
+ 
+ DegToRad NUMBER := 57.29577951;
+
+BEGIN
+  RETURN(NVL(Radius,0) * ACOS((sin(NVL(LatOri,0) / DegToRad) * SIN(NVL(LatDest,0) / DegToRad)) +
+        (COS(NVL(LatOri,0) / DegToRad) * COS(NVL(LatDest,0) / DegToRad) *
+         COS(NVL(LonDest,0) / DegToRad - NVL(LonOri,0)/ DegToRad))));
+END;
+/             
 COMMIT
 /
