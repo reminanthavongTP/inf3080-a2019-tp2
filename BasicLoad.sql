@@ -464,7 +464,7 @@ BEGIN
 rpSoumissionE := tp2DemandeSoumission.currval;	
 SELECT tp1DemandeSoumission.nPrix INTO rnPrix	
     FROM tp1DemandeSoumission
-    WHERE tp1DemandeSoumission.pSoumissionE = rpSoumissionE;
+    WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;
 
 
 SELECT tp1TypeEquipement.nCout INTO rnCout	 	
@@ -474,7 +474,7 @@ SELECT tp1TypeEquipement.nCout INTO rnCout
     ON tp1Camion.pEquipement = tp1Equipement.pEquipement	
     JOIN tp1TypeEquipement	 
     ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
-    WHERE tp1DemandeSoumission.pSoumissionE = rpSoumissionE;    
+    WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;    
 
 
 IF  (rnPrix = rnCout)	
