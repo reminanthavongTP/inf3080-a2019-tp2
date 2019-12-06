@@ -136,9 +136,7 @@ BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rpCompagnie  tp1Camion.pCompagnie %TYPE;
-  rpSoumission  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-rpSoumission := tp2SoumissionE.currval;
 SELECT tp1Camion.pCompagnie INTO rpCompagnie
     FROM tp1SoumissionE JOIN tp1Chargement
     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
@@ -146,7 +144,7 @@ SELECT tp1Camion.pCompagnie INTO rpCompagnie
     ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
     JOIN tp1Camion
     ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-    WHERE tp1SoumissionE.pSoumissionE = rpSoumission;
+    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
 
   UPDATE tp1Compagnie
      SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
