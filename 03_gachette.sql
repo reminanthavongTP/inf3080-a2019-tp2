@@ -233,7 +233,6 @@ THEN
 raise_application_error
 (-20000, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
 END IF;
-RETURN
 END;
  /
 COMMIT
