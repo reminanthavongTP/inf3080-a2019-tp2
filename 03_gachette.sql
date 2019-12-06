@@ -132,21 +132,17 @@ BEGIN
 END;
 /
 create OR REPLACE trigger tp2ReduireCamion
-AFTER INSERT ON tp1SoumissionE
+AFTER INSERT ON tp1DemandeSoumission
 FOR EACH ROW
 DECLARE
   rpCompagnie  tp1Camion.pCompagnie %TYPE;
-  rpSoumissionE  tp1SoumissionE.pSoumissionE  %TYPE;
+  rpSoumission  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-rpSoumissionE := tp2SoumissionE.currval;
+rpSoumission := tp2DemandeSoumission.currval;
 SELECT tp1Camion.pCompagnie INTO rpCompagnie
-     FROM tp1SoumissionE JOIN tp1Chargement
-     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-     JOIN tp1DemandeSoumission
-     ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-     JOIN tp1Camion
+     FROM tp1DemandeSoumission JOIN tp1Camion
      ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-     WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;
+     WHERE tp1DemandeSoumission.pSoumission = rpSoumission;
 
   UPDATE tp1Compagnie
      SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
@@ -154,25 +150,18 @@ SELECT tp1Camion.pCompagnie INTO rpCompagnie
 END;     
 /
 CREATE OR REPLACE TRIGGER tp2BlocReservation
-AFTER INSERT ON tp1SoumissionE
+AFTER INSERT ON tp1Route
 FOR EACH ROW
 DECLARE
   rnDistance  tp1Route.nDistance %TYPE;
-  rpSoumissionE  tp1SoumissionE.pSoumissionE  %TYPE;
+  rpRoute  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-rpSoumissionE := tp2SoumissionE.currval;
-SELECT tp1route.ndistance INTO rnDistance
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    JOIN tp1Route
-    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;
-IF  (rnDistance > 50)
+rpRoute := tp2Route.currval;
+SELECT tp1route.ndistance INTO rnDistance FROM tp1route
+    WHERE tp1route.pRoute = rpRoute;
+IF  (rnDistance > 50.00)
 THEN
-raise_application_error
-(-20000, 'Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km');
+Raise_Application_Error(-20000, 'Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km');
 END IF;
 END;
 /
@@ -205,33 +194,25 @@ SELECT tp1TypeEquipement.nCout INTO rnCout
     ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
     WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;    
     
-IF  (rnPrix != rnCout)
+IF  (rnPrix = rnCout)
 THEN
-raise_application_error
-(-20000, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');
+raise_application_error(-20001, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');
 END IF;
 END;
  /
 CREATE OR REPLACE TRIGGER tp2TrajetInvalid
-AFTER INSERT ON tp1SoumissionE
+AFTER INSERT ON tp1Route
 FOR EACH ROW
 DECLARE
   rnDistance  tp1Route.nDistance %TYPE;
-  rpSoumissionE  tp1SoumissionE.pSoumissionE  %TYPE;
+  rpRoute  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-rpSoumissionE := tp2SoumissionE.currval;
-SELECT tp1route.ndistance INTO rnDistance
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    JOIN tp1Route
-    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;
+rpRoute := tp2Route.currval;
+SELECT tp1route.ndistance INTO rnDistance FROM tp1route
+    WHERE tp1route.pRoute = rpRoute;
 IF  (rnDistance <= 0)
 THEN
-raise_application_error
-(-20000, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
+raise_application_error(-20002, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
 END IF;
 END;
  /
