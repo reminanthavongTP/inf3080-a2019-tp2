@@ -778,16 +778,16 @@ INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
 /
 CREATE OR REPLACE PROCEDURE ConsulterSoumissions 
-(noClient tp1Client.pClient%TYPE) IS 
+(noClient tp1Chargement.pClient%TYPE) IS 
 leCamion tp1DemandeSoumission.pCamion%TYPE; 
 lePrix tp1DemandeSoumission.nPrix%TYPE;
 laDate tp1DemandeSoumission.dateSoumission%TYPE; 
 CURSOR lignesDétail 
-(unClient tp1Client.pClient%TYPE)IS 
+(unClient tp1Chargement.pClient%TYPE)IS 
 SELECT tp1DemandeSoumission.pCamion, tp1DemandeSoumission.nPrix, tp1DemandeSoumission.dateSoumission  
 FROM tp1Chargement JOIN tp1DemandeSoumission 
 ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission 
-WHERE tp1Chargement.noClient = tp1Chargement.unClient; 
+WHERE noClient = unClient; 
 BEGIN 
 DBMS_OUTPUT.PUT('Votre Client #:'); 
 DBMS_OUTPUT.PUT_LINE(noClient);  
