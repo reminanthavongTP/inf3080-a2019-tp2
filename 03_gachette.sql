@@ -132,7 +132,7 @@ BEGIN
 END;
 /
 create OR REPLACE trigger tp2ReduireCamion
-AFTER INSERT ON tp1SoumissionE
+BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rpCompagnie  tp1Camion.pCompagnie %TYPE;
