@@ -809,7 +809,7 @@ CREATE OR REPLACE PROCEDURE afficherLivraisons
 laQuantitéLivrée tp1SoumissionE.dSoumission%TYPE;
 -- Déclaration d'un curseur (CURSOR) PL/SQL pour itérer sur les lignes
 CURSOR lignesDétail
-(unNoArticle tp1SoumissionE.dSoumission%TYPE)IS
+(unNoArticle tp1SoumissionE.pSoumissionE%TYPE)IS
 SELECT dSoumission
 FROM tp1SoumissionE
 WHERE noCommande = unNoCommande;
