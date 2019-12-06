@@ -433,6 +433,25 @@ UPDATE tp1Compagnie
 	 
 END;
 /
+create OR REPLACE trigger tp2VerifierSoumission
+BEFORE INSERT ON tp1SoumissionE
+FOR EACH ROW
+DECLARE
+rnDistance tp1Camion.nDistance%TYPE;  
+rpRoute tp1DemandeSoumission.pSoumission%TYPE;  
+BEGIN
+rpRoute := tp2Route.currval;
+SELECT tp1Camion.nDistance INTO rpCompagnie
+WHERE tp1DemandeSoumission.pRoute = rpRoute;
+
+IF  rnDistance > 50.00
+THEN	
+Raise_Application_Error(-20000, 'Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km');
+ELSIF rnDistance <= 0 THEN
+      raise_application_error(-20001, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
+END IF;	  
+END;
+/
 INSERT INTO tp1Client
  	VALUES(0,'VISA')
 /
