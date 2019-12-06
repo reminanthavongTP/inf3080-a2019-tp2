@@ -14,19 +14,12 @@ END;
 create OR REPLACE trigger tp2GachetteDemandeSoumission
 BEFORE INSERT ON tp1DemandeSoumission
 FOR EACH ROW
-  WHEN (new.pSoumission = 0)
+  WHEN (new.pSoumission = 0 AND new.pCamion = 0)
+DECLARE
+  rpCamion  tp1DemandeSoumission.pCamion%TYPE;  
 BEGIN
   :new.pSoumission := tp2DemandeSoumission.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachetteDemandeSoumission2
-BEFORE INSERT ON tp1DemandeSoumission
-FOR EACH ROW
-  WHEN (new.pCamion = 0)
-DECLARE
-  rpCamion  tp1DemandeSoumission.pCamion%TYPE;
-BEGIN
-SELECT * INTO rpCamion FROM   
+  SELECT * INTO rpCamion FROM   
 (
 SELECT pCamion FROM tp1Camion  
 ORDER BY dbms_random.value
@@ -39,43 +32,22 @@ END;
 create OR REPLACE trigger tp2GachetteSoumissionE
 BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
-  WHEN (new.pSoumissionE = 0)
+  WHEN (new.pSoumissionE = 0 AND new.pChargement = 0)
 BEGIN
   :new.pSoumissionE := tp2SoumissionE.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachetteSoumissionE2
-BEFORE INSERT ON tp1SoumissionE
-FOR EACH ROW
-  WHEN (new.pChargement = 0)
-BEGIN
   :new.pChargement := tp2Chargement.currval;
 END;
 /
 create OR REPLACE trigger tp2GachetteChargement
 BEFORE INSERT ON tp1Chargement
 FOR EACH ROW
-  WHEN (new.pChargement = 0)
+  WHEN (new.pChargement = 0 AND new.pSoumission = 0 AND new.pClient = 0)
+DECLARE
+  rpClient  tp1Chargement.pClient%TYPE;  
 BEGIN
   :new.pChargement := tp2Chargement.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachetteChargement2
-BEFORE INSERT ON tp1Chargement
-FOR EACH ROW
-  WHEN (new.pSoumission = 0)
-BEGIN
   :new.pSoumission := tp2DemandeSoumission.currval;
-END;
-/
-create OR REPLACE trigger tp2GachetteChargement3
-BEFORE INSERT ON tp1Chargement
-FOR EACH ROW
-  WHEN (new.pClient = 0)
-DECLARE
-  rpClient  tp1Chargement.pClient%TYPE;
-BEGIN
-SELECT * INTO rpClient FROM   
+  SELECT * INTO rpClient FROM   
 (
 SELECT pClient FROM tp1Client  
 ORDER BY dbms_random.value
@@ -87,28 +59,14 @@ END;
 create OR REPLACE trigger tp2GachetteRoute
 BEFORE INSERT ON tp1Route
 FOR EACH ROW
-  WHEN (new.pRoute = 0)
+  WHEN (new.pRoute = 0 AND new.pSoumission = 0 AND new.nDistance = 0)
+DECLARE
+rnDistance tp1Route.nDistance%TYPE;    
 BEGIN
   :new.pRoute := tp2Route.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachetteRoute2
-BEFORE INSERT ON tp1Route
-FOR EACH ROW
-  WHEN (new.pSoumission = 0)
-BEGIN
   :new.pSoumission := tp2DemandeSoumission.currval;
-END;
-/
-create OR REPLACE trigger tp2GachetteRoute3
-BEFORE INSERT ON tp1Route
-FOR EACH ROW
-  WHEN (new.nDistance = 0)
-DECLARE
-rnDistance tp1Route.nDistance%TYPE;  
-BEGIN
-
-SELECT calculDistance (:new.nLatOri,:new.nLongOri,:new.nLatDes,:new.nLongDes) INTO rnDistance FROM DUAL;
+  
+  SELECT calculDistance (:new.nLatOri,:new.nLongOri,:new.nLatDes,:new.nLongDes) INTO rnDistance FROM DUAL;
   :new.nDistance := rnDistance;
 END;
 /
@@ -131,16 +89,9 @@ END;
 create OR REPLACE trigger tp2GachetteCamion
 BEFORE INSERT ON tp1Camion
 FOR EACH ROW
-  WHEN (new.pCamion = 0)
+  WHEN (new.pCamion = 0 AND new.pEquipement = 0 and new.pTracteur = 0)
 BEGIN
   :new.pCamion := tp2Camion.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachetteCamion2
-BEFORE INSERT ON tp1Camion
-FOR EACH ROW
-  WHEN (new.pEquipement = 0 and new.pTracteur = 0)
-BEGIN
   :new.pEquipement := tp2Equipement.currval;
   :new.pTracteur := tp2Tracteur.currval;
 END;
@@ -156,48 +107,27 @@ END;
 create OR REPLACE trigger tp2GachetteEquipement
 BEFORE INSERT ON tp1Equipement
 FOR EACH ROW
-  WHEN (new.pEquipement = 0)
+  WHEN (new.pEquipement = 0 AND new.pTypeEquipement = 0)
 BEGIN
   :new.pEquipement := tp2Equipement.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachetteEquipement2
-BEFORE INSERT ON tp1Equipement
-FOR EACH ROW
-  WHEN (new.pTypeEquipement = 0)
-BEGIN
   :new.pTypeEquipement := tp2TypeEquipement.currval;
 END;
 /
 create OR REPLACE trigger tp2GachettePosition
 BEFORE INSERT ON tp1Position
 FOR EACH ROW
-  WHEN (new.pPosition = 0)
+  WHEN (new.pPosition = 0 AND new.pCamion = 0)
 BEGIN
   :new.pPosition := tp2Position.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachettePosition2
-BEFORE INSERT ON tp1Position
-FOR EACH ROW
-  WHEN (new.pCamion = 0)
-BEGIN
   :new.pCamion := tp2Camion.currval;
 END;
 /
 create OR REPLACE trigger tp2GachetteTracteur
 BEFORE INSERT ON tp1Tracteur
 FOR EACH ROW
-  WHEN (new.pTracteur = 0)
+  WHEN (new.pTracteur = 0 AND new.pCarburant = 0)
 BEGIN
   :new.pTracteur := tp2Tracteur.nextval;
-END;
-/
-create OR REPLACE trigger tp2GachetteTracteur2
-BEFORE INSERT ON tp1Tracteur
-FOR EACH ROW
-  WHEN (new.pCarburant = 0)
-BEGIN
   :new.pCarburant := tp2Carburant.currval;
 END;
 /
@@ -218,8 +148,8 @@ SELECT tp1Camion.pCompagnie INTO rpCompagnie
      WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
 
   UPDATE tp1Compagnie
-     SET nCamion = nCamion - 1
-     WHERE pCompagnie = rpCompagnie;
+     SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
+     WHERE tp1Compagnie.pCompagnie = rpCompagnie;
 END;     
 /
 COMMIT
