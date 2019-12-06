@@ -422,11 +422,9 @@ BEGIN
     ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
     WHERE tp1SoumissionE.pSoumissionE = laSoumissionE;
 	
-	IF (rpCompagnie > 0)
-     THEN  UPDATE tp1Compagnie
+     UPDATE tp1Compagnie
      SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
-     WHERE tp1Compagnie.pCompagnie = rpCompagnie;
-    END IF;	 
+     WHERE tp1Compagnie.pCompagnie = rpCompagnie; 
 
 END;
 /
