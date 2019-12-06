@@ -294,7 +294,7 @@ SELECT tp1TypeEquipement.nCout INTO rnCout
     ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
     WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;    
     
-IF  (rnPrix = rnCout)
+IF  (rnPrix != rnCout)
 THEN
 raise_application_error
 (-20000, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');
