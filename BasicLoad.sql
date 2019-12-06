@@ -437,12 +437,13 @@ create OR REPLACE trigger tp2VerifierSoumission
 BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
-rnDistance tp1Camion.nDistance%TYPE;  
+rnDistance tp1Route.nDistance%TYPE;  
 rpRoute tp1DemandeSoumission.pSoumission%TYPE;  
 BEGIN
 rpRoute := tp2Route.currval;
-SELECT tp1Camion.nDistance INTO rpCompagnie
-WHERE tp1DemandeSoumission.pRoute = rpRoute;
+SELECT tp1Route.nDistance INTO rnDistance
+FROM tp1Route	     
+WHERE tp1Route.pRoute = rpRoute;
 
 IF  rnDistance > 50.00
 THEN	
