@@ -136,8 +136,9 @@ BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rpCompagnie  tp1Camion.pCompagnie %TYPE;
+  rpSoumissionE  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-
+rpSoumissionE := tp2SoumissionE.currval;
 SELECT tp1Camion.pCompagnie INTO rpCompagnie
      FROM tp1SoumissionE JOIN tp1Chargement
      ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
@@ -145,7 +146,7 @@ SELECT tp1Camion.pCompagnie INTO rpCompagnie
      ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
      JOIN tp1Camion
      ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-     WHERE tp1SoumissionE.pSoumissionE = tp2SoumissionE.currval;
+     WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;
 
   UPDATE tp1Compagnie
      SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
@@ -157,8 +158,9 @@ BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rnDistance  tp1Route.nDistance %TYPE;
+  rpSoumissionE  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-
+rpSoumissionE := tp2SoumissionE.currval;
 SELECT tp1route.ndistance INTO rnDistance
     FROM tp1SoumissionE JOIN tp1Chargement
     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
@@ -166,7 +168,7 @@ SELECT tp1route.ndistance INTO rnDistance
     ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
     JOIN tp1Route
     ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = tp2SoumissionE.currval;
+    WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;
 IF  (rnDistance > 50)
 THEN
 raise_application_error
@@ -180,14 +182,15 @@ FOR EACH ROW
 DECLARE
   rnPrix  tp1DemandeSoumission.nPrix %TYPE;
   rnCout  tp1TypeEquipement.nCout %TYPE;
+  rpSoumissionE  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-
+rpSoumissionE := tp2SoumissionE.currval;
 SELECT tp1DemandeSoumission.nPrix INTO rnPrix
     FROM tp1SoumissionE JOIN tp1Chargement
     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
     JOIN tp1DemandeSoumission
     ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = tp2SoumissionE.currval;
+    WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;
     
 SELECT tp1TypeEquipement.nCout INTO rnCout
     FROM tp1SoumissionE JOIN tp1Chargement
@@ -200,7 +203,7 @@ SELECT tp1TypeEquipement.nCout INTO rnCout
     ON tp1Camion.pEquipement = tp1Equipement.pEquipement
     JOIN tp1TypeEquipement
     ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
-    WHERE tp1SoumissionE.pSoumissionE = tp2SoumissionE.currval;    
+    WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;    
     
 IF  (rnPrix != rnCout)
 THEN
@@ -214,8 +217,9 @@ BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rnDistance  tp1Route.nDistance %TYPE;
+  rpSoumissionE  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
-
+rpSoumissionE := tp2SoumissionE.currval;
 SELECT tp1route.ndistance INTO rnDistance
     FROM tp1SoumissionE JOIN tp1Chargement
     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
@@ -223,7 +227,7 @@ SELECT tp1route.ndistance INTO rnDistance
     ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
     JOIN tp1Route
     ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = tp2SoumissionE.currval;
+    WHERE tp1SoumissionE.pSoumissionE = rpSoumissionE;
 IF  (rnDistance <= 0)
 THEN
 raise_application_error
