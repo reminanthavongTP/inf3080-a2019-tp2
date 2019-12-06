@@ -160,7 +160,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Calgary-Montreal',0,1,0,0,7.0,6.0,3.0,30.0,1,1.0,300.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Calgary-Montreal',51.0486,-114.0708,45.501,73.567,3020.0,12) <--- Eroor
+ 	VALUES(0,'Calgary-Montreal',51.0486,-114.0708,45.501,73.567,3020.0,12)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
@@ -172,7 +172,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Vancouver-Ottawa',0,1,0,1,7.0,3.0,6.0,40.0,1,1.0,20.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Vancouver-Ottawa',45.638728,-122.661486,45.4215,75.6972,3539.0,14) <--- Eroor
+ 	VALUES(0,'Vancouver-Ottawa',45.638728,-122.661486,45.4215,75.6972,3539.0,14) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
@@ -208,7 +208,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Montreal-Regina',1,1,1,0,7.0,6.0,3.0,40.0,1,1.0,5000.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Montreal-Regina',45.501,73.567,50.4547,-104.6066,2357.0,20) <--- Eroor
+ 	VALUES(0,'Montreal-Regina',45.501,73.567,50.4547,-104.6066,2357.0,20) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
@@ -220,7 +220,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Edmonton-Ottawa',1,1,1,1,3.0,7.0,6.0,50.0,1,1.0,100.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Edmonton-Ottawa',53.546,113.493,45.421,75.697,2837.0,22) <--- Eroor
+ 	VALUES(0,'Edmonton-Ottawa',53.546,113.493,45.421,75.697,2837.0,22) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
@@ -244,7 +244,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Winnipeg-Edmonton',0,1,1,0,6.0,3.0,7.0,200.0,1,1.0,500.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Winnipeg-Edmonton',49.895,97.138,53.546,113.49,1194.0,26) <--- Eroor
+ 	VALUES(0,'Winnipeg-Edmonton',49.895,97.138,53.546,113.49,1194.0,26)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/15', 'yyyy/mm/dd'))
@@ -268,7 +268,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Winnipeg-Brampton',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Winnipeg-Brampton',49.895,97.138,43.731,79.762,1484.0,30) <--- Eroor
+ 	VALUES(0,'Winnipeg-Brampton',49.895,97.138,43.731,79.762,1484.0,30) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/13', 'yyyy/mm/dd'))
@@ -280,7 +280,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Edmonton-Hamilton',0,0,0,1,7.0,6.0,3.0,80.0,1,1.0,700.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Edmonton-Hamilton',53.546,113.49,43.255,79.871,2700.0,32) <--- Eroor
+ 	VALUES(0,'Edmonton-Hamilton',53.546,113.49,43.255,79.871,2700.0,32) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/10', 'yyyy/mm/dd'))
