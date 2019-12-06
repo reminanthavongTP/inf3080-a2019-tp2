@@ -266,40 +266,5 @@ raise_application_error
 END IF;
 END;
  /
-CREATE OR REPLACE TRIGGER tp2CoutErreur
-AFTER INSERT ON tp1SoumissionE
-FOR EACH ROW
-DECLARE
-  rnPrix  tp1DemandeSoumission.nPrix %TYPE;
-  rnCout  tp1TypeEquipement.nCout %TYPE;
-BEGIN
-
-SELECT tp1DemandeSoumission.nPrix INTO rnPrix
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
-    
-SELECT tp1TypeEquipement.nCout INTO rnCout
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    JOIN tp1Camion
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-    JOIN tp1Equipement
-    ON tp1Camion.pEquipement = tp1Equipement.pEquipement
-    JOIN tp1TypeEquipement
-    ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
-    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;    
-    
-IF  (rnPrix != rnCout)
-THEN
-raise_application_error
-(-20000, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');
-END IF;
-END;
- /
 COMMIT
 /
