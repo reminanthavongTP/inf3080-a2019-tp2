@@ -812,7 +812,7 @@ CURSOR lignesDétail
 (unNoArticle tp1SoumissionE.pSoumissionE%TYPE)IS
 SELECT dSoumission
 FROM tp1SoumissionE
-WHERE noCommande = unNoCommande;
+WHERE noCommande = unNoArticle;
 BEGIN
 DBMS_OUTPUT.PUT('noCommande #:');
 DBMS_OUTPUT.PUT_LINE(noCommande);
