@@ -309,15 +309,6 @@ WHERE rownum = 1;
   :new.pCamion := rpCamion;
 END;
 /
-create OR REPLACE trigger tp2GachetteSoumissionE
-BEFORE INSERT ON tp1SoumissionE
-FOR EACH ROW
-  WHEN (new.pSoumissionE = 0 AND new.pChargement = 0)
-BEGIN
-  :new.pSoumissionE := tp2SoumissionE.nextval;
-  :new.pChargement := tp2Chargement.currval;
-END;
-/
 create OR REPLACE trigger tp2GachetteChargement
 BEFORE INSERT ON tp1Chargement
 FOR EACH ROW
@@ -431,6 +422,33 @@ THEN  UPDATE tp1Compagnie
      WHERE tp1Compagnie.pCompagnie = rpCompagnie;
 END IF;	 
 END;     
+/
+create OR REPLACE trigger tp2GachetteSoumissionE
+BEFORE INSERT ON tp1SoumissionE
+FOR EACH ROW
+  WHEN (new.pSoumissionE = 0 AND new.pChargement = 0)
+DECLARE
+  rpCompagnie  tp1Camion.pCompagnie %TYPE;  
+BEGIN
+  :new.pSoumissionE := tp2SoumissionE.nextval;
+  :new.pChargement := tp2Chargement.currval;
+  
+  SELECT tp1Camion.pCompagnie INTO rpCompagnie
+    FROM tp1SoumissionE JOIN tp1Chargement
+    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
+    JOIN tp1DemandeSoumission
+    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+    JOIN tp1Camion
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
+    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
+	
+	IF (rpCompagnie > 0)
+     THEN  UPDATE tp1Compagnie
+     SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
+     WHERE tp1Compagnie.pCompagnie = rpCompagnie;
+    END IF;	 
+
+END;
 /
 INSERT INTO tp1Client
  	VALUES(0,'VISA')
