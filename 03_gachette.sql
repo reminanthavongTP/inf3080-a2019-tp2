@@ -139,7 +139,7 @@ DECLARE
   rpSoumission  tp1SoumissionE.pSoumissionE  %TYPE;
 BEGIN
 rpSoumission := tp2SoumissionE.currval;
-SELECT tp1Camion.pCompagnie
+SELECT tp1Camion.pCompagnie INTO rpCompagnie
     FROM tp1SoumissionE JOIN tp1Chargement
     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
     JOIN tp1DemandeSoumission
