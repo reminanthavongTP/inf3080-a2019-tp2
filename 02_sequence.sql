@@ -63,7 +63,7 @@ CREATE SEQUENCE tp2Route
  start with 10
  increment by 2
  minvalue 10
- maxvalue 20
+ maxvalue 50
  
 
 /
