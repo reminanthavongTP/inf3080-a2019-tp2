@@ -408,11 +408,11 @@ FOR EACH ROW
   WHEN (new.pSoumissionE = 0 AND new.pChargement = 0)
 DECLARE
   rpCompagnie  tp1Camion.pCompagnie %TYPE; 
-  laSoumissionE   tp2SoumissionE.pSoumissionE %TYPE;
+
 BEGIN
   :new.pSoumissionE := tp2SoumissionE.nextval;
   :new.pChargement := tp2Chargement.currval;
-  laSoumissionE = tp2SoumissionE.currval;
+
   SELECT tp1Camion.pCompagnie INTO rpCompagnie
     FROM tp1SoumissionE JOIN tp1Chargement
     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
@@ -420,7 +420,7 @@ BEGIN
     ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
     JOIN tp1Camion
     ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-    WHERE tp1SoumissionE.pSoumissionE = laSoumissionE;
+    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
 	
      UPDATE tp1Compagnie
      SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
