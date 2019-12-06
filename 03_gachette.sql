@@ -239,27 +239,5 @@ raise_application_error
 END IF;
 END;
 /
-CREATE OR REPLACE TRIGGER tp2TrajetInvalid
-AFTER INSERT ON tp1SoumissionE
-FOR EACH ROW
-DECLARE
-  rnDistance  tp1Route.nDistance %TYPE;
-BEGIN
-
-SELECT tp1route.ndistance INTO rnDistance
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    JOIN tp1Route
-    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
-IF  (rnDistance <= 0)
-THEN
-raise_application_error
-(-20000, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
-END IF;
-END;
- /
 COMMIT
 /
