@@ -1,3 +1,8 @@
+SET ECHO ON
+-- Script Oracle SQL*plus de gachette pour le travail pratique 2 - Modélisation et Conception d'une BD
+-- Version sans accents
+-- INSERTION dans les tables
+SET ECHO ON
 CREATE OR REPLACE TRIGGER tp2GachetteClients
 BEFORE INSERT ON tp1Client
 FOR EACH ROW
