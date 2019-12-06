@@ -453,6 +453,36 @@ ELSIF rnDistance <= 0 THEN
 END IF;	  
 END;
 /
+CREATE OR REPLACE TRIGGER tp2CoutErreur
+BEFORE INSERT ON tp1SoumissionE	 	
+FOR EACH ROW	
+DECLARE	
+  rnPrix  tp1DemandeSoumission.nPrix %TYPE;	 
+  rnCout  tp1TypeEquipement.nCout %TYPE;	
+  rpSoumissionE  tp1SoumissionE.pSoumissionE %TYPE;
+BEGIN	 	
+rpSoumissionE := tp2DemandeSoumission.currval;	
+SELECT tp1DemandeSoumission.nPrix INTO rnPrix	
+    FROM tp1DemandeSoumission
+    WHERE tp1DemandeSoumission.pSoumissionE = rpSoumissionE;
+
+
+SELECT tp1TypeEquipement.nCout INTO rnCout	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Equipement	
+    ON tp1Camion.pEquipement = tp1Equipement.pEquipement	
+    JOIN tp1TypeEquipement	 
+    ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
+    WHERE tp1DemandeSoumission.pSoumissionE = rpSoumissionE;    
+
+
+IF  (rnPrix = rnCout)	
+THEN	
+raise_application_error(-20001, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');	 
+END IF;	
+END;	
+ /
 INSERT INTO tp1Client
  	VALUES(0,'VISA')
 /
