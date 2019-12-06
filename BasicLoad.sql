@@ -841,5 +841,90 @@ WHEN OTHERS THEN
 RAISE_APPLICATION_ERROR(-20004,'erreur interne'); 
 END ProduireFacture;
 /
+CREATE OR REPLACE FUNCTION CoutTotalDuTrajet
+(uneSoumission tp1DemandeSoumission.pSoumission%TYPE,
+sourceOriLat tp1Route.nLatOri%TYPE,
+sourceOriLong tp1Route.nLongOri%TYPE,
+sourceDestLat tp1Route.nLatDes%TYPE,
+sourceDestLong tp1Route.nLongDes%TYPE) RETURN NUMBER	
+IS	
+ prix INTEGER;
+ rnDistance tp1Route.nDistance%TYPE;
+ BEGIN	
+ SELECT calculDistance (sourceOriLat,sourceOriLong,sourceDestLat,sourceDestLong) INTO rnDistance FROM DUAL;
+ prix := rnDistance * 1.5; 	
+ prix := prix * 1.18;	
+ RETURN prix;	
+END;
+/
+CREATE OR REPLACE FUNCTION TotalFacture
+(uneSoumission tp1DemandeSoumission.pSoumission%TYPE) RETURN NUMBER	
+IS	
+ prix INTEGER;
+ rnDistance tp1Route.nDistance%TYPE;
+ rnConsommation tp1Tracteur.nConsommation%TYPE;
+ CarburantnCout tp1Carburant.nCout%TYPE;
+ TypeEnCout  tp1TypeEquipement.nCout%TYPE;
+ rnProfit tp1Compagnie.nProfit%TYPE;
+ BEGIN	
+ 
+ SELECT tp1TypeEquipement.nCout INTO TypeEnCout	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Equipement	
+    ON tp1Camion.pEquipement = tp1Equipement.pEquipement	
+    JOIN tp1TypeEquipement	 
+    ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission; 
+
+  SELECT tp1Route.nDistance INTO rnDistance	 	
+    FROM tp1DemandeSoumission JOIN tp1Route	 	
+    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission	 	
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+	
+   SELECT tp1Tracteur.nConsommation INTO rnConsommation	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Tracteur	
+    ON tp1Camion.pTracteur = tp1Tracteur.pTracteur	
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+ 
+  SELECT tp1Carburant.nCout INTO CarburantnCout	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Tracteur	
+    ON tp1Camion.pTracteur = tp1Tracteur.pTracteur
+	JOIN tp1Carburant
+	ON tp1Tracteur.pCarburant = tp1Carburant.pCarburant
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+
+  SELECT tp1Compagnie.nProfit INTO rnProfit	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	
+	JOIN tp1Compagnie
+	ON tp1Camion.pCompagnie = tp1Compagnie.pCompagnie
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+	
+ prix := (rnConsommation * rnDistance * CarburantnCout) + (TypeEnCout * rnDistance) * rnProfit;	
+ RETURN prix;	
+END;
+/
+CREATE OR REPLACE FUNCTION PlusLongTrajet
+(uneDate tp1DemandeSoumission.dateSoumission%TYPE) RETURN VARCHAR2
+IS	
+ rnDistance tp1Route.nDistance%TYPE;
+ rnCamion tp1DemandeSoumission.pCamion%TYPE;
+ BEGIN	
+ 
+SELECT tp1Route.nDistance, tp1DemandeSoumission.pCamion INTO rnDistance , rnCamion
+FROM tp1DemandeSoumission JOIN tp1Route
+ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
+WHERE tp1DemandeSoumission.dateSoumission = uneDate
+ORDER BY nDistance desc
+FETCH  first 1 rows only;
+
+ RETURN ' La distnace: ' || rnDistance || ' et le camion: ' || rnCamion;	
+END;
+/
 COMMIT
 /
