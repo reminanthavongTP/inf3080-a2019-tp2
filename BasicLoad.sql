@@ -421,7 +421,7 @@ DECLARE
 BEGIN
 
   laSoumissionE := tp2SoumissionE.currval;
-  
+  LOCK TABLE tp1SoumissionE IN ROW SHARE MODE;
   SELECT tp1Camion.pCompagnie INTO rpCompagnie
     FROM tp1SoumissionE JOIN tp1Chargement
     ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
