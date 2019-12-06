@@ -37,13 +37,13 @@ INSERT INTO tp1Client
  	VALUES(0,'VISA')
 /
 INSERT INTO tp1Compagnie
- 	VALUES(0,'Earenam','2',1.18)
+ 	VALUES(0,'Earenam',10,1.18)
 /
 INSERT INTO tp1Compagnie
- 	VALUES(0,'Arearn','2',1.18)
+ 	VALUES(0,'Arearn',10,1.18)
 /
 INSERT INTO tp1Compagnie
- 	VALUES(0,'Senoine','2',1.18)
+ 	VALUES(0,'Senoine',10,1.18)
 /
 INSERT INTO tp1TypeEquipement
  	VALUES(0,'Flatbed',0.02)
