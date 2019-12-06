@@ -105,11 +105,11 @@ CREATE TABLE tp1DemandeSoumission
 CREATE TABLE tp1Route
 (pRoute 		INTEGER 	NOT NULL,
  cRoute 		VARCHAR(40) 	NOT NULL,
- nLatOri 	NUMBER(8,5) 	NOT NULL,
- nLongOri 	NUMBER(8,5) 	NOT NULL,
- nLatDes 		NUMBER(8,5) 		NOT NULL,
- nLongDes 		NUMBER(8,5) 		NOT NULL,
- nDistance 		NUMBER(8,5) 		NOT NULL,
+ nLatOri 	NUMBER 	NOT NULL,
+ nLongOri 	NUMBER 	NOT NULL,
+ nLatDes 		NUMBER 		NOT NULL,
+ nLongDes 		NUMBER 		NOT NULL,
+ nDistance 		NUMBER 		NOT NULL,
  pSoumission 		INTEGER 		NOT NULL,
  FOREIGN KEY 	(pSoumission) REFERENCES tp1DemandeSoumission,
  PRIMARY KEY 	(pRoute)
@@ -147,8 +147,8 @@ CREATE TABLE tp1SoumissionE
 CREATE TABLE tp1Position
 (pPosition INTEGER NOT NULL,
  cPosition VARCHAR(30) NOT NULL,
- nLat NUMBER(8,5) NOT NULL,
- nLong NUMBER(8,5) NOT NULL,
+ nLat NUMBER NOT NULL,
+ nLong NUMBER NOT NULL,
  bDisponible INTEGER NOT NULL,
  pCamion 		INTEGER 		NOT NULL,
  PRIMARY KEY    (pPosition),
