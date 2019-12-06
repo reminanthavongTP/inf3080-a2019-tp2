@@ -108,13 +108,7 @@ rnDistance tp1Route.nDistance%TYPE;
   WHEN (new.nDistance = 0)
 BEGIN
 
-SELECT tp1DemandeSoumission.nPrix INTO rnPrix
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
-    
+SELECT calculDistance (:new.nLatOri,:new.nLongOri,:new.nLatDes,:new.nLongDes) INTO rnDistance FROM DUAL;
   :new.nDistance := rnDistance;
 END;
 /
