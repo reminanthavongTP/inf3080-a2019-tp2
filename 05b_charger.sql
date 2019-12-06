@@ -265,10 +265,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,80.00,0,to_date('2019/10/13', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Toronto-Vaughan',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
+ 	VALUES(0,'Toronto-Etobicoke',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Toronto-Vaughan',49.895,97.138,43.8563,79.5085,0,0) 
+ 	VALUES(0,'Toronto-Etobicoke',43.6532,79.3832,43.6205,79.5132,0,0) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/13', 'yyyy/mm/dd'))
