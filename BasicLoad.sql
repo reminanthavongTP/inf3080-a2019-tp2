@@ -479,7 +479,7 @@ SELECT tp1TypeEquipement.nCout INTO rnCout
 
 IF  (rnPrix = rnCout)	
 THEN	
-raise_application_error(-20001, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');	 
+raise_application_error(-20002, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');	 
 END IF;	
 END;	
  /
@@ -776,6 +776,37 @@ INSERT INTO tp1Route
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
+/
+CREATE OR REPLACE PROCEDURE ConsulterSoumissions 
+(noClient tp1Client.pClient%TYPE) IS 
+leCamion tp1DemandeSoumission.pCamion%TYPE; 
+lePrix tp1DemandeSoumission.nPrix%TYPE;
+laDate tp1DemandeSoumission.dateSoumission%TYPE; 
+CURSOR lignesDétail 
+(unClient tp1Client.pClient%TYPE)IS 
+SELECT tp1DemandeSoumission.pCamion, tp1DemandeSoumission.nPrix, tp1DemandeSoumission.dateSoumission  
+FROM tp1Chargement JOIN tp1DemandeSoumission 
+ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission 
+WHERE noClient = unClient; 
+BEGIN 
+DBMS_OUTPUT.PUT('Votre Client #:'); 
+DBMS_OUTPUT.PUT_LINE(noClient);  
+OPEN lignesDétail(noClient); 
+LOOP 
+FETCH lignesDétail INTO leCamion, lePrix, laDate; 
+EXIT WHEN lignesDétail%NOTFOUND; 
+DBMS_OUTPUT.PUT('Le Camion assigné :'); 
+DBMS_OUTPUT.PUT(leCamion); 
+DBMS_OUTPUT.PUT('Votre Cout :'); 
+DBMS_OUTPUT.PUT_LINE(lePrix); 
+DBMS_OUTPUT.PUT('Votre date de soumission :'); 
+DBMS_OUTPUT.PUT_LINE(laDate); 
+END LOOP; 
+CLOSE lignesDétail ; 
+EXCEPTION 
+WHEN OTHERS THEN 
+RAISE_APPLICATION_ERROR(-20003,'erreur interne'); 
+END ConsulterSoumissions;
 /
 COMMIT
 /
