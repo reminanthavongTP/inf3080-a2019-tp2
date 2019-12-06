@@ -157,10 +157,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,170.00,0,to_date('2019/10/17', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Calgary-RedDeer',0,1,0,0,7.0,6.0,3.0,30.0,1,1.0,300.00,0,0)
+ 	VALUES(0,'Calgary-Chestermere',0,1,0,0,7.0,6.0,3.0,30.0,1,1.0,300.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Calgary-RedDeer',51.0486,-114.0708,52.2690,113.8116,0,0)
+ 	VALUES(0,'Calgary-Chestermere',51.0486,114.0719,51.0382,113.8425,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
@@ -169,10 +169,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,190.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Vancouver-Burnaby',0,1,0,1,7.0,3.0,6.0,40.0,1,1.0,20.00,0,0)
+ 	VALUES(0,'Vancouver-West Vancouver',0,1,0,1,7.0,3.0,6.0,40.0,1,1.0,20.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Vancouver-Burnaby',45.638728,-122.661486,49.2488,122.9805,0,0) 
+ 	VALUES(0,'Vancouver-West Vancouver',49.2827,123.1207,49.3286,123.1602,0,0) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
@@ -265,10 +265,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,80.00,0,to_date('2019/10/13', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Toronto-Brampton',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
+ 	VALUES(0,'Toronto-Vaughan',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Toronto-Brampton',49.895,97.138,43.6532,79.3832,0,0) 
+ 	VALUES(0,'Toronto-Vaughan',49.895,97.138,43.8563,79.5085,0,0) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/13', 'yyyy/mm/dd'))
