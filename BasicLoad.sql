@@ -403,26 +403,24 @@ BEGIN
 END;   
 /
 create OR REPLACE trigger tp2GachetteSoumissionE
-AFTER INSERT ON tp1SoumissionE
+BEFORE INSERT ON tp1SoumissionE
 FOR EACH ROW
   WHEN (new.pSoumissionE = 0 AND new.pChargement = 0)
-DECLARE
-  rpCompagnie  tp1Camion.pCompagnie %TYPE; 
-  laSoumissionE   tp2SoumissionE.pSoumissionE %TYPE;
 BEGIN
   :new.pSoumissionE := tp2SoumissionE.nextval;
   :new.pChargement := tp2Chargement.currval;
   
-  UPDATE tp1SoumissionE
-     SET tp1SoumissionE.pSoumissionE = :new.pSoumissionE
-     WHERE tp1Compagnie.pSoumissionE = :old.pSoumissionE; 
-	 
-	UPDATE tp1SoumissionE
-     SET tp1SoumissionE.pChargement = :new.pChargement
-     WHERE tp1Compagnie.pChargement = :old.pChargement;  
-  
-  
-  laSoumissionE = tp2SoumissionE.currval;
+END;
+/
+create OR REPLACE trigger tp2ReduireCamion
+AFTER INSERT ON tp1SoumissionE
+FOR EACH ROW
+DECLARE
+  rpCompagnie  tp1Camion.pCompagnie %TYPE; 
+  laSoumissionE   tp2SoumissionE.pSoumissionE %TYPE;
+BEGIN
+
+  laSoumissionE := tp2SoumissionE.currval;
   
   SELECT tp1Camion.pCompagnie INTO rpCompagnie
     FROM tp1SoumissionE JOIN tp1Chargement
