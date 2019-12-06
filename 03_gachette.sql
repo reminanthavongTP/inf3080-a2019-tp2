@@ -132,7 +132,7 @@ BEGIN
 END;
 /
 create OR REPLACE trigger tp2ReduireCamion
-BEFORE INSERT ON tp1SoumissionE
+AFTER INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rpCompagnie  tp1Camion.pCompagnie %TYPE;
@@ -154,7 +154,7 @@ SELECT tp1Camion.pCompagnie INTO rpCompagnie
 END;     
 /
 CREATE OR REPLACE TRIGGER tp2BlocReservation
-BEFORE INSERT ON tp1SoumissionE
+AFTER INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rnDistance  tp1Route.nDistance %TYPE;
@@ -177,7 +177,7 @@ END IF;
 END;
 /
 CREATE OR REPLACE TRIGGER tp2CoutErreur
-BEFORE INSERT ON tp1SoumissionE
+AFTER INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rnPrix  tp1DemandeSoumission.nPrix %TYPE;
@@ -213,7 +213,7 @@ END IF;
 END;
  /
 CREATE OR REPLACE TRIGGER tp2TrajetInvalid
-BEFORE INSERT ON tp1SoumissionE
+AFTER INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rnDistance  tp1Route.nDistance %TYPE;
