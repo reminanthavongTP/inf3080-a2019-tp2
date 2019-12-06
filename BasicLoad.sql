@@ -779,28 +779,24 @@ INSERT INTO tp1SoumissionE
 /
 CREATE OR REPLACE PROCEDURE ConsulterSoumissions 
 (noClient tp1Chargement.pClient%TYPE) IS 
-leCamion tp1DemandeSoumission.pCamion%TYPE; 
-lePrix tp1DemandeSoumission.nPrix%TYPE;
-laDate tp1DemandeSoumission.dateSoumission%TYPE; 
+laRoute tp1Chargement.cChargement%TYPE; 
+laSoumission tp1Chargement.pSoumission%TYPE; 
 CURSOR lignesDétail 
 (unClient tp1Chargement.pClient%TYPE)IS 
-SELECT tp1DemandeSoumission.pCamion, tp1DemandeSoumission.nPrix, tp1DemandeSoumission.dateSoumission  
-FROM tp1Chargement JOIN tp1DemandeSoumission 
-ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission 
+SELECT  cChargement, pSoumission
+FROM tp1Chargement 
 WHERE noClient = unClient; 
 BEGIN 
 DBMS_OUTPUT.PUT('Votre Client #:'); 
 DBMS_OUTPUT.PUT_LINE(noClient);  
 OPEN lignesDétail(noClient); 
 LOOP 
-FETCH lignesDétail INTO leCamion, lePrix, laDate; 
+FETCH lignesDétail INTO laRoute, laSoumission; 
 EXIT WHEN lignesDétail%NOTFOUND; 
-DBMS_OUTPUT.PUT('Le Camion assigné :'); 
-DBMS_OUTPUT.PUT(leCamion); 
-DBMS_OUTPUT.PUT('Votre Cout :'); 
-DBMS_OUTPUT.PUT_LINE(lePrix); 
-DBMS_OUTPUT.PUT('Votre date de soumission :'); 
-DBMS_OUTPUT.PUT_LINE(laDate); 
+DBMS_OUTPUT.PUT('La route :'); 
+DBMS_OUTPUT.PUT(laRoute); 
+DBMS_OUTPUT.PUT('Votre soumission :'); 
+DBMS_OUTPUT.PUT_LINE(laSoumission); 
 END LOOP; 
 CLOSE lignesDétail ; 
 EXCEPTION 
