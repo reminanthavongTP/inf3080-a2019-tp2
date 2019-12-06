@@ -61,7 +61,7 @@ CREATE TABLE tp1Equipement
 CREATE TABLE tp1Carburant
 (pCarburant INTEGER NOT NULL,
  cCarburant VARCHAR(30) NOT NULL,
- nCout NUMBER NOT NULL,
+ nCout NUMBER(8,5) NOT NULL,
  PRIMARY KEY    (pCarburant)
 )
 /
@@ -793,9 +793,10 @@ OPEN lignesDétail(noClient);
 LOOP 
 FETCH lignesDétail INTO laRoute, laSoumission; 
 EXIT WHEN lignesDétail%NOTFOUND; 
-DBMS_OUTPUT.PUT('La route :'); 
+DBMS_OUTPUT.PUT('La route : '); 
 DBMS_OUTPUT.PUT(laRoute); 
-DBMS_OUTPUT.PUT('Votre soumission :'); 
+DBMS_OUTPUT.PUT(' et ');
+DBMS_OUTPUT.PUT('Votre soumission #: '); 
 DBMS_OUTPUT.PUT_LINE(laSoumission); 
 END LOOP; 
 CLOSE lignesDétail ; 
@@ -803,6 +804,42 @@ EXCEPTION
 WHEN OTHERS THEN 
 RAISE_APPLICATION_ERROR(-20003,'erreur interne'); 
 END ConsulterSoumissions;
+/
+CREATE OR REPLACE PROCEDURE ProduireFacture 
+(noClient tp1Chargement.pClient%TYPE) IS 
+laSoumission tp1Chargement.pSoumission%TYPE;
+lePrix tp1DemandeSoumission.nPrix%TYPE;
+laPayment tp1Client.cClient%TYPE;
+CURSOR lignesDétail 
+(unClient tp1Chargement.pClient%TYPE)IS 
+SELECT * FROM
+(SELECT  tp1Chargement.pSoumission, tp1DemandeSoumission.nPrix, tp1Client.cClient
+FROM tp1Chargement JOIN  tp1DemandeSoumission
+ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+JOIN tp1Client
+ON tp1Chargement.pClient = tp1Client.pClient
+WHERE tp1Chargement.pClient = unClient
+)
+WHERE noClient = unClient; 
+BEGIN 
+DBMS_OUTPUT.PUT('Votre Client #:'); 
+DBMS_OUTPUT.PUT_LINE(noClient);  
+OPEN lignesDétail(noClient); 
+LOOP 
+FETCH lignesDétail INTO laSoumission, lePrix, laPayment; 
+EXIT WHEN lignesDétail%NOTFOUND; 
+DBMS_OUTPUT.PUT('Votre soumission #: '); 
+DBMS_OUTPUT.PUT_LINE(laSoumission); 
+DBMS_OUTPUT.PUT('Votre cout $: '); 
+DBMS_OUTPUT.PUT_LINE(lePrix); 
+DBMS_OUTPUT.PUT('Votre mode de payment: '); 
+DBMS_OUTPUT.PUT_LINE(laPayment);
+END LOOP; 
+CLOSE lignesDétail ; 
+EXCEPTION 
+WHEN OTHERS THEN 
+RAISE_APPLICATION_ERROR(-20004,'erreur interne'); 
+END ProduireFacture;
 /
 COMMIT
 /
