@@ -100,6 +100,24 @@ BEGIN
   :new.pSoumission := tp2DemandeSoumission.currval;
 END;
 /
+create OR REPLACE trigger tp2GachetteRoute3
+BEFORE INSERT ON tp1Route
+FOR EACH ROW
+DECLARE
+rnDistance tp1Route.nDistance%TYPE;
+  WHEN (new.nDistance = 0)
+BEGIN
+
+SELECT tp1DemandeSoumission.nPrix INTO rnPrix
+    FROM tp1SoumissionE JOIN tp1Chargement
+    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
+    JOIN tp1DemandeSoumission
+    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
+    
+  :new.nDistance := rnDistance;
+END;
+/
 create OR REPLACE trigger tp2GachetteCarburant
 BEFORE INSERT ON tp1Carburant
 FOR EACH ROW
