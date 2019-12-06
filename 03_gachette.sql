@@ -152,5 +152,55 @@ UPDATE tp1Compagnie
 	 
 END;
 /
+create OR REPLACE trigger tp2VerifierSoumission
+BEFORE INSERT ON tp1SoumissionE
+FOR EACH ROW
+DECLARE
+rnDistance tp1Route.nDistance%TYPE;  
+rpRoute tp1DemandeSoumission.pSoumission%TYPE;  
+BEGIN
+rpRoute := tp2Route.currval;
+SELECT tp1Route.nDistance INTO rnDistance
+FROM tp1Route	     
+WHERE tp1Route.pRoute = rpRoute;
+
+IF  rnDistance > 50.00
+THEN	
+Raise_Application_Error(-20000, 'Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km');
+ELSIF rnDistance <= 0 THEN
+      raise_application_error(-20001, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
+END IF;	  
+END;
+/
+CREATE OR REPLACE TRIGGER tp2CoutErreur
+BEFORE INSERT ON tp1SoumissionE	 	
+FOR EACH ROW	
+DECLARE	
+  rnPrix  tp1DemandeSoumission.nPrix %TYPE;	 
+  rnCout  tp1TypeEquipement.nCout %TYPE;	
+  rpSoumissionE  tp1SoumissionE.pSoumissionE %TYPE;
+BEGIN	 	
+rpSoumissionE := tp2DemandeSoumission.currval;	
+SELECT tp1DemandeSoumission.nPrix INTO rnPrix	
+    FROM tp1DemandeSoumission
+    WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;
+
+
+SELECT tp1TypeEquipement.nCout INTO rnCout	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Equipement	
+    ON tp1Camion.pEquipement = tp1Equipement.pEquipement	
+    JOIN tp1TypeEquipement	 
+    ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
+    WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;    
+
+
+IF  (rnPrix = rnCout)	
+THEN	
+raise_application_error(-20002, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');	 
+END IF;	
+END;	
+ /
 COMMIT
 /
