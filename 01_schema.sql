@@ -1,3 +1,9 @@
+SET ECHO ON
+-- Script Oracle SQL*plus de creation du schema travail pratique 1 - Modélisation et Conception d'une BD
+-- Version sans accents
+-- Enlever les tables existantes
+-- Creation des tables
+SET ECHO ON
 DROP TABLE tp1Client CASCADE CONSTRAINTS
 /
 DROP TABLE tp1DemandeSoumission CASCADE CONSTRAINTS
