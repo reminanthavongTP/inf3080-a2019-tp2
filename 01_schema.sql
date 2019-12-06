@@ -61,7 +61,7 @@ CREATE TABLE tp1Equipement
 CREATE TABLE tp1Carburant
 (pCarburant INTEGER NOT NULL,
  cCarburant VARCHAR(30) NOT NULL,
- nCout NUMBER NOT NULL,
+ nCout NUMBER(8,5) NOT NULL,
  PRIMARY KEY    (pCarburant)
 )
 /
