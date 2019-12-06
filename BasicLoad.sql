@@ -400,28 +400,7 @@ FOR EACH ROW
 BEGIN
   :new.pTracteur := tp2Tracteur.nextval;
   :new.pCarburant := tp2Carburant.currval;
-END;
-/
-create OR REPLACE trigger tp2ReduireCamion
-BEFORE INSERT ON tp1SoumissionE
-FOR EACH ROW
-DECLARE
-  rpCompagnie  tp1Camion.pCompagnie %TYPE;
-BEGIN
-SELECT tp1Camion.pCompagnie INTO rpCompagnie
-    FROM tp1SoumissionE JOIN tp1Chargement
-    ON tp1SoumissionE.pChargement = tp1Chargement.pChargement
-    JOIN tp1DemandeSoumission
-    ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-    JOIN tp1Camion
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
-    WHERE tp1SoumissionE.pSoumissionE = :new.pSoumissionE;
-IF (rpCompagnie > 0)
-THEN  UPDATE tp1Compagnie
-     SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
-     WHERE tp1Compagnie.pCompagnie = rpCompagnie;
-END IF;	 
-END;     
+END;   
 /
 create OR REPLACE trigger tp2GachetteSoumissionE
 BEFORE INSERT ON tp1SoumissionE
