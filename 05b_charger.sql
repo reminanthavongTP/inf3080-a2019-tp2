@@ -229,10 +229,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,12.00,0,to_date('2019/10/18', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Mississauga-Ottawa',0,1,0,1,3.0,6.0,7.0,20.0,1,1.0,400.00,0,0)
+ 	VALUES(0,'Mississauga-Toronto',0,1,0,1,3.0,6.0,7.0,20.0,1,1.0,400.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Mississauga-Ottawa',43.5890,79.6441,45.4215,75.6972,373.4,24)
+ 	VALUES(0,'Mississauga-Toronto',43.5890,79.6441,43.6532,79.3832,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
@@ -241,10 +241,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,30.00,0,to_date('2019/10/15', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Winnipeg-Edmonton',0,1,1,0,6.0,3.0,7.0,200.0,1,1.0,500.00,0,0)
+ 	VALUES(0,'Winnipeg-Oakville',0,1,1,0,6.0,3.0,7.0,200.0,1,1.0,500.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Winnipeg-Edmonton',49.895,97.138,53.546,113.49,1194.0,26)
+ 	VALUES(0,'Winnipeg-Oakville',49.895,97.138,49.9294,98.0039,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/15', 'yyyy/mm/dd'))
@@ -256,7 +256,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Toronto-Mississauga',1,0,1,0,7.0,6.0,3.0,250.0,1,1.0,600.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,22.18,28)
+ 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/12', 'yyyy/mm/dd'))
@@ -265,10 +265,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,80.00,0,to_date('2019/10/13', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Winnipeg-Brampton',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
+ 	VALUES(0,'Toronto-Brampton',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Winnipeg-Brampton',49.895,97.138,43.731,79.762,1484.0,30) 
+ 	VALUES(0,'Toronto-Brampton',49.895,97.138,43.6532,79.3832,0,0) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/13', 'yyyy/mm/dd'))
@@ -277,10 +277,10 @@ INSERT INTO tp1DemandeSoumission
  	VALUES(0,145.00,0,to_date('2019/10/10', 'yyyy/mm/dd'))
 /
 INSERT INTO tp1Chargement
- 	VALUES(0,'Edmonton-Hamilton',0,0,0,1,7.0,6.0,3.0,80.0,1,1.0,700.00,0,0)
+ 	VALUES(0,'Edmonton-Sherwood Park',0,0,0,1,7.0,6.0,3.0,80.0,1,1.0,700.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Edmonton-Hamilton',53.546,113.49,43.255,79.871,2700.0,32) 
+ 	VALUES(0,'Edmonton-Sherwood Park',53.546,113.49,53.5412,113.2957,0,0) 
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/10', 'yyyy/mm/dd'))
@@ -292,7 +292,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Hamilton-Mississauga',0,0,0,1,6.0,3.0,7.0,90.0,1,1.0,40.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Hamilton-Mississauga',43.2557,79.8711,43.5890,79.6441,41.35,34)
+ 	VALUES(0,'Hamilton-Mississauga',43.2557,79.8711,43.5890,79.6441,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
