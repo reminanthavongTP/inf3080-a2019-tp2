@@ -417,7 +417,7 @@ AFTER INSERT ON tp1SoumissionE
 FOR EACH ROW
 DECLARE
   rpCompagnie  tp1Camion.pCompagnie %TYPE; 
-  laSoumissionE   tp2SoumissionE.pSoumissionE %TYPE;
+  laSoumissionE   tp1SoumissionE.pSoumissionE %TYPE;
 BEGIN
 
   laSoumissionE := tp2SoumissionE.currval;
