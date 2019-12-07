@@ -59,7 +59,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Toronto-Montreal',43.6532,79.3832,0,0,0,0)
+ 	VALUES(0,'Toronto-Montreal',0,0,0,0,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
