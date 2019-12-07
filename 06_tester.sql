@@ -4,85 +4,112 @@ SET ECHO ON
 -- Test de la BD
 -- 
 SET ECHO ON
-DROP TABLE tp1TestClient CASCADE CONSTRAINTS
-/
-DROP TABLE tp1TestDemandeSoumission CASCADE CONSTRAINTS
-/
-DROP TABLE tp1TestCompagnie
-/
-CREATE TABLE tp1TestClient
-(pClient 		INTEGER 		NOT NULL,
- nomClient 		VARCHAR(20) 	NOT NULL,
- prenomClient 		VARCHAR(20) 	NOT NULL,
- noTelephone 	VARCHAR(15) 	NOT NULL,
- email 	VARCHAR(50) 	NOT NULL,
- PRIMARY KEY 	(pClient)
-)
+
+-- 
+-- Test CHECK dans la table tp1Client - CHECK (cClient IN ('VISA','Master Card','American Express'))
+-- 
+INSERT INTO tp1Client
+ 	VALUES(0,'AMEX')
 /
 -- 
--- Devrait fonctionner
+-- Test CHECK dans la table tp1Compagnie - CHECK (nCamion>=1)
 -- 
-INSERT INTO tp1TestClient
- 	VALUES(1,'Luc','Samson','(999)999-9999','luc.samson@email.ca')
+INSERT INTO tp1Compagnie
+ 	VALUES(0,'TestCheck',0,1.18)
 /
 -- 
--- Devrait pas fonctionner car noTelephone depasse la contrainte
--- 
-INSERT INTO tp1TestClient
- 	VALUES(2,'Luc','Samson','(999)999-9999999999','luc.samson@email.ca')
+-- Test Trigger tp2ReduireCamion 
+-- Réduire la quantité des camions que le transporteur possède en fonction de la quantité louée
+SELECT pCamion FROM tp1Compagnie
 /
-CREATE TABLE tp1TestDemandeSoumission
-(pSoumission 		INTEGER 		NOT NULL,
- origine 		VARCHAR(20) 	NOT NULL,
- destination 		VARCHAR(20) 	NOT NULL,
- dateSoumission 	DATE 	NOT NULL,
- refrigerated 		INTEGER	NOT NULL,
- dock 		INTEGER 	NOT NULL,
- hazardous 	INTEGER 	NOT NULL,
- rush 		INTEGER 		NOT NULL,
- lenght		FLOAT 	NOT NULL,
- width 		FLOAT  	NOT NULL,
- height 	FLOAT  	NOT NULL,
- quantity 	INTEGER  	NOT NULL,
- hours 	FLOAT  	NOT NULL,
- valeur 	INTEGER  	NOT NULL,
- pClient 		INTEGER 		NOT NULL,
- PRIMARY KEY 	(pSoumission),
- FOREIGN KEY 	(pClient) REFERENCES tp1Client
-)
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/
+SELECT pCamion FROM tp1Compagnie
 /
 -- 
--- Devrait fonctionner
--- 
-INSERT INTO tp1TestDemandeSoumission
- 	VALUES(000001,'Toronto','Ottawa','2019/10/18',0,0,0,0,6.0,3.0,7.0,1,1.0,200.00,1)
+-- Test Trigger tp2VerifierSoumission
+-- Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km
+-- Bloquer la soumission si le trajet n’a pas été bien identifié
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Montreal',43.6532,79.3832,45.5017,73.5673,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Montreal',43.6532,79.3832,0,0,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
 /
 -- 
--- Devrait pas fonctionner car refrigerated doit etre en format INT non String
--- 
-INSERT INTO tp1TestDemandeSoumission
- 	VALUES(000002,'Toronto','Ottawa','2019/10/18','Oui',0,0,0,6.0,3.0,7.0,1,1.0,200.00,1)
+-- Test Trigger tp2CoutErreur
+-- Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents. 
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,0.02,0,to_date('2019/12/06', 'yyyy/mm/dd'))
 /
-CREATE TABLE tp1TestCompagnie
-(pCompagnie 		INTEGER 		NOT NULL,
- nomCompagnie 		VARCHAR(20) 	NOT NULL,
- noTelephone 	VARCHAR(15) 	NOT NULL,
- email 	VARCHAR(50) 	NOT NULL,
- nbCamion INTEGER NOT NULL,
- PRIMARY KEY 	(pCompagnie)
-)
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,0.05,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/                     
+-- 
+-- Test PROCEDURE ConsulterSoumissions
+-- 
+EXEC ConsulterSoumissions(14)
 /
 -- 
--- Devrait fonctionner
+-- Test PROCEDURE ProduireFacture 
 -- 
-INSERT INTO tp1TestCompagnie
- 	VALUES(1,'Earenam','(999)888-9999','Earenam,@transport.ca',2)
+EXEC ProduireFacture(14)
 /
 -- 
--- Devrait pas fonctionner car pCompagnie doit etre en format INT non String
+-- Test FUNCTION  CoutTotalDuTrajet 
 -- 
-INSERT INTO tp1TestCompagnie
- 	VALUES('XYZ','Arearn','(514)777-9999','Arearn@transport.ca',2)
+SELECT CoutTotalDuTrajet(14,43.6532,79.3832,43.5890,79.6441) FROM DUAL
 /
+-- 
+-- Test FUNCTION  TotalFacture 
+-- 
+SELECT TotalFacture(14) FROM DUAL
+/                      
 COMMIT
 /
