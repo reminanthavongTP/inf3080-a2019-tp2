@@ -14,7 +14,7 @@
    
    Il y a deux facons: 
    
-   ###Soit charger partie par partie
+   ### Soit charger partie par partie
 
    1 - Charger le schema dans sqlplus (@01_schema.sql)
    
@@ -28,10 +28,41 @@
    
    6 - Charger les tests dans sqlplus (@06_tester.sql)
    
-   ###Soit charger avec une commande
+   ### Soit charger avec une commande
    
    1 - Charger le schema dans sqlplus (@Fullload.sql)
 
+   ## Exemple
+   
+   EXEC ConsulterSoumissions(14)
+   
+   Statement processed.
+Votre Client #:14
+La route : Toronto-Mississauga et Votre soumission #: 10
+Prix a payer $: 15
+La route : Winnipeg-Oakville et Votre soumission #: 26
+Prix a payer $: 30
+
+   EXEC ProduireFacture(14)
+   
+   Statement processed.
+Votre Client #:14
+Votre soumission #: 10
+Votre cout $: 15
+Votre mode de payment: VISA
+Votre soumission #: 26
+Votre cout $: 30
+Votre mode de payment: VISA
+
+   SELECT CoutTotalDuTrajet(14,43.6532,79.3832,43.5890,79.6441) FROM DUAL
+   
+   COUTTOTALDUTRAJET(14,43.6532,79.3832,43.5890,79.6441)
+25
+
+   SELECT TotalFacture(14) FROM DUAL
+   
+TOTALFACTURE(14)
+109
 
    ## Contenu du projet
 
