@@ -1,3 +1,9 @@
+SET ECHO ON
+-- Script Oracle SQL*plus de creation du schema travail pratique 1 - Modélisation et Conception d'une BD
+-- Version sans accents
+-- Enlever les tables existantes
+-- Creation des tables
+SET ECHO ON
 DROP TABLE tp1Client CASCADE CONSTRAINTS
 /
 DROP TABLE tp1DemandeSoumission CASCADE CONSTRAINTS
@@ -149,6 +155,11 @@ CREATE TABLE tp1Position
  FOREIGN KEY 	(pCamion) REFERENCES tp1Camion
 )
 /
+SET ECHO ON
+-- Script Oracle SQL*plus de sequence pour le travail pratique 2 - Modélisation et Conception d'une BD
+-- Version sans accents
+-- INSERTION dans les tables
+SET ECHO ON
 DROP SEQUENCE tp2Client
 /
 DROP SEQUENCE tp2DemandeSoumission
@@ -266,9 +277,12 @@ CREATE SEQUENCE tp2Tracteur
  increment by 2
  minvalue 10
  maxvalue 40
- 
 
 /
+SET ECHO ON
+-- Script Oracle SQL*plus de procedure. pour le travail pratique 2 - Modélisation et Conception d'une BD
+-- Version sans accents
+SET ECHO ON
 CREATE OR REPLACE FUNCTION calculDistance (LatOri IN NUMBER,
                                      LonOri IN NUMBER,
                                      LatDest IN NUMBER,
@@ -282,7 +296,160 @@ BEGIN
         (COS(NVL(LatOri,0) / DegToRad) * COS(NVL(LatDest,0) / DegToRad) *
          COS(NVL(LonDest,0) / DegToRad - NVL(LonOri,0)/ DegToRad))));
 END;
-/             
+/
+CREATE OR REPLACE PROCEDURE ConsulterSoumissions 
+(noClient tp1Chargement.pClient%TYPE) IS 
+laRoute tp1Chargement.cChargement%TYPE; 
+laSoumission tp1Chargement.pSoumission%TYPE; 
+CURSOR lignesDétail 
+(unClient tp1Chargement.pClient%TYPE)IS 
+SELECT  cChargement, pSoumission
+FROM tp1Chargement 
+WHERE noClient = unClient; 
+BEGIN 
+DBMS_OUTPUT.PUT('Votre Client #:'); 
+DBMS_OUTPUT.PUT_LINE(noClient);  
+OPEN lignesDétail(noClient); 
+LOOP 
+FETCH lignesDétail INTO laRoute, laSoumission; 
+EXIT WHEN lignesDétail%NOTFOUND; 
+DBMS_OUTPUT.PUT('La route : '); 
+DBMS_OUTPUT.PUT(laRoute); 
+DBMS_OUTPUT.PUT(' et ');
+DBMS_OUTPUT.PUT('Votre soumission #: '); 
+DBMS_OUTPUT.PUT_LINE(laSoumission); 
+END LOOP; 
+CLOSE lignesDétail ; 
+EXCEPTION 
+WHEN OTHERS THEN 
+RAISE_APPLICATION_ERROR(-20003,'erreur interne'); 
+END ConsulterSoumissions;
+/
+CREATE OR REPLACE PROCEDURE ProduireFacture 
+(noClient tp1Chargement.pClient%TYPE) IS 
+laSoumission tp1Chargement.pSoumission%TYPE;
+lePrix tp1DemandeSoumission.nPrix%TYPE;
+laPayment tp1Client.cClient%TYPE;
+CURSOR lignesDétail 
+(unClient tp1Chargement.pClient%TYPE)IS 
+SELECT * FROM
+(SELECT  tp1Chargement.pSoumission, tp1DemandeSoumission.nPrix, tp1Client.cClient
+FROM tp1Chargement JOIN  tp1DemandeSoumission
+ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+JOIN tp1Client
+ON tp1Chargement.pClient = tp1Client.pClient
+WHERE tp1Chargement.pClient = unClient
+)
+WHERE noClient = unClient; 
+BEGIN 
+DBMS_OUTPUT.PUT('Votre Client #:'); 
+DBMS_OUTPUT.PUT_LINE(noClient);  
+OPEN lignesDétail(noClient); 
+LOOP 
+FETCH lignesDétail INTO laSoumission, lePrix, laPayment; 
+EXIT WHEN lignesDétail%NOTFOUND; 
+DBMS_OUTPUT.PUT('Votre soumission #: '); 
+DBMS_OUTPUT.PUT_LINE(laSoumission); 
+DBMS_OUTPUT.PUT('Votre cout $: '); 
+DBMS_OUTPUT.PUT_LINE(lePrix); 
+DBMS_OUTPUT.PUT('Votre mode de payment: '); 
+DBMS_OUTPUT.PUT_LINE(laPayment);
+END LOOP; 
+CLOSE lignesDétail ; 
+EXCEPTION 
+WHEN OTHERS THEN 
+RAISE_APPLICATION_ERROR(-20004,'erreur interne'); 
+END ProduireFacture;
+/
+CREATE OR REPLACE FUNCTION CoutTotalDuTrajet
+(uneSoumission tp1DemandeSoumission.pSoumission%TYPE,
+sourceOriLat tp1Route.nLatOri%TYPE,
+sourceOriLong tp1Route.nLongOri%TYPE,
+sourceDestLat tp1Route.nLatDes%TYPE,
+sourceDestLong tp1Route.nLongDes%TYPE) RETURN NUMBER	
+IS	
+ prix INTEGER;
+ rnDistance tp1Route.nDistance%TYPE;
+ BEGIN	
+ SELECT calculDistance (sourceOriLat,sourceOriLong,sourceDestLat,sourceDestLong) INTO rnDistance FROM DUAL;
+ prix := rnDistance * 1.5; 	
+ prix := prix * 1.18;	
+ RETURN prix;	
+END;
+/
+CREATE OR REPLACE FUNCTION TotalFacture
+(uneSoumission tp1DemandeSoumission.pSoumission%TYPE) RETURN NUMBER	
+IS	
+ prix INTEGER;
+ rnDistance tp1Route.nDistance%TYPE;
+ rnConsommation tp1Tracteur.nConsommation%TYPE;
+ CarburantnCout tp1Carburant.nCout%TYPE;
+ TypeEnCout  tp1TypeEquipement.nCout%TYPE;
+ rnProfit tp1Compagnie.nProfit%TYPE;
+ BEGIN	
+ 
+ SELECT tp1TypeEquipement.nCout INTO TypeEnCout	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Equipement	
+    ON tp1Camion.pEquipement = tp1Equipement.pEquipement	
+    JOIN tp1TypeEquipement	 
+    ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission; 
+
+  SELECT tp1Route.nDistance INTO rnDistance	 	
+    FROM tp1DemandeSoumission JOIN tp1Route	 	
+    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission	 	
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+	
+   SELECT tp1Tracteur.nConsommation INTO rnConsommation	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Tracteur	
+    ON tp1Camion.pTracteur = tp1Tracteur.pTracteur	
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+ 
+  SELECT tp1Carburant.nCout INTO CarburantnCout	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
+    JOIN tp1Tracteur	
+    ON tp1Camion.pTracteur = tp1Tracteur.pTracteur
+	JOIN tp1Carburant
+	ON tp1Tracteur.pCarburant = tp1Carburant.pCarburant
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+
+  SELECT tp1Compagnie.nProfit INTO rnProfit	 	
+    FROM tp1DemandeSoumission JOIN tp1Camion	 	
+    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	
+	JOIN tp1Compagnie
+	ON tp1Camion.pCompagnie = tp1Compagnie.pCompagnie
+    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+	
+ prix := (rnConsommation * rnDistance * CarburantnCout) + (TypeEnCout * rnDistance) * rnProfit;	
+ RETURN prix;	
+END;
+/
+CREATE OR REPLACE FUNCTION PlusLongTrajet
+(uneDate tp1DemandeSoumission.dateSoumission%TYPE) RETURN VARCHAR2
+IS	
+ rnDistance tp1Route.nDistance%TYPE;
+ rnCamion tp1DemandeSoumission.pCamion%TYPE;
+ BEGIN	
+ 
+SELECT tp1Route.nDistance, tp1DemandeSoumission.pCamion INTO rnDistance , rnCamion
+FROM tp1DemandeSoumission JOIN tp1Route
+ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
+WHERE tp1DemandeSoumission.dateSoumission = uneDate
+ORDER BY nDistance desc
+FETCH  first 1 rows only;
+
+ RETURN ' La distnace: ' || rnDistance || ' et le camion: ' || rnCamion;	
+END;
+/   
+SET ECHO ON
+-- Script Oracle SQL*plus de creation des gachettes travail pratique 1 - Modélisation et Conception d'une BD
+-- Version sans accents
+SET ECHO ON
 CREATE OR REPLACE TRIGGER tp2GachetteClients
 BEFORE INSERT ON tp1Client
 FOR EACH ROW
@@ -483,6 +650,11 @@ raise_application_error(-20002, 'Bloquer la soumission si le coût de type d’�
 END IF;	
 END;	
  /
+SET ECHO ON
+-- Script Oracle SQL*plus de l'insertion pour le travail pratique 1 - Modélisation et Conception d'une BD
+-- Version sans accents
+-- INSERTION dans les tables
+SET ECHO ON
 INSERT INTO tp1Client
  	VALUES(0,'VISA')
 /
@@ -777,154 +949,118 @@ INSERT INTO tp1Route
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
 /
-CREATE OR REPLACE PROCEDURE ConsulterSoumissions 
-(noClient tp1Chargement.pClient%TYPE) IS 
-laRoute tp1Chargement.cChargement%TYPE; 
-laSoumission tp1Chargement.pSoumission%TYPE; 
-CURSOR lignesDétail 
-(unClient tp1Chargement.pClient%TYPE)IS 
-SELECT  cChargement, pSoumission
-FROM tp1Chargement 
-WHERE noClient = unClient; 
-BEGIN 
-DBMS_OUTPUT.PUT('Votre Client #:'); 
-DBMS_OUTPUT.PUT_LINE(noClient);  
-OPEN lignesDétail(noClient); 
-LOOP 
-FETCH lignesDétail INTO laRoute, laSoumission; 
-EXIT WHEN lignesDétail%NOTFOUND; 
-DBMS_OUTPUT.PUT('La route : '); 
-DBMS_OUTPUT.PUT(laRoute); 
-DBMS_OUTPUT.PUT(' et ');
-DBMS_OUTPUT.PUT('Votre soumission #: '); 
-DBMS_OUTPUT.PUT_LINE(laSoumission); 
-END LOOP; 
-CLOSE lignesDétail ; 
-EXCEPTION 
-WHEN OTHERS THEN 
-RAISE_APPLICATION_ERROR(-20003,'erreur interne'); 
-END ConsulterSoumissions;
-/
-CREATE OR REPLACE PROCEDURE ProduireFacture 
-(noClient tp1Chargement.pClient%TYPE) IS 
-laSoumission tp1Chargement.pSoumission%TYPE;
-lePrix tp1DemandeSoumission.nPrix%TYPE;
-laPayment tp1Client.cClient%TYPE;
-CURSOR lignesDétail 
-(unClient tp1Chargement.pClient%TYPE)IS 
-SELECT * FROM
-(SELECT  tp1Chargement.pSoumission, tp1DemandeSoumission.nPrix, tp1Client.cClient
-FROM tp1Chargement JOIN  tp1DemandeSoumission
-ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
-JOIN tp1Client
-ON tp1Chargement.pClient = tp1Client.pClient
-WHERE tp1Chargement.pClient = unClient
-)
-WHERE noClient = unClient; 
-BEGIN 
-DBMS_OUTPUT.PUT('Votre Client #:'); 
-DBMS_OUTPUT.PUT_LINE(noClient);  
-OPEN lignesDétail(noClient); 
-LOOP 
-FETCH lignesDétail INTO laSoumission, lePrix, laPayment; 
-EXIT WHEN lignesDétail%NOTFOUND; 
-DBMS_OUTPUT.PUT('Votre soumission #: '); 
-DBMS_OUTPUT.PUT_LINE(laSoumission); 
-DBMS_OUTPUT.PUT('Votre cout $: '); 
-DBMS_OUTPUT.PUT_LINE(lePrix); 
-DBMS_OUTPUT.PUT('Votre mode de payment: '); 
-DBMS_OUTPUT.PUT_LINE(laPayment);
-END LOOP; 
-CLOSE lignesDétail ; 
-EXCEPTION 
-WHEN OTHERS THEN 
-RAISE_APPLICATION_ERROR(-20004,'erreur interne'); 
-END ProduireFacture;
-/
-CREATE OR REPLACE FUNCTION CoutTotalDuTrajet
-(uneSoumission tp1DemandeSoumission.pSoumission%TYPE,
-sourceOriLat tp1Route.nLatOri%TYPE,
-sourceOriLong tp1Route.nLongOri%TYPE,
-sourceDestLat tp1Route.nLatDes%TYPE,
-sourceDestLong tp1Route.nLongDes%TYPE) RETURN NUMBER	
-IS	
- prix INTEGER;
- rnDistance tp1Route.nDistance%TYPE;
- BEGIN	
- SELECT calculDistance (sourceOriLat,sourceOriLong,sourceDestLat,sourceDestLong) INTO rnDistance FROM DUAL;
- prix := rnDistance * 1.5; 	
- prix := prix * 1.18;	
- RETURN prix;	
-END;
-/
-CREATE OR REPLACE FUNCTION TotalFacture
-(uneSoumission tp1DemandeSoumission.pSoumission%TYPE) RETURN NUMBER	
-IS	
- prix INTEGER;
- rnDistance tp1Route.nDistance%TYPE;
- rnConsommation tp1Tracteur.nConsommation%TYPE;
- CarburantnCout tp1Carburant.nCout%TYPE;
- TypeEnCout  tp1TypeEquipement.nCout%TYPE;
- rnProfit tp1Compagnie.nProfit%TYPE;
- BEGIN	
- 
- SELECT tp1TypeEquipement.nCout INTO TypeEnCout	 	
-    FROM tp1DemandeSoumission JOIN tp1Camion	 	
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
-    JOIN tp1Equipement	
-    ON tp1Camion.pEquipement = tp1Equipement.pEquipement	
-    JOIN tp1TypeEquipement	 
-    ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
-    WHERE tp1DemandeSoumission.pSoumission = uneSoumission; 
+SET ECHO ON
+-- Script Oracle SQL*plus de creation du schema travail pratique 1 - Modélisation et Conception d'une BD
+-- 
+-- Test de la BD
+-- 
+SET ECHO ON
 
-  SELECT tp1Route.nDistance INTO rnDistance	 	
-    FROM tp1DemandeSoumission JOIN tp1Route	 	
-    ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission	 	
-    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
-	
-   SELECT tp1Tracteur.nConsommation INTO rnConsommation	 	
-    FROM tp1DemandeSoumission JOIN tp1Camion	 	
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
-    JOIN tp1Tracteur	
-    ON tp1Camion.pTracteur = tp1Tracteur.pTracteur	
-    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
- 
-  SELECT tp1Carburant.nCout INTO CarburantnCout	 	
-    FROM tp1DemandeSoumission JOIN tp1Camion	 	
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	 	
-    JOIN tp1Tracteur	
-    ON tp1Camion.pTracteur = tp1Tracteur.pTracteur
-	JOIN tp1Carburant
-	ON tp1Tracteur.pCarburant = tp1Carburant.pCarburant
-    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
-
-  SELECT tp1Compagnie.nProfit INTO rnProfit	 	
-    FROM tp1DemandeSoumission JOIN tp1Camion	 	
-    ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion	
-	JOIN tp1Compagnie
-	ON tp1Camion.pCompagnie = tp1Compagnie.pCompagnie
-    WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
-	
- prix := (rnConsommation * rnDistance * CarburantnCout) + (TypeEnCout * rnDistance) * rnProfit;	
- RETURN prix;	
-END;
+-- 
+-- Test CHECK dans la table tp1Client - CHECK (cClient IN ('VISA','Master Card','American Express'))
+-- 
+INSERT INTO tp1Client
+ 	VALUES(0,'AMEX')
 /
-CREATE OR REPLACE FUNCTION PlusLongTrajet
-(uneDate tp1DemandeSoumission.dateSoumission%TYPE) RETURN VARCHAR2
-IS	
- rnDistance tp1Route.nDistance%TYPE;
- rnCamion tp1DemandeSoumission.pCamion%TYPE;
- BEGIN	
- 
-SELECT tp1Route.nDistance, tp1DemandeSoumission.pCamion INTO rnDistance , rnCamion
-FROM tp1DemandeSoumission JOIN tp1Route
-ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-WHERE tp1DemandeSoumission.dateSoumission = uneDate
-ORDER BY nDistance desc
-FETCH  first 1 rows only;
-
- RETURN ' La distnace: ' || rnDistance || ' et le camion: ' || rnCamion;	
-END;
+-- 
+-- Test CHECK dans la table tp1Compagnie - CHECK (nCamion>=1)
+-- 
+INSERT INTO tp1Compagnie
+ 	VALUES(0,'TestCheck',0,1.18)
 /
+-- 
+-- Test Trigger tp2ReduireCamion 
+-- Réduire la quantité des camions que le transporteur possède en fonction de la quantité louée
+SELECT pCamion FROM tp1Compagnie
+/
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/
+SELECT pCamion FROM tp1Compagnie
+/
+-- 
+-- Test Trigger tp2VerifierSoumission
+-- Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km
+-- Bloquer la soumission si le trajet n’a pas été bien identifié
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Montreal',43.6532,79.3832,45.5017,73.5673,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Montreal',43.6532,79.3832,0,0,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/
+-- 
+-- Test Trigger tp2CoutErreur
+-- Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents. 
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,0.02,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1DemandeSoumission
+ 	VALUES(0,0.05,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+/
+INSERT INTO tp1Chargement
+ 	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+/
+INSERT INTO tp1Route
+ 	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+/
+INSERT INTO tp1SoumissionE
+ 	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+/                     
+-- 
+-- Test PROCEDURE ConsulterSoumissions
+-- 
+EXEC ConsulterSoumissions(14)
+/
+-- 
+-- Test PROCEDURE ProduireFacture 
+-- 
+EXEC ProduireFacture(14)
+/
+-- 
+-- Test FUNCTION  CoutTotalDuTrajet 
+-- 
+SELECT CoutTotalDuTrajet(14,43.6532,79.3832,43.5890,79.6441) FROM DUAL
+/
+-- 
+-- Test FUNCTION  TotalFacture 
+-- 
+SELECT TotalFacture(14) FROM DUAL
+/                      
 COMMIT
-/
+/			   
