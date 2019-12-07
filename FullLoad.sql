@@ -300,24 +300,33 @@ END;
 CREATE OR REPLACE PROCEDURE ConsulterSoumissions 
 (noClient tp1Chargement.pClient%TYPE) IS 
 laRoute tp1Chargement.cChargement%TYPE; 
-laSoumission tp1Chargement.pSoumission%TYPE; 
+laSoumission tp1Chargement.pSoumission%TYPE;
+lePrix tp1DemandeSoumission.nPrix%TYPE;
 CURSOR lignesDétail 
 (unClient tp1Chargement.pClient%TYPE)IS 
-SELECT  cChargement, pSoumission
-FROM tp1Chargement 
+SELECT * FROM
+(SELECT  tp1Chargement.cChargement, tp1Chargement.pSoumission, tp1DemandeSoumission.nPrix
+FROM tp1Chargement JOIN  tp1DemandeSoumission
+ON tp1Chargement.pSoumission = tp1DemandeSoumission.pSoumission
+JOIN tp1Client
+ON tp1Chargement.pClient = tp1Client.pClient
+WHERE tp1Chargement.pClient = unClient
+)
 WHERE noClient = unClient; 
 BEGIN 
 DBMS_OUTPUT.PUT('Votre Client #:'); 
 DBMS_OUTPUT.PUT_LINE(noClient);  
 OPEN lignesDétail(noClient); 
 LOOP 
-FETCH lignesDétail INTO laRoute, laSoumission; 
+FETCH lignesDétail INTO laRoute, laSoumission, lePrix; 
 EXIT WHEN lignesDétail%NOTFOUND; 
 DBMS_OUTPUT.PUT('La route : '); 
 DBMS_OUTPUT.PUT(laRoute); 
 DBMS_OUTPUT.PUT(' et ');
 DBMS_OUTPUT.PUT('Votre soumission #: '); 
 DBMS_OUTPUT.PUT_LINE(laSoumission); 
+DBMS_OUTPUT.PUT('Prix a payer $: '); 
+DBMS_OUTPUT.PUT_LINE(lePrix); 
 END LOOP; 
 CLOSE lignesDétail ; 
 EXCEPTION 
