@@ -11,6 +11,10 @@
    Remi Nanthavong NANS24118900
 
    ## Fonctionnement
+   
+   Il y a deux facons: 
+   
+   ###Soit charger partie par partie
 
    1 - Charger le schema dans sqlplus (@01_schema.sql)
    
@@ -23,6 +27,10 @@
    5 - Charger les entrees dans sqlplus (@05_charger.sql)
    
    6 - Charger les tests dans sqlplus (@06_tester.sql)
+   
+   ###Soit charger avec une commande
+   
+   1 - Charger le schema dans sqlplus (@Fullload.sql)
 
 
    ## Contenu du projet
@@ -38,12 +46,18 @@
    05_charger.sql
    
    06_tester.sql
+   
+   FullLoad.sql
+   
+   modele-tp1.png
 
    ## Références
 
   https://www.w3schools.com/sql/
   
   https://www.oracletutorial.com/oracle-basics/
+  
+  https://livesql.oracle.com/
 
    ## Statut
 
