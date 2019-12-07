@@ -1056,10 +1056,18 @@ INSERT INTO tp1SoumissionE
 -- 
 EXEC ConsulterSoumissions(14)
 /
+EXEC ConsulterSoumissions(10)
+/
+EXEC ConsulterSoumissions(20)
+/
 -- 
 -- Test PROCEDURE ProduireFacture 
 -- 
 EXEC ProduireFacture(14)
+/
+EXEC ProduireFacture(22)
+/
+EXEC ProduireFacture(18)
 /
 -- 
 -- Test FUNCTION  CoutTotalDuTrajet 
@@ -1070,6 +1078,10 @@ SELECT CoutTotalDuTrajet(14,43.6532,79.3832,43.5890,79.6441) FROM DUAL
 -- Test FUNCTION  TotalFacture 
 -- 
 SELECT TotalFacture(14) FROM DUAL
-/                      
+/
+SELECT TotalFacture(10) FROM DUAL
+/  
+SELECT TotalFacture(12) FROM DUAL
+/  
 COMMIT
 /			   
