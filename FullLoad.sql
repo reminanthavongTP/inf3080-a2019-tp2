@@ -971,7 +971,7 @@ INSERT INTO tp1Compagnie
 -- 
 -- Test Trigger tp2ReduireCamion 
 -- Réduire la quantité des camions que le transporteur possède en fonction de la quantité louée
-SELECT pCamion FROM tp1Compagnie
+SELECT nCamion FROM tp1Compagnie
 /
 INSERT INTO tp1DemandeSoumission
  	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
@@ -985,7 +985,7 @@ INSERT INTO tp1Route
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
 /
-SELECT pCamion FROM tp1Compagnie
+SELECT nCamion FROM tp1Compagnie
 /
 -- 
 -- Test Trigger tp2VerifierSoumission
@@ -1010,7 +1010,7 @@ INSERT INTO tp1Chargement
  	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
 /
 INSERT INTO tp1Route
- 	VALUES(0,'Toronto-Montreal',43.6532,79.3832,0,0,0,0)
+ 	VALUES(0,'Toronto-Montreal',0,0,0,0,0,0)
 /
 INSERT INTO tp1SoumissionE
  	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
