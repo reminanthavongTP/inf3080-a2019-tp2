@@ -14,7 +14,11 @@
 
    1 - Charger le schema dans sqlplus (@01_schema.sql)
    
-   2 - Charger les entres dans sqlplus (@02_charger.sql)
+   2 - Charger les entres dans sqlplus (@02_sequence.sql)
+   
+   3 - Charger les entres dans sqlplus (@03_procedure.sql)
+   
+   4 - Charger les entres dans sqlplus (@04_gachette.sql)
    
    3 -  Exemple a) Pour afficher tous les demande de soumission fait par les clients en affichant seulement Origine et Destination
                   
