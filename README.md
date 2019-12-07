@@ -14,38 +14,15 @@
 
    1 - Charger le schema dans sqlplus (@01_schema.sql)
    
-   2 - Charger les entres dans sqlplus (@02_sequence.sql)
+   2 - Charger les sequences dans sqlplus (@02_sequence.sql)
    
-   3 - Charger les entres dans sqlplus (@03_procedure.sql)
+   3 - Charger les procedure/fonctions dans sqlplus (@03_procedure.sql)
    
-   4 - Charger les entres dans sqlplus (@04_gachette.sql)
+   4 - Charger les gachettes dans sqlplus (@04_gachette.sql)
    
-   3 -  Exemple a) Pour afficher tous les demande de soumission fait par les clients en affichant seulement Origine et Destination
-                  
-                    SELECT pclient,origine,destination FROM tp1DemandeSoumission;
-                    PCLIENT    ORIGINE              DESTINATION
-                    ---------- -------------------- --------------------
-                    1          Toronto              Ottawa
-                    1          Calgary              Montreal
-                    2          Vancouver            Ottawa
-                    3          Quebec               Toronto
-                    4          Montreal             Toronto
-                    
-        Exemple b) Pour afficher liste les camions qui sont presentement en voyage
-                  SELECT tp1Compagnie.nomcompagnie, tp1camion.pcamion, tp1position.cposition, tp1position.ndisponible 
-                  FROM ((tp1Compagnie
-                  INNER JOIN tp1camion ON tp1Compagnie.pcompagnie = tp1camion.pcompagnie)
-                  INNER JOIN tp1position ON tp1camion.pcamion = tp1position.pcamion)
-                  WHERE tp1position.ndisponible = 0
-                  
-                  ou
-                  
-                  @04a_query.sql
-
-               NOMCOMPAGNIE            PCAMION CPOSITION                      NDISPONIBLE
-               -------------------- ---------- ------------------------------ -----------
-                  Earenam                       7 AWAY                                     0
-                  Senoine                       8 AWAY                                     0
+   5 - Charger les entrees dans sqlplus (@05_charger.sql)
+   
+   6 - Charger les tests dans sqlplus (@06_tester.sql)
 
 
    ## Contenu du projet
@@ -54,33 +31,13 @@
    
    02_sequence.sql
    
-   03_gachette.sql
+   03_procedure.sql
    
-   04_procedure.sql
+   04_gachette.sql
    
-   05a_route.txt
-   
-   05a_route.ctl
-   
-   05a_route.log
-   
-   05a_route.sh
-   
-   05b_charger.sql
+   05_charger.sql
    
    06_tester.sql
-   
-   07a_query.sql
-   
-   07b_query.sql
-   
-   07c_query.sql
-   
-   07d_query.md
-   
-   07e_query.sql
-   
-   08_algebre-tp1.pdf
 
    ## Références
 
@@ -94,6 +51,10 @@
    
    ## Auto-évaluation de votre travail
    
-   J'évalue mon livrable à x points / 25
+   J'évalue mon livrable à 20 points / 25
    
    ## Difficultés rencontrées
+   
+   Creer les procedures/fonctions/gachettes
+   
+   Pas de JAVA/JDBC
