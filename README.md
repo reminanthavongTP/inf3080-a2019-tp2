@@ -34,7 +34,7 @@
 
    ## Exemple
    
-   EXEC ConsulterSoumissions(14)
+   ### EXEC ConsulterSoumissions(14)
    
    Statement processed.
    
@@ -49,7 +49,7 @@ La route : Winnipeg-Oakville et Votre soumission #: 26
 Prix a payer $: 30
 
 
-   EXEC ProduireFacture(14)
+  ### EXEC ProduireFacture(14)
    
    Statement processed.
    
@@ -67,13 +67,13 @@ Votre cout $: 30
 
 Votre mode de payment: VISA
 
-   SELECT CoutTotalDuTrajet(14,43.6532,79.3832,43.5890,79.6441) FROM DUAL
+ ###  SELECT CoutTotalDuTrajet(14,43.6532,79.3832,43.5890,79.6441) FROM DUAL
    
    COUTTOTALDUTRAJET(14,43.6532,79.3832,43.5890,79.6441)
    
 25
 
-   SELECT TotalFacture(14) FROM DUAL
+ ###  SELECT TotalFacture(14) FROM DUAL
    
 TOTALFACTURE(14)
 
