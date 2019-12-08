@@ -46,5 +46,24 @@ class ClientInsertJDBC
     // Fermeture de énoncé et de la connexion
     unEnoncéSQL.close();
     uneConnection.close();
+    
+    // Création d'un appel de fonction associé à la Connection
+    CallableStatement unCall = uneConnection.prepareCall("{ ? = call TotalFacture(?)}");
+
+    // Spécification du paramètre d'entrée
+    unCall.setInt(14);
+    // Inscription de la sortie
+    unCall.registerOutParameter(1, java.sql.Types.INTEGER);
+    // Exécution de l'appel
+    unCall.execute();
+    // Récupération de la sortie
+    int leprix = unCall.getInt(1);
+    
+    System.out.println("Montant total:"+leprix);
+    unCall.close();
+    uneConnection.close();
+    }
+
+    
   }
 }
