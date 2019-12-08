@@ -1,5 +1,4 @@
-// Exemple de programme JAVA qui utilise le pilote JDBC OCI8 d'Oracle
-// pour insérer une ligne dans la table Client
+// Programme JAVA qui utilise le pilote JDBC OCI8 d'Oracle
 
 // Il faut importer le paquetage java.sql pour utiliser JDBC
 package ExemplesJDBC;
