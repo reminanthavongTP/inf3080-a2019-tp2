@@ -126,11 +126,11 @@ SELECT TotalFacture(12) FROM DUAL
 -- 
 -- Test FUNCTION  PlusLongTrajet 
 -- 
-SELECT PlusLongTrajet(14) FROM DUAL
+SELECT PlusLongTrajet('30-SEP-19') FROM DUAL
 /
-SELECT PlusLongTrajet(10) FROM DUAL
+SELECT PlusLongTrajet('17-OCT-19') FROM DUAL
 /  
-SELECT PlusLongTrajet(12) FROM DUAL
+SELECT PlusLongTrajet('18-OCT-19') FROM DUAL
 /  
 COMMIT
 /
