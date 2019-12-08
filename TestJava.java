@@ -26,6 +26,23 @@ class ClientInsertJDBC
        "VALUES (0,'VISA')");
     System.out.println ("Nombre de lignes inserees:" + n);
     
+    
+    // Exécution d'un SELECT
+    ResultSet résultatSelect = unEnoncéSQL.executeQuery
+     ("SELECT CCOMPAGNIE, NCAMION "+
+     "FROM tp1compagnie ");
+    
+    // Itérer sur les lignes du résultat du SELECT et extraire les valeurs
+    // des colonnes dans des variables JAVA
+    
+    while (résultatSelect.next ()){
+      int NCAMION = résultatSelect.getInt ("NCAMION");
+      String CCOMPAGNIE = résultatSelect.getString ("CCOMPAGNIE");
+      System.out.println ("Total Camions:" + NCAMION);
+      System.out.println ("Nom de la compagnie:" + CCOMPAGNIE);
+    }
+
+    
     // Fermeture de énoncé et de la connexion
     unEnoncéSQL.close();
     uneConnection.close();
