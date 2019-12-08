@@ -65,5 +65,17 @@ class ClientInsertJDBC
     }
 
     
+  // Création d'un appel de fonction associé à la Connection
+    CallableStatement unCall = uneConnection.prepareCall("{call ProduireFacture(?)}");
+
+    // Spécification des paramètres d'entrée
+    unCall.setInt(16);
+    // Exécution de l'appel
+    unCall.execute();
+    unCall.close();
+    uneConnection.close();
+    }
+
+  
   }
 }
