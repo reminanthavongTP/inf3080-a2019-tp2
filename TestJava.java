@@ -48,31 +48,31 @@ class ClientInsertJDBC
     uneConnection.close();
     
     // Création d'un appel de fonction associé à la Connection
-    CallableStatement unCall = uneConnection.prepareCall("{ ? = call TotalFacture(?)}");
+    CallableStatement uneFonction = uneConnection.prepareCall("{ ? = call TotalFacture(?)}");
 
     // Spécification du paramètre d'entrée
-    unCall.setInt(14);
+    uneFonction.setInt(14);
     // Inscription de la sortie
-    unCall.registerOutParameter(1, java.sql.Types.INTEGER);
+    uneFonction.registerOutParameter(1, java.sql.Types.INTEGER);
     // Exécution de l'appel
-    unCall.execute();
+    uneFonction.execute();
     // Récupération de la sortie
     int leprix = unCall.getInt(1);
     
     System.out.println("Montant total:"+leprix);
-    unCall.close();
+    uneFonction.close();
     uneConnection.close();
     }
 
     
   // Création d'un appel de fonction associé à la Connection
-    CallableStatement unCall = uneConnection.prepareCall("{call ProduireFacture(?)}");
+    CallableStatement uneProcedure = uneConnection.prepareCall("{call ProduireFacture(?)}");
 
     // Spécification des paramètres d'entrée
-    unCall.setInt(16);
+    uneProcedure.setInt(16);
     // Exécution de l'appel
-    unCall.execute();
-    unCall.close();
+    uneProcedure.execute();
+    uneProcedure.close();
     uneConnection.close();
     }
 
