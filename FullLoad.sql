@@ -236,7 +236,7 @@ CREATE SEQUENCE tp2Compagnie
  start with 10
  increment by 2
  minvalue 10
- maxvalue 20
+ maxvalue 50
  
 
 /
@@ -244,7 +244,7 @@ CREATE SEQUENCE tp2Camion
  start with 10
  increment by 2
  minvalue 10
- maxvalue 40
+ maxvalue 80
  
 
 /
@@ -252,7 +252,7 @@ CREATE SEQUENCE tp2TypeEquipement
  start with 10
  increment by 2
  minvalue 10
- maxvalue 40
+ maxvalue 80
  
 
 /
@@ -260,7 +260,7 @@ CREATE SEQUENCE tp2Equipement
  start with 10
  increment by 2
  minvalue 10
- maxvalue 40
+ maxvalue 80
  
 
 /
@@ -268,7 +268,7 @@ CREATE SEQUENCE tp2Position
  start with 10
  increment by 2
  minvalue 10
- maxvalue 40
+ maxvalue 80
  
 
 /
@@ -276,7 +276,8 @@ CREATE SEQUENCE tp2Tracteur
  start with 10
  increment by 2
  minvalue 10
- maxvalue 40
+ maxvalue 80
+ 
 
 /
 SET ECHO ON
