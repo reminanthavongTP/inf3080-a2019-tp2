@@ -453,7 +453,7 @@ WHERE tp1DemandeSoumission.dateSoumission = uneDate
 ORDER BY nDistance desc
 FETCH  first 1 rows only;
 
- RETURN ' La distnace: ' || rnDistance || ' et le camion: ' || rnCamion;	
+ RETURN ' La distance: ' || rnDistance || ' et le camion: ' || rnCamion;	
 END;
 /   
 SET ECHO ON
