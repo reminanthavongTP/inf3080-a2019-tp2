@@ -118,5 +118,3 @@ TOTALFACTURE(14)
    ## Difficultés rencontrées
    
    Creer les procedures/fonctions/gachettes
-   
-   Pas de JAVA/JDBC
