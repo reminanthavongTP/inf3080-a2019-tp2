@@ -22,8 +22,8 @@ class ClientInsertJDBC
     
     // Insertion d'une ligne dans la table Client
     int n = unEnoncéSQL.executeUpdate
-      ("INSERT INTO CLIENT " +
-       "VALUES (100, 'G. Lemoyne', '911')");
+      ("INSERT INTO tp1Client" +
+       "VALUES (0,'VISA')");
     System.out.println ("Nombre de lignes inserees:" + n);
     
     // Fermeture de énoncé et de la connexion
