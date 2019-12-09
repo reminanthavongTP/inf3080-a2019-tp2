@@ -449,9 +449,8 @@ IS
 SELECT tp1Route.nDistance, tp1DemandeSoumission.pCamion INTO rnDistance , rnCamion
 FROM tp1DemandeSoumission JOIN tp1Route
 ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-WHERE tp1DemandeSoumission.dateSoumission = uneDate
-ORDER BY nDistance desc
-FETCH  first 1 rows only;
+WHERE tp1DemandeSoumission.dateSoumission = uneDate and ROWNUM = 1
+ORDER BY nDistance desc;
 
  RETURN ' La distance: ' || rnDistance || ' et le camion: ' || rnCamion;	
 END;
@@ -1087,11 +1086,11 @@ SELECT TotalFacture(12) FROM DUAL
 -- 
 -- Test FUNCTION  PlusLongTrajet 
 -- 
-SELECT PlusLongTrajet('30-SEP-19') FROM DUAL
+SELECT PlusLongTrajet('19-09-30') FROM DUAL
 /
-SELECT PlusLongTrajet('17-OCT-19') FROM DUAL
+SELECT PlusLongTrajet('19-10-17') FROM DUAL
 /  
-SELECT PlusLongTrajet('18-OCT-19') FROM DUAL
+SELECT PlusLongTrajet('19-10-18') FROM DUAL
 /  			   
 COMMIT
 /			   
