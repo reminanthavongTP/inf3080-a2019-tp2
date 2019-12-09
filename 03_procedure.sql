@@ -167,9 +167,8 @@ IS
 SELECT tp1Route.nDistance, tp1DemandeSoumission.pCamion INTO rnDistance , rnCamion
 FROM tp1DemandeSoumission JOIN tp1Route
 ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
-WHERE tp1DemandeSoumission.dateSoumission = uneDate
-ORDER BY nDistance desc
-FETCH  first 1 rows only;
+WHERE tp1DemandeSoumission.dateSoumission = uneDate and ROWNUM = 1
+ORDER BY nDistance desc;
 
  RETURN ' La distance: ' || rnDistance || ' et le camion: ' || rnCamion;	
 END;
