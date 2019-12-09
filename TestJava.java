@@ -3,6 +3,7 @@
 // Il faut importer le paquetage java.sql pour utiliser JDBC
 package ExemplesJDBC;
 import java.sql.*;
+import oracle.jdbc.driver.OracleDriver;
 
 class ClientInsertJDBC
 {
@@ -10,11 +11,12 @@ class ClientInsertJDBC
        throws SQLException, ClassNotFoundException, java.io.IOException
   {
     // Charger le pilote JDBC d'Oracle
-    Class.forName ("oracle.jdbc.driver.OracleDriver");
+    //Class.forName ("oracle.jdbc.driver.OracleDriver");
+    DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
 
     // Connection à une BD
     Connection uneConnection =
-      DriverManager.getConnection ("jdbc:oracle:thin:@localhost:1521:orcl", "godin", "oracle");
+      DriverManager.getConnection ("jdbc:oracle:thin:@zeta2.labunix.uqam.ca:1521:baclab", "gj391249", "NAN75614");
 
     // Création d'un énoncé associé à la Connection
     Statement unEnoncéSQL = uneConnection.createStatement ();
@@ -25,6 +27,9 @@ class ClientInsertJDBC
        "VALUES (0,'VISA')");
     System.out.println ("Nombre de lignes inserees:" + n);
     
+     // Fermeture de énoncé et de la connexion
+    unEnoncéSQL.close();
+    uneConnection.close();
     
     // Exécution d'un SELECT
     ResultSet résultatSelect = unEnoncéSQL.executeQuery
