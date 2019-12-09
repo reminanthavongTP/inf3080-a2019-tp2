@@ -1,15 +1,13 @@
 // Programme JAVA qui utilise le pilote JDBC OCI8 d'Oracle
 
 // Il faut importer le paquetage java.sql pour utiliser JDBC
-package ExemplesJDBC;
+//package ExemplesJDBC;
 import java.sql.*;
 import oracle.jdbc.driver.OracleDriver;
 
-class ClientInsertJDBC
-{
-  public static void main (String args [])
-       throws SQLException, ClassNotFoundException, java.io.IOException
-  {
+public class TP2 {
+   
+   public static void main(String[] args) {
     // Charger le pilote JDBC d'Oracle
     //Class.forName ("oracle.jdbc.driver.OracleDriver");
     DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
@@ -66,7 +64,7 @@ class ClientInsertJDBC
     System.out.println("Montant total:"+leprix);
     uneFonction.close();
     uneConnection.close();
-    }
+    
 
     
   // Création d'un appel de fonction associé à la Connection
@@ -77,9 +75,6 @@ class ClientInsertJDBC
     // Exécution de l'appel
     uneProcedure.execute();
     uneProcedure.close();
-    uneConnection.close();
-    }
-
-  
-  }
-}
+    uneConnection.close(); 
+}//end main
+}//end TP2
