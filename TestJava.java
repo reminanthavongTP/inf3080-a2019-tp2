@@ -3,18 +3,27 @@
 // Il faut importer le paquetage java.sql pour utiliser JDBC
 //package ExemplesJDBC;
 import java.sql.*;
-import oracle.jdbc.driver.OracleDriver;
+//import oracle.jdbc.driver.OracleDriver;
 
-public class TP2 {
-   
-   public static void main(String[] args) {
+public class Main {
+// JDBC driver name and database URL
+   static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
+   static final String DB_URL = "jdbc:oracle:thin:@zeta2.labunix.uqam.ca:1521:baclab";
+
+   //  Database credentials
+   static final String USER = "gj391249";
+   static final String PASS = "NAN75614";
+
+   public static void main(String[] args) throws SQLException, ClassNotFoundException, java.io.IOException
+   {
+                 
+     Connection uneConnection = null; 
     // Charger le pilote JDBC d'Oracle
     //Class.forName ("oracle.jdbc.driver.OracleDriver");
-    DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
-
+    //DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+   Class.forName("com.mysql.jdbc.Driver");
     // Connection à une BD
-    Connection uneConnection =
-      DriverManager.getConnection ("jdbc:oracle:thin:@zeta2.labunix.uqam.ca:1521:baclab", "gj391249", "NAN75614");
+    uneConnection = DriverManager.getConnection(DB_URL,USER,PASS);
 
     // Création d'un énoncé associé à la Connection
     Statement unEnoncéSQL = uneConnection.createStatement ();
@@ -49,32 +58,5 @@ public class TP2 {
     unEnoncéSQL.close();
     uneConnection.close();
     
-    // Création d'un appel de fonction associé à la Connection
-    CallableStatement uneFonction = uneConnection.prepareCall("{ ? = call TotalFacture(?)}");
-
-    // Spécification du paramètre d'entrée
-    uneFonction.setInt(14);
-    // Inscription de la sortie
-    uneFonction.registerOutParameter(1, java.sql.Types.INTEGER);
-    // Exécution de l'appel
-    uneFonction.execute();
-    // Récupération de la sortie
-    int leprix = unCall.getInt(1);
-    
-    System.out.println("Montant total:"+leprix);
-    uneFonction.close();
-    uneConnection.close();
-    
-
-    
-  // Création d'un appel de fonction associé à la Connection
-    CallableStatement uneProcedure = uneConnection.prepareCall("{call ProduireFacture(?)}");
-
-    // Spécification des paramètres d'entrée
-    uneProcedure.setInt(16);
-    // Exécution de l'appel
-    uneProcedure.execute();
-    uneProcedure.close();
-    uneConnection.close(); 
 }//end main
-}//end TP2
+}//end Main
