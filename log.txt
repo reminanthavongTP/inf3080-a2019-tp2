@@ -1,4 +1,4 @@
-SQL> @FullLoad.sql
+SQL> SET ECHO ON
 SQL> -- Script Oracle SQL*plus de creation du schema travail pratique 1 - Modélisation et Conception d'une BD
 SQL> -- Version sans accents
 SQL> -- Enlever les tables existantes
@@ -65,22 +65,22 @@ SQL> DROP TABLE tp1Tracteur CASCADE CONSTRAINTS
 Table dropped.
 
 SQL> CREATE TABLE tp1Client
-  2  (pClient		     INTEGER		     NOT NULL,
-  3   cClient		     VARCHAR(20)     NOT NULL,
-  4   CHECK	(cClient IN ('VISA','Master Card','American Express')),
-  5   PRIMARY KEY    (pClient)
+  2  (pClient 		INTEGER 		NOT NULL,
+  3   cClient 		VARCHAR(20) 	NOT NULL,
+  4   CHECK     (cClient IN ('VISA','Master Card','American Express')),
+  5   PRIMARY KEY 	(pClient)
   6  )
   7  /
 
 Table created.
 
 SQL> CREATE TABLE tp1Compagnie
-  2  (pCompagnie	     INTEGER		     NOT NULL,
-  3   cCompagnie	     VARCHAR(20)     NOT NULL,
-  4   nCamion	     INTEGER		     NOT NULL,
-  5   nProfit	   NUMBER      NOT NULL,
+  2  (pCompagnie 		INTEGER 		NOT NULL,
+  3   cCompagnie 		VARCHAR(20) 	NOT NULL,
+  4   nCamion      	INTEGER 		NOT NULL,
+  5   nProfit      NUMBER      NOT NULL,
   6   CHECK (nCamion>=1),
-  7   PRIMARY KEY    (pCompagnie)
+  7   PRIMARY KEY 	(pCompagnie)
   8  )
   9  /
 
@@ -90,7 +90,7 @@ SQL> CREATE TABLE tp1TypeEquipement
   2  (pTypeEquipement INTEGER NOT NULL,
   3   cTypeEquipement VARCHAR(30) NOT NULL,
   4   nCout NUMBER(8,5) NOT NULL,
-  5   CHECK	      (cTypeEquipement IN ( 'DryBox','Flatbed')),
+  5   CHECK           (cTypeEquipement IN ( 'DryBox','Flatbed')),
   6   PRIMARY KEY    (pTypeEquipement)
   7  )
   8  /
@@ -106,7 +106,7 @@ SQL> CREATE TABLE tp1Equipement
   7   nHauteur NUMBER NOT NULL,
   8   pTypeEquipement INTEGER NOT NULL,
   9   PRIMARY KEY    (pTypeEquipement),
- 10   FOREIGN KEY    (pTypeEquipement) REFERENCES tp1TypeEquipement
+ 10   FOREIGN KEY 	(pTypeEquipement) REFERENCES tp1TypeEquipement
  11  )
  12  /
 
@@ -126,88 +126,88 @@ SQL> CREATE TABLE tp1Tracteur
   2  (pTracteur INTEGER NOT NULL,
   3   cTracteur VARCHAR(30) NOT NULL,
   4   nConsommation FLOAT(8) NOT NULL,
-  5   bActif	    INTEGER NOT NULL,
+  5   bActif        INTEGER NOT NULL,
   6   pCarburant    INTEGER NOT NULL,
   7   PRIMARY KEY    (pTracteur),
-  8   FOREIGN KEY    (pCarburant) REFERENCES tp1Carburant
+  8   FOREIGN KEY 	(pCarburant) REFERENCES tp1Carburant
   9  )
  10  /
 
 Table created.
 
 SQL> CREATE TABLE tp1Camion
-  2  (pCamion		     INTEGER		     NOT NULL,
-  3   pCompagnie	     INTEGER		     NOT NULL,
-  4   pEquipement	     INTEGER		     NOT NULL,
-  5   pTracteur 	     INTEGER		     NOT NULL,
-  6   cCamion	   VARCHAR(20)	     NOT NULL,
-  7   PRIMARY KEY    (pCamion),
-  8   FOREIGN KEY    (pCompagnie) REFERENCES tp1Compagnie,
-  9   FOREIGN KEY    (pEquipement) REFERENCES tp1Equipement,
- 10   FOREIGN KEY    (pTracteur) REFERENCES tp1Tracteur
+  2  (pCamion 		INTEGER 		NOT NULL,
+  3   pCompagnie 		INTEGER 		NOT NULL,
+  4   pEquipement 		INTEGER 		NOT NULL,
+  5   pTracteur 		INTEGER 		NOT NULL,
+  6   cCamion      VARCHAR(20) 	NOT NULL,
+  7   PRIMARY KEY 	(pCamion),
+  8   FOREIGN KEY 	(pCompagnie) REFERENCES tp1Compagnie,
+  9   FOREIGN KEY 	(pEquipement) REFERENCES tp1Equipement,
+ 10   FOREIGN KEY 	(pTracteur) REFERENCES tp1Tracteur
  11  )
  12  /
 
 Table created.
 
 SQL> CREATE TABLE tp1DemandeSoumission
-  2  (pSoumission	     INTEGER		     NOT NULL,
-  3   nPrix	     NUMBER(8,5)	     NOT NULL,
-  4   pCamion		     INTEGER		     NOT NULL,
-  5   dateSoumission	     DATE    NOT NULL,
-  6   PRIMARY KEY    (pSoumission),
-  7   FOREIGN KEY    (pCamion) REFERENCES tp1Camion
+  2  (pSoumission 		INTEGER 		NOT NULL,
+  3   nPrix 		NUMBER(8,5) 		NOT NULL,
+  4   pCamion 		INTEGER 		NOT NULL,
+  5   dateSoumission 	DATE 	NOT NULL,
+  6   PRIMARY KEY 	(pSoumission),
+  7   FOREIGN KEY 	(pCamion) REFERENCES tp1Camion
   8  )
   9  /
 
 Table created.
 
 SQL> CREATE TABLE tp1Route
-  2  (pRoute		     INTEGER	     NOT NULL,
-  3   cRoute		     VARCHAR(40)     NOT NULL,
-  4   nLatOri	     NUMBER  NOT NULL,
-  5   nLongOri	     NUMBER  NOT NULL,
-  6   nLatDes		     NUMBER	     NOT NULL,
-  7   nLongDes		     NUMBER	     NOT NULL,
-  8   nDistance 	     NUMBER	     NOT NULL,
-  9   pSoumission	     INTEGER		     NOT NULL,
- 10   FOREIGN KEY    (pSoumission) REFERENCES tp1DemandeSoumission,
- 11   PRIMARY KEY    (pRoute)
+  2  (pRoute 		INTEGER 	NOT NULL,
+  3   cRoute 		VARCHAR(40) 	NOT NULL,
+  4   nLatOri 	NUMBER 	NOT NULL,
+  5   nLongOri 	NUMBER 	NOT NULL,
+  6   nLatDes 		NUMBER 		NOT NULL,
+  7   nLongDes 		NUMBER 		NOT NULL,
+  8   nDistance 		NUMBER 		NOT NULL,
+  9   pSoumission 		INTEGER 		NOT NULL,
+ 10   FOREIGN KEY 	(pSoumission) REFERENCES tp1DemandeSoumission,
+ 11   PRIMARY KEY 	(pRoute)
  12  )
  13  /
 
 Table created.
 
 SQL> CREATE TABLE tp1Chargement
-  2  (pChargement	     INTEGER	     NOT NULL,
-  3   cChargement	     VARCHAR(40)     NOT NULL,
-  4   refrigerated	     INTEGER NOT NULL,
-  5   dock	     INTEGER	     NOT NULL,
-  6   hazardous      INTEGER	     NOT NULL,
-  7   rush	     INTEGER		     NOT NULL,
-  8   nLongueur 	     NUMBER	     NOT NULL,
-  9   nLargeur		     NUMBER	     NOT NULL,
- 10   nHauteur		     NUMBER	     NOT NULL,
- 11   nPoids		     NUMBER	     NOT NULL,
- 12   quantity	     INTEGER	     NOT NULL,
- 13   hours  FLOAT   NOT NULL,
- 14   valeur	     INTEGER	     NOT NULL,
- 15   pSoumission	     INTEGER		     NOT NULL,
- 16   pClient	    INTEGER	     NOT NULL,
- 17   PRIMARY KEY    (pChargement),
- 18   FOREIGN KEY    (pClient) REFERENCES tp1Client,
- 19   FOREIGN KEY    (pSoumission) REFERENCES tp1DemandeSoumission
+  2  (pChargement 		INTEGER 	NOT NULL,
+  3   cChargement 		VARCHAR(40) 	NOT NULL,
+  4   refrigerated 		INTEGER	NOT NULL,
+  5   dock 		INTEGER 	NOT NULL,
+  6   hazardous 	INTEGER 	NOT NULL,
+  7   rush 		INTEGER 		NOT NULL,
+  8   nLongueur 		NUMBER 		NOT NULL,
+  9   nLargeur 		NUMBER 		NOT NULL,
+ 10   nHauteur		NUMBER 		NOT NULL,
+ 11   nPoids 		NUMBER 		NOT NULL,
+ 12   quantity 	INTEGER  	NOT NULL,
+ 13   hours 	FLOAT  	NOT NULL,
+ 14   valeur 	INTEGER  	NOT NULL,
+ 15   pSoumission 		INTEGER 		NOT NULL,
+ 16   pClient       INTEGER 		NOT NULL,
+ 17   PRIMARY KEY 	(pChargement),
+ 18   FOREIGN KEY 	(pClient) REFERENCES tp1Client,
+ 19   FOREIGN KEY 	(pSoumission) REFERENCES tp1DemandeSoumission
  20  )
  21  /
 
 Table created.
 
 SQL> CREATE TABLE tp1SoumissionE
-  2  (pSoumissionE	     INTEGER		     NOT NULL,
-  3   pChargement   INTEGER	     NOT NULL,
-  4   dSoumission   DATE	     NOT NULL,
-  5   PRIMARY KEY    (pSoumissionE),
-  6   FOREIGN KEY    (pChargement) REFERENCES tp1Chargement
+  2  (pSoumissionE		INTEGER 		NOT NULL,
+  3   pChargement   INTEGER 		NOT NULL,
+  4   dSoumission   DATE 		NOT NULL,
+  5   PRIMARY KEY 	(pSoumissionE),
+  6   FOREIGN KEY 	(pChargement) REFERENCES tp1Chargement
   7  )
   8  /
 
@@ -219,9 +219,9 @@ SQL> CREATE TABLE tp1Position
   4   nLat NUMBER NOT NULL,
   5   nLong NUMBER NOT NULL,
   6   bDisponible INTEGER NOT NULL,
-  7   pCamion		     INTEGER		     NOT NULL,
+  7   pCamion 		INTEGER 		NOT NULL,
   8   PRIMARY KEY    (pPosition),
-  9   FOREIGN KEY    (pCamion) REFERENCES tp1Camion
+  9   FOREIGN KEY 	(pCamion) REFERENCES tp1Camion
  10  )
  11  /
 
@@ -429,17 +429,17 @@ SQL> -- Script Oracle SQL*plus de procedure. pour le travail pratique 2 - Modéli
 SQL> -- Version sans accents
 SQL> SET ECHO ON
 SQL> CREATE OR REPLACE FUNCTION calculDistance (LatOri IN NUMBER,
-  2  					  LonOri IN NUMBER,
-  3  					  LatDest IN NUMBER,
-  4  					  LonDest IN NUMBER,
-  5  					  Radius IN NUMBER DEFAULT 3963) RETURN NUMBER IS
+  2                                       LonOri IN NUMBER,
+  3                                       LatDest IN NUMBER,
+  4                                       LonDest IN NUMBER,
+  5                                       Radius IN NUMBER DEFAULT 3963) RETURN NUMBER IS
   6  
   7   DegToRad NUMBER := 57.29577951;
   8  
   9  BEGIN
  10    RETURN(NVL(Radius,0) * ACOS((sin(NVL(LatOri,0) / DegToRad) * SIN(NVL(LatDest,0) / DegToRad)) +
- 11  	     (COS(NVL(LatOri,0) / DegToRad) * COS(NVL(LatDest,0) / DegToRad) *
- 12  	      COS(NVL(LonDest,0) / DegToRad - NVL(LonOri,0)/ DegToRad))));
+ 11          (COS(NVL(LatOri,0) / DegToRad) * COS(NVL(LatDest,0) / DegToRad) *
+ 12           COS(NVL(LonDest,0) / DegToRad - NVL(LonOri,0)/ DegToRad))));
  13  END;
  14  /
 
@@ -555,41 +555,41 @@ SQL> CREATE OR REPLACE FUNCTION TotalFacture
  10   BEGIN
  11  
  12   SELECT tp1TypeEquipement.nCout INTO TypeEnCout
- 13  	 FROM tp1DemandeSoumission JOIN tp1Camion
- 14  	 ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
- 15  	 JOIN tp1Equipement
- 16  	 ON tp1Camion.pEquipement = tp1Equipement.pEquipement
- 17  	 JOIN tp1TypeEquipement
- 18  	 ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
- 19  	 WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+ 13      FROM tp1DemandeSoumission JOIN tp1Camion
+ 14      ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
+ 15      JOIN tp1Equipement
+ 16      ON tp1Camion.pEquipement = tp1Equipement.pEquipement
+ 17      JOIN tp1TypeEquipement
+ 18      ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
+ 19      WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
  20  
  21    SELECT tp1Route.nDistance INTO rnDistance
- 22  	 FROM tp1DemandeSoumission JOIN tp1Route
- 23  	 ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
- 24  	 WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+ 22      FROM tp1DemandeSoumission JOIN tp1Route
+ 23      ON tp1DemandeSoumission.pSoumission = tp1Route.pSoumission
+ 24      WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
  25  
- 26  	SELECT tp1Tracteur.nConsommation INTO rnConsommation
- 27  	 FROM tp1DemandeSoumission JOIN tp1Camion
- 28  	 ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
- 29  	 JOIN tp1Tracteur
- 30  	 ON tp1Camion.pTracteur = tp1Tracteur.pTracteur
- 31  	 WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+ 26     SELECT tp1Tracteur.nConsommation INTO rnConsommation
+ 27      FROM tp1DemandeSoumission JOIN tp1Camion
+ 28      ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
+ 29      JOIN tp1Tracteur
+ 30      ON tp1Camion.pTracteur = tp1Tracteur.pTracteur
+ 31      WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
  32  
  33    SELECT tp1Carburant.nCout INTO CarburantnCout
- 34  	 FROM tp1DemandeSoumission JOIN tp1Camion
- 35  	 ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
- 36  	 JOIN tp1Tracteur
- 37  	 ON tp1Camion.pTracteur = tp1Tracteur.pTracteur
- 38  	     JOIN tp1Carburant
- 39  	     ON tp1Tracteur.pCarburant = tp1Carburant.pCarburant
- 40  	 WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+ 34      FROM tp1DemandeSoumission JOIN tp1Camion
+ 35      ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
+ 36      JOIN tp1Tracteur
+ 37      ON tp1Camion.pTracteur = tp1Tracteur.pTracteur
+ 38  	JOIN tp1Carburant
+ 39  	ON tp1Tracteur.pCarburant = tp1Carburant.pCarburant
+ 40      WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
  41  
  42    SELECT tp1Compagnie.nProfit INTO rnProfit
- 43  	 FROM tp1DemandeSoumission JOIN tp1Camion
- 44  	 ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
- 45  	     JOIN tp1Compagnie
- 46  	     ON tp1Camion.pCompagnie = tp1Compagnie.pCompagnie
- 47  	 WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
+ 43      FROM tp1DemandeSoumission JOIN tp1Camion
+ 44      ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
+ 45  	JOIN tp1Compagnie
+ 46  	ON tp1Camion.pCompagnie = tp1Compagnie.pCompagnie
+ 47      WHERE tp1DemandeSoumission.pSoumission = uneSoumission;
  48  
  49   prix := (rnConsommation * rnDistance * CarburantnCout) + (TypeEnCout * rnDistance) * rnProfit;
  50   RETURN prix;
@@ -801,8 +801,8 @@ SQL> create OR REPLACE trigger tp2ReduireCamion
  13  
  14  
  15  UPDATE tp1Compagnie
- 16  	  SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
- 17  	  WHERE tp1Compagnie.pCompagnie = rpCompagnie;
+ 16       SET tp1Compagnie.nCamion = tp1Compagnie.nCamion - 1
+ 17       WHERE tp1Compagnie.pCompagnie = rpCompagnie;
  18  
  19  
  20  END;
@@ -824,9 +824,9 @@ SQL> create OR REPLACE trigger tp2VerifierSoumission
  12  
  13  IF  rnDistance > 50.00
  14  THEN
- 15  Raise_Application_Error(-20000, 'Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km');
+ 15  Raise_Application_Error(-20000, 'Bloquer la réservation d.un camion lorsque le trajet est supérieur à 50 km');
  16  ELSIF rnDistance <= 0 THEN
- 17  	   raise_application_error(-20001, 'Bloquer la soumission si le trajet n’a pas été bien identifié');
+ 17        raise_application_error(-20001, 'Bloquer la soumission si le trajet n.a pas été bien identifié');
  18  END IF;
  19  END;
  20  /
@@ -843,23 +843,23 @@ SQL> CREATE OR REPLACE TRIGGER tp2CoutErreur
   8  BEGIN
   9  rpSoumissionE := tp2DemandeSoumission.currval;
  10  SELECT tp1DemandeSoumission.nPrix INTO rnPrix
- 11  	 FROM tp1DemandeSoumission
- 12  	 WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;
+ 11      FROM tp1DemandeSoumission
+ 12      WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;
  13  
  14  
  15  SELECT tp1TypeEquipement.nCout INTO rnCout
- 16  	 FROM tp1DemandeSoumission JOIN tp1Camion
- 17  	 ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
- 18  	 JOIN tp1Equipement
- 19  	 ON tp1Camion.pEquipement = tp1Equipement.pEquipement
- 20  	 JOIN tp1TypeEquipement
- 21  	 ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
- 22  	 WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;
+ 16      FROM tp1DemandeSoumission JOIN tp1Camion
+ 17      ON tp1DemandeSoumission.pCamion = tp1Camion.pCamion
+ 18      JOIN tp1Equipement
+ 19      ON tp1Camion.pEquipement = tp1Equipement.pEquipement
+ 20      JOIN tp1TypeEquipement
+ 21      ON tp1Equipement.pTypeEquipement = tp1TypeEquipement.pTypeEquipement
+ 22      WHERE tp1DemandeSoumission.pSoumission = rpSoumissionE;
  23  
  24  
  25  IF  (rnPrix = rnCout)
  26  THEN
- 27  raise_application_error(-20002, 'Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.');
+ 27  raise_application_error(-20002, 'Bloquer la soumission si le coût de type d.équipement pour un camion ne sont pas différents.');
  28  END IF;
  29  END;
  30   /
@@ -872,589 +872,589 @@ SQL> -- Version sans accents
 SQL> -- INSERTION dans les tables
 SQL> SET ECHO ON
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'VISA')
+  2   	VALUES(0,'VISA')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'Master Card')
+  2   	VALUES(0,'Master Card')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'VISA')
+  2   	VALUES(0,'VISA')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'Master Card')
+  2   	VALUES(0,'Master Card')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'American Express')
+  2   	VALUES(0,'American Express')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'VISA')
+  2   	VALUES(0,'VISA')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'Master Card')
+  2   	VALUES(0,'Master Card')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'Master Card')
+  2   	VALUES(0,'Master Card')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'VISA')
+  2   	VALUES(0,'VISA')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'American Express')
+  2   	VALUES(0,'American Express')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'VISA')
+  2   	VALUES(0,'VISA')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Compagnie
-  2  	     VALUES(0,'Earenam',10,1.18)
+  2   	VALUES(0,'Earenam',10,1.18)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Compagnie
-  2  	     VALUES(0,'Arearn',10,1.18)
+  2   	VALUES(0,'Arearn',10,1.18)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Compagnie
-  2  	     VALUES(0,'Senoine',10,1.18)
+  2   	VALUES(0,'Senoine',10,1.18)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1TypeEquipement
-  2  	     VALUES(0,'Flatbed',0.02)
+  2   	VALUES(0,'Flatbed',0.02)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Equipement
-  2  	     VALUES(0,'EarenamFlatbed',8.0,4.8,5.4,208.0,0)
+  2   	VALUES(0,'EarenamFlatbed',8.0,4.8,5.4,208.0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1TypeEquipement
-  2  	     VALUES(0,'DryBox',0.05)
+  2   	VALUES(0,'DryBox',0.05)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Equipement
-  2  	     VALUES(0,'EarenamDryBox',11.7,6.0,5.5,396.0,0)
+  2   	VALUES(0,'EarenamDryBox',11.7,6.0,5.5,396.0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1TypeEquipement
-  2  	     VALUES(0,'Flatbed',0.02)
+  2   	VALUES(0,'Flatbed',0.02)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Equipement
-  2  	     VALUES(0,'ArearnFlatbed',8.0,4.8,5.4,208.0,0)
+  2   	VALUES(0,'ArearnFlatbed',8.0,4.8,5.4,208.0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1TypeEquipement
-  2  	     VALUES(0,'DryBox',0.05)
+  2   	VALUES(0,'DryBox',0.05)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Equipement
-  2  	     VALUES(0,'ArearnDryBox',11.7,6.0,5.5,396.0,0)
+  2   	VALUES(0,'ArearnDryBox',11.7,6.0,5.5,396.0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1TypeEquipement
-  2  	     VALUES(0,'Flatbed',0.02)
+  2   	VALUES(0,'Flatbed',0.02)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Equipement
-  2  	     VALUES(0,'SenoineFlatbed',8.0,4.8,5.4,208.0,0)
+  2   	VALUES(0,'SenoineFlatbed',8.0,4.8,5.4,208.0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1TypeEquipement
-  2  	     VALUES(0,'DryBox',0.05)
+  2   	VALUES(0,'DryBox',0.05)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Equipement
-  2  	     VALUES(0,'SenoineDryBox',11.7,6.0,5.5,396.0,0)
+  2   	VALUES(0,'SenoineDryBox',11.7,6.0,5.5,396.0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Carburant
-  2  	     VALUES(0,'Regulier',1.10)
+  2   	VALUES(0,'Regulier',1.10)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Tracteur
-  2  	     VALUES(0,'EarenamTracteurReg',20,1,0)
+  2   	VALUES(0,'EarenamTracteurReg',20,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Camion
-  2  	     VALUES(0,10,0,0,'EarenamCamion')
+  2   	VALUES(0,10,0,0,'EarenamCamion')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Position
-  2  	     VALUES(0,'Montreal',43.6532,79.3832,1,0)
+  2   	VALUES(0,'Montreal',43.6532,79.3832,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Tracteur
-  2  	     VALUES(0,'ArearnTracteurReg',20,1,0)
+  2   	VALUES(0,'ArearnTracteurReg',20,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Camion
-  2  	     VALUES(0,12,0,0,'ArearnCamion')
+  2   	VALUES(0,12,0,0,'ArearnCamion')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Position
-  2  	     VALUES(0,'Toronto',45.5017,73.5673,1,0)
+  2   	VALUES(0,'Toronto',45.5017,73.5673,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Tracteur
-  2  	     VALUES(0,'SenoineTracteurReg',20,1,0)
+  2   	VALUES(0,'SenoineTracteurReg',20,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Camion
-  2  	     VALUES(0,14,0,0,'SenoineCamion')
+  2   	VALUES(0,14,0,0,'SenoineCamion')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Position
-  2  	     VALUES(0,'Calgary',51.0447,114.0719,1,0)
+  2   	VALUES(0,'Calgary',51.0447,114.0719,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Carburant
-  2  	     VALUES(0,'Diesel',1.50)
+  2   	VALUES(0,'Diesel',1.50)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Tracteur
-  2  	     VALUES(0,'EarenamTracteurDies',20,1,0)
+  2   	VALUES(0,'EarenamTracteurDies',20,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Camion
-  2  	     VALUES(0,10,0,0,'EarenamCamion')
+  2   	VALUES(0,10,0,0,'EarenamCamion')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Position
-  2  	     VALUES(0,'Montreal',43.6532,79.3832,1,0)
+  2   	VALUES(0,'Montreal',43.6532,79.3832,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Tracteur
-  2  	     VALUES(0,'ArearnTracteurDies',20,1,0)
+  2   	VALUES(0,'ArearnTracteurDies',20,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Camion
-  2  	     VALUES(0,12,0,0,'ArearnCamion')
+  2   	VALUES(0,12,0,0,'ArearnCamion')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Position
-  2  	     VALUES(0,'Toronto',45.5017,73.5673,1,0)
+  2   	VALUES(0,'Toronto',45.5017,73.5673,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Tracteur
-  2  	     VALUES(0,'SenoineTracteurDies',20,1,0)
+  2   	VALUES(0,'SenoineTracteurDies',20,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Camion
-  2  	     VALUES(0,14,0,0,'SenoineCamion')
+  2   	VALUES(0,14,0,0,'SenoineCamion')
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Position
-  2  	     VALUES(0,'Calgary',51.0447,114.0719,1,0)
+  2   	VALUES(0,'Calgary',51.0447,114.0719,1,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,15.00,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,15.00,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,170.00,0,to_date('2019/10/17', 'yyyy/mm/dd'))
+  2   	VALUES(0,170.00,0,to_date('2019/10/17', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Calgary-Chestermere',0,1,0,0,7.0,6.0,3.0,30.0,1,1.0,300.00,0,0)
+  2   	VALUES(0,'Calgary-Chestermere',0,1,0,0,7.0,6.0,3.0,30.0,1,1.0,300.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Calgary-Chestermere',51.0486,114.0719,51.0382,113.8425,0,0)
+  2   	VALUES(0,'Calgary-Chestermere',51.0486,114.0719,51.0382,113.8425,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,190.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,190.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Vancouver-West Vancouver',0,1,0,1,7.0,3.0,6.0,40.0,1,1.0,20.00,0,0)
+  2   	VALUES(0,'Vancouver-West Vancouver',0,1,0,1,7.0,3.0,6.0,40.0,1,1.0,20.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Vancouver-West Vancouver',49.2827,123.1207,49.3286,123.1602,0,0)
+  2   	VALUES(0,'Vancouver-West Vancouver',49.2827,123.1207,49.3286,123.1602,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,20.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,20.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Quebec-Levis',0,0,1,1,7.0,6.0,3.0,50.0,1,1.0,500.00,0,0)
+  2   	VALUES(0,'Quebec-Levis',0,0,1,1,7.0,6.0,3.0,50.0,1,1.0,500.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Quebec-Levis',46.8139,71.2080,46.7382,71.2465,0,0)
+  2   	VALUES(0,'Quebec-Levis',46.8139,71.2080,46.7382,71.2465,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,15.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,15.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Montreal-Brossard',0,0,1,0,6.0,3.0,7.0,20.0,1,1.0,1000.00,0,0)
+  2   	VALUES(0,'Montreal-Brossard',0,0,1,0,6.0,3.0,7.0,20.0,1,1.0,1000.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Montreal-Brossard',45.5017,73.5673,45.4514,73.4619,0,0)
+  2   	VALUES(0,'Montreal-Brossard',45.5017,73.5673,45.4514,73.4619,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,125.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,125.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Montreal-Laval',1,1,1,0,7.0,6.0,3.0,40.0,1,1.0,5000.00,0,0)
+  2   	VALUES(0,'Montreal-Laval',1,1,1,0,7.0,6.0,3.0,40.0,1,1.0,5000.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Montreal-Laval',45.501,73.567,45.6066,73.7124,0,0)
+  2   	VALUES(0,'Montreal-Laval',45.501,73.567,45.6066,73.7124,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,160.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,160.00,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Edmonton-Summerside',1,1,1,1,3.0,7.0,6.0,50.0,1,1.0,100.00,0,0)
+  2   	VALUES(0,'Edmonton-Summerside',1,1,1,1,3.0,7.0,6.0,50.0,1,1.0,100.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Edmonton-Summerside',53.546,113.493,53.4158,113.4588,0,0)
+  2   	VALUES(0,'Edmonton-Summerside',53.546,113.493,53.4158,113.4588,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/09/30', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,12.00,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,12.00,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Mississauga-Toronto',0,1,0,1,3.0,6.0,7.0,20.0,1,1.0,400.00,0,0)
+  2   	VALUES(0,'Mississauga-Toronto',0,1,0,1,3.0,6.0,7.0,20.0,1,1.0,400.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Mississauga-Toronto',43.5890,79.6441,43.6532,79.3832,0,0)
+  2   	VALUES(0,'Mississauga-Toronto',43.5890,79.6441,43.6532,79.3832,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,30.00,0,to_date('2019/10/15', 'yyyy/mm/dd'))
+  2   	VALUES(0,30.00,0,to_date('2019/10/15', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Winnipeg-Oakville',0,1,1,0,6.0,3.0,7.0,200.0,1,1.0,500.00,0,0)
+  2   	VALUES(0,'Winnipeg-Oakville',0,1,1,0,6.0,3.0,7.0,200.0,1,1.0,500.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Winnipeg-Oakville',49.895,97.138,49.9294,98.0039,0,0)
+  2   	VALUES(0,'Winnipeg-Oakville',49.895,97.138,49.9294,98.0039,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/15', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/15', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,5.00,0,to_date('2019/10/12', 'yyyy/mm/dd'))
+  2   	VALUES(0,5.00,0,to_date('2019/10/12', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Mississauga',1,0,1,0,7.0,6.0,3.0,250.0,1,1.0,600.00,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',1,0,1,0,7.0,6.0,3.0,250.0,1,1.0,600.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/12', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/12', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,80.00,0,to_date('2019/10/13', 'yyyy/mm/dd'))
+  2   	VALUES(0,80.00,0,to_date('2019/10/13', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Etobicoke',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
+  2   	VALUES(0,'Toronto-Etobicoke',0,0,1,0,3.0,7.0,6.0,30.0,1,1.0,800.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Etobicoke',43.6532,79.3832,43.6205,79.5132,0,0)
+  2   	VALUES(0,'Toronto-Etobicoke',43.6532,79.3832,43.6205,79.5132,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/13', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/13', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,145.00,0,to_date('2019/10/10', 'yyyy/mm/dd'))
+  2   	VALUES(0,145.00,0,to_date('2019/10/10', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Edmonton-Sherwood Park',0,0,0,1,7.0,6.0,3.0,80.0,1,1.0,700.00,0,0)
+  2   	VALUES(0,'Edmonton-Sherwood Park',0,0,0,1,7.0,6.0,3.0,80.0,1,1.0,700.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Edmonton-Sherwood Park',53.546,113.49,53.5412,113.2957,0,0)
+  2   	VALUES(0,'Edmonton-Sherwood Park',53.546,113.49,53.5412,113.2957,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/10', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/10', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,5.00,0,to_date('2019/10/17', 'yyyy/mm/dd'))
+  2   	VALUES(0,5.00,0,to_date('2019/10/17', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Hamilton-Mississauga',0,0,0,1,6.0,3.0,7.0,90.0,1,1.0,40.00,0,0)
+  2   	VALUES(0,'Hamilton-Mississauga',0,0,0,1,6.0,3.0,7.0,90.0,1,1.0,40.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Hamilton-Mississauga',43.2557,79.8711,43.5890,79.6441,0,0)
+  2   	VALUES(0,'Hamilton-Mississauga',43.2557,79.8711,43.5890,79.6441,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/17', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
@@ -1470,24 +1470,24 @@ SQL> --
 SQL> -- Test CHECK dans la table tp1Client - CHECK (cClient IN ('VISA','Master Card','American Express'))
 SQL> --
 SQL> INSERT INTO tp1Client
-  2  	     VALUES(0,'AMEX')
+  2   	VALUES(0,'AMEX')
   3  /
 INSERT INTO tp1Client
 *
 ERROR at line 1:
-ORA-02290: violation de contraintes (GJ391249.SYS_C004403587) de verification 
+ORA-02290: violation de contraintes (GJ391249.SYS_C004406555) de verification 
 
 
 SQL> --
 SQL> -- Test CHECK dans la table tp1Compagnie - CHECK (nCamion>=1)
 SQL> --
 SQL> INSERT INTO tp1Compagnie
-  2  	     VALUES(0,'TestCheck',0,1.18)
+  2   	VALUES(0,'TestCheck',0,1.18)
   3  /
 INSERT INTO tp1Compagnie
 *
 ERROR at line 1:
-ORA-02290: violation de contraintes (GJ391249.SYS_C004403593) de verification 
+ORA-02290: violation de contraintes (GJ391249.SYS_C004406561) de verification 
 
 
 SQL> --
@@ -1498,30 +1498,30 @@ SQL> SELECT nCamion FROM tp1Compagnie
 
    NCAMION                                                                      
 ----------                                                                      
-         4                                                                      
-         9                                                                      
-         4                                                                      
+         6                                                                      
+         5                                                                      
+         6                                                                      
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+  2   	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
@@ -1531,39 +1531,39 @@ SQL> SELECT nCamion FROM tp1Compagnie
 
    NCAMION                                                                      
 ----------                                                                      
-         4                                                                      
-         8                                                                      
-         4                                                                      
+         5                                                                      
+         5                                                                      
+         6                                                                      
 
 SQL> --
 SQL> -- Test Trigger tp2VerifierSoumission
-SQL> -- Bloquer la réservation d’un camion lorsque le trajet est supérieur à 50 km
-SQL> -- Bloquer la soumission si le trajet n’a pas été bien identifié
+SQL> -- Bloquer la réservation d.un camion lorsque le trajet est supérieur à 50 km
+SQL> -- Bloquer la soumission si le trajet n.a pas été bien identifié
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+  2   	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+  2   	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Montreal',43.6532,79.3832,45.5017,73.5673,0,0)
+  2   	VALUES(0,'Toronto-Montreal',43.6532,79.3832,45.5017,73.5673,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20000: Bloquer la r?servation d?un camion lorsque le trajet est sup?rieur ? 
+ORA-20000: Bloquer la r?servation d.un camion lorsque le trajet est sup?rieur ? 
 50 km 
 ORA-06512: a "GJ391249.TP2VERIFIERSOUMISSION", ligne 12 
 ORA-04088: erreur lors d'execution du declencheur 
@@ -1571,30 +1571,30 @@ ORA-04088: erreur lors d'execution du declencheur
 
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+  2   	VALUES(0,15.00,0,to_date('2019/12/06', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+  2   	VALUES(0,'Toronto-Montreal',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Montreal',0,0,0,0,0,0)
+  2   	VALUES(0,'Toronto-Montreal',0,0,0,0,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20001: Bloquer la soumission si le trajet n?a pas ?t? bien identifi? 
+ORA-20001: Bloquer la soumission si le trajet n.a pas ?t? bien identifi? 
 ORA-06512: a "GJ391249.TP2VERIFIERSOUMISSION", ligne 14 
 ORA-04088: erreur lors d'execution du declencheur 
 'GJ391249.TP2VERIFIERSOUMISSION' 
@@ -1602,56 +1602,56 @@ ORA-04088: erreur lors d'execution du declencheur
 
 SQL> --
 SQL> -- Test Trigger tp2CoutErreur
-SQL> -- Bloquer la soumission si le coût de type d’équipement pour un camion ne sont pas différents.
+SQL> -- Bloquer la soumission si le coût de type d.équipement pour un camion ne sont pas différents.
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,0.02,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+  2   	VALUES(0,0.02,0,to_date('2019/12/06', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1DemandeSoumission
-  2  	     VALUES(0,0.05,0,to_date('2019/12/06', 'yyyy/mm/dd'))
+  2   	VALUES(0,0.05,0,to_date('2019/12/06', 'yyyy/mm/dd'))
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Chargement
-  2  	     VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',0,0,0,0,6.0,3.0,7.0,20.0,1,1.0,200.00,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1Route
-  2  	     VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
+  2   	VALUES(0,'Toronto-Mississauga',43.6532,79.3832,43.5890,79.6441,0,0)
   3  /
 
 1 row created.
 
 SQL> INSERT INTO tp1SoumissionE
-  2  	     VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
+  2   	VALUES(0,0,to_date('2019/10/18', 'yyyy/mm/dd'))
   3  /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20002: Bloquer la soumission si le co?t de type d??quipement pour un camion 
+ORA-20002: Bloquer la soumission si le co?t de type d.?quipement pour un camion 
 ne sont pas diff?rents. 
 ORA-06512: a "GJ391249.TP2COUTERREUR", ligne 24 
 ORA-04088: erreur lors d'execution du declencheur 'GJ391249.TP2COUTERREUR' 
@@ -1661,6 +1661,9 @@ SQL> --
 SQL> -- Test PROCEDURE ConsulterSoumissions
 SQL> --
 SQL> EXEC ConsulterSoumissions(14)
+Votre Client #:14                                                               
+La route : Mississauga-Toronto et Votre soumission #: 24                        
+Prix a payer $: 12                                                              
 
 PL/SQL procedure successfully completed.
 
@@ -1668,13 +1671,22 @@ SQL> /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20002: Bloquer la soumission si le co?t de type d??quipement pour un camion 
+ORA-20002: Bloquer la soumission si le co?t de type d.?quipement pour un camion 
 ne sont pas diff?rents. 
 ORA-06512: a "GJ391249.TP2COUTERREUR", ligne 24 
 ORA-04088: erreur lors d'execution du declencheur 'GJ391249.TP2COUTERREUR' 
 
 
 SQL> EXEC ConsulterSoumissions(10)
+Votre Client #:10                                                               
+La route : Toronto-Mississauga et Votre soumission #: 10                        
+Prix a payer $: 15                                                              
+La route : Calgary-Chestermere et Votre soumission #: 12                        
+Prix a payer $: 170                                                             
+La route : Toronto-Etobicoke et Votre soumission #: 30                          
+Prix a payer $: 80                                                              
+La route : Toronto-Montreal et Votre soumission #: 38                           
+Prix a payer $: 15                                                              
 
 PL/SQL procedure successfully completed.
 
@@ -1682,13 +1694,18 @@ SQL> /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20002: Bloquer la soumission si le co?t de type d??quipement pour un camion 
+ORA-20002: Bloquer la soumission si le co?t de type d.?quipement pour un camion 
 ne sont pas diff?rents. 
 ORA-06512: a "GJ391249.TP2COUTERREUR", ligne 24 
 ORA-04088: erreur lors d'execution du declencheur 'GJ391249.TP2COUTERREUR' 
 
 
 SQL> EXEC ConsulterSoumissions(20)
+Votre Client #:20                                                               
+La route : Quebec-Levis et Votre soumission #: 16                               
+Prix a payer $: 20                                                              
+La route : Toronto-Mississauga et Votre soumission #: 36                        
+Prix a payer $: 15                                                              
 
 PL/SQL procedure successfully completed.
 
@@ -1696,7 +1713,7 @@ SQL> /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20002: Bloquer la soumission si le co?t de type d??quipement pour un camion 
+ORA-20002: Bloquer la soumission si le co?t de type d.?quipement pour un camion 
 ne sont pas diff?rents. 
 ORA-06512: a "GJ391249.TP2COUTERREUR", ligne 24 
 ORA-04088: erreur lors d'execution du declencheur 'GJ391249.TP2COUTERREUR' 
@@ -1706,6 +1723,10 @@ SQL> --
 SQL> -- Test PROCEDURE ProduireFacture
 SQL> --
 SQL> EXEC ProduireFacture(14)
+Votre Client #:14                                                               
+Votre soumission #: 24                                                          
+Votre cout $: 12                                                                
+Votre mode de payment: VISA                                                     
 
 PL/SQL procedure successfully completed.
 
@@ -1713,13 +1734,17 @@ SQL> /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20002: Bloquer la soumission si le co?t de type d??quipement pour un camion 
+ORA-20002: Bloquer la soumission si le co?t de type d.?quipement pour un camion 
 ne sont pas diff?rents. 
 ORA-06512: a "GJ391249.TP2COUTERREUR", ligne 24 
 ORA-04088: erreur lors d'execution du declencheur 'GJ391249.TP2COUTERREUR' 
 
 
 SQL> EXEC ProduireFacture(22)
+Votre Client #:22                                                               
+Votre soumission #: 14                                                          
+Votre cout $: 190                                                               
+Votre mode de payment: Master Card                                              
 
 PL/SQL procedure successfully completed.
 
@@ -1727,13 +1752,14 @@ SQL> /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20002: Bloquer la soumission si le co?t de type d??quipement pour un camion 
+ORA-20002: Bloquer la soumission si le co?t de type d.?quipement pour un camion 
 ne sont pas diff?rents. 
 ORA-06512: a "GJ391249.TP2COUTERREUR", ligne 24 
 ORA-04088: erreur lors d'execution du declencheur 'GJ391249.TP2COUTERREUR' 
 
 
 SQL> EXEC ProduireFacture(18)
+Votre Client #:18                                                               
 
 PL/SQL procedure successfully completed.
 
@@ -1741,7 +1767,7 @@ SQL> /
 INSERT INTO tp1SoumissionE
 *
 ERROR at line 1:
-ORA-20002: Bloquer la soumission si le co?t de type d??quipement pour un camion 
+ORA-20002: Bloquer la soumission si le co?t de type d.?quipement pour un camion 
 ne sont pas diff?rents. 
 ORA-06512: a "GJ391249.TP2COUTERREUR", ligne 24 
 ORA-04088: erreur lors d'execution du declencheur 'GJ391249.TP2COUTERREUR' 
@@ -1772,7 +1798,7 @@ SQL> SELECT TotalFacture(10) FROM DUAL
 
 TOTALFACTURE(10)                                                                
 ----------------                                                                
-             415                                                                
+             304                                                                
 
 SQL> SELECT TotalFacture(12) FROM DUAL
   2  /
@@ -1789,7 +1815,7 @@ SQL> SELECT PlusLongTrajet('19-09-30') FROM DUAL
 
 PLUSLONGTRAJET('19-09-30')                                                      
 --------------------------------------------------------------------------------
- La distance: 3,64041784542690010971958111017122773111 et le camion: 18         
+ La distance: 3,64041784542690010971958111017122773111 et le camion: 20         
 
 SQL> SELECT PlusLongTrajet('19-10-17') FROM DUAL
   2  /
@@ -1803,7 +1829,7 @@ SQL> SELECT PlusLongTrajet('19-10-18') FROM DUAL
 
 PLUSLONGTRAJET('19-10-18')                                                      
 --------------------------------------------------------------------------------
- La distance: 13,79773215166840587265017623909278134989 et le camion: 20        
+ La distance: 13,79773215166840587265017623909278134989 et le camion: 14        
 
 SQL> COMMIT
   2  /
