@@ -97,7 +97,7 @@ TOTALFACTURE(14)
    
    modele-tp1.png
    
-   TestJava.java
+   Main.java
 
    ## Références
 
